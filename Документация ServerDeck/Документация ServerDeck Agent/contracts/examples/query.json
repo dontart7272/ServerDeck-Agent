@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "request_id": "11111111-1111-4111-8111-111111111111",
+  "query": "history.get",
+  "params": {
+    "series_ids": [
+      "system.cpu.busy.v1"
+    ],
+    "from": "2026-10-12T00:00:00Z",
+    "to": "2026-10-12T01:00:00Z",
+    "max_points": 2000
+  }
+}

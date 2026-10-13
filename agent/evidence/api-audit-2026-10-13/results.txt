@@ -1,0 +1,8 @@
+wss-nonobject-params: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+wss-duplicate-subscription-id: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+wss-server-message: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+wss-topic-data-mismatch: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+prepare-icmp-flag: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+execute-icmp-flag: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+control-bootstrap-icmp-flag: exit=1; INVALID_INPUT
+control-unknown-bootstrap-field: exit=1; SCHEMA_MISMATCH

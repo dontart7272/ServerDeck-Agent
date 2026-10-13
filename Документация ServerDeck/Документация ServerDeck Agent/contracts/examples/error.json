@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "request_id": "11111111-1111-4111-8111-111111111111",
+  "agent_id": "22222222-2222-4222-8222-222222222222",
+  "served_at": "2026-10-12T10:00:00Z",
+  "error": {
+    "code": "AUDIT_UNAVAILABLE",
+    "message": "Начало изменения не сохранено",
+    "retryable": false
+  }
+}

@@ -1,0 +1,2 @@
+insecure='0'
+APT sources use official Ubuntu archive/security InRelease; no trust bypass flags were supplied.

@@ -1,0 +1,10 @@
+wss-nonobject-params: exit=1; SCHEMA_MISMATCH
+wss-duplicate-subscription-id: exit=1; INVALID_INPUT
+wss-server-message: exit=1; SCHEMA_MISMATCH
+wss-topic-data-mismatch: exit=1; SCHEMA_MISMATCH
+prepare-icmp-flag: exit=1; INVALID_INPUT
+execute-icmp-flag: exit=1; INVALID_INPUT
+control-valid-client: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+control-valid-server: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+control-bootstrap-icmp-flag: exit=1; INVALID_INPUT
+control-unknown-bootstrap-field: exit=1; SCHEMA_MISMATCH

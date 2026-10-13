@@ -1,0 +1,398 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:serverdeck:ui:1",
+  "title": "ServerDeck ui specification 1.0",
+  "anyOf": [
+    {
+      "$ref": "#/definitions/Manifest"
+    },
+    {
+      "$ref": "#/definitions/Ui"
+    },
+    {
+      "$ref": "#/definitions/Signature"
+    }
+  ],
+  "definitions": {
+    "Node": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "type": {
+          "enum": [
+            "column",
+            "row",
+            "section",
+            "text",
+            "metric",
+            "status",
+            "chart",
+            "table",
+            "text_input",
+            "number_input",
+            "toggle",
+            "select",
+            "button"
+          ]
+        },
+        "label_key": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 128
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "binding": {
+          "type": "object",
+          "properties": {
+            "read_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "pointer": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 1024,
+              "pattern": "^(|/.*)$"
+            }
+          },
+          "required": [
+            "read_id",
+            "pointer"
+          ],
+          "additionalProperties": false
+        },
+        "action_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "form_bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "parameter": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "field_node_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              }
+            },
+            "required": [
+              "parameter",
+              "field_node_id"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "series_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "minItems": 0,
+          "maxItems": 32
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label_key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "value": {
+                "type": "string",
+                "minLength": 0,
+                "maxLength": 256
+              }
+            },
+            "required": [
+              "label_key",
+              "value"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "max_length": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "max_rows": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "max_columns": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        }
+      },
+      "required": [
+        "node_id",
+        "type"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "column",
+                  "row",
+                  "section"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "children"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "children"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "button"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "action_id"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "action_id"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Manifest": {
+      "type": "object",
+      "properties": {
+        "module_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9.-]*\\.[a-z0-9][a-z0-9.-]*$"
+        },
+        "publisher_id": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 128,
+          "pattern": "^[a-z0-9][a-z0-9.-]*\\.[a-z0-9][a-z0-9.-]*$"
+        },
+        "package_version": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 80,
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+        },
+        "ui_schema": {
+          "const": 1
+        },
+        "server_schema": {
+          "type": "object",
+          "properties": {
+            "min_inclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            },
+            "max_exclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            }
+          },
+          "required": [
+            "min_inclusive",
+            "max_exclusive"
+          ],
+          "additionalProperties": false
+        },
+        "client_components": {
+          "type": "object",
+          "properties": {
+            "min_inclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            },
+            "max_exclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            }
+          },
+          "required": [
+            "min_inclusive",
+            "max_exclusive"
+          ],
+          "additionalProperties": false
+        },
+        "inventory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128,
+                "pattern": "^(ui\\.json|assets/[A-Za-z0-9_./-]+|locales/[A-Za-z0-9_-]+\\.json)$"
+              },
+              "size_bytes": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 20000000
+              },
+              "sha256": {
+                "type": "string",
+                "minLength": 64,
+                "maxLength": 64,
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "path",
+              "size_bytes",
+              "sha256"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 254
+        }
+      },
+      "required": [
+        "module_id",
+        "publisher_id",
+        "package_version",
+        "ui_schema",
+        "server_schema",
+        "client_components",
+        "inventory"
+      ],
+      "additionalProperties": false
+    },
+    "Ui": {
+      "type": "object",
+      "properties": {
+        "ui_schema": {
+          "const": 1
+        },
+        "screens": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "screen_id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              },
+              "title_key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "root": {
+                "$ref": "#/definitions/Node"
+              }
+            },
+            "required": [
+              "screen_id",
+              "title_key",
+              "root"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 32
+        }
+      },
+      "required": [
+        "ui_schema",
+        "screens"
+      ],
+      "additionalProperties": false
+    },
+    "Signature": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "const": "Ed25519"
+        },
+        "key_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "signature": {
+          "type": "string",
+          "minLength": 86,
+          "maxLength": 86,
+          "pattern": "^[A-Za-z0-9_-]{86}$"
+        }
+      },
+      "required": [
+        "algorithm",
+        "key_id",
+        "signature"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

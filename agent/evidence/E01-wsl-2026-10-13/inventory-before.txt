@@ -1,0 +1,37 @@
+wsl: Failed to start the systemd user session for 'dontart7272'. See journalctl for more details.
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+Linux LABS-KOMPANIETS 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+uid=1000(dontart7272) gid=1000(dontart7272) groups=1000(dontart7272),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev)
+TARGET SOURCE   FSTYPE OPTIONS
+/      /dev/sdd ext4   rw,relatime,discard,errors=remount-ro,data=ordered
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdd       1007G  1.6G  955G   1% /
+/usr/bin/readelf
+/usr/bin/curl
+/usr/bin/python3
+/usr/bin/rsync
+binutils	2.38-4ubuntu2.12	amd64
+ca-certificates	20260601~22.04.1	all
+curl	7.81.0-1ubuntu1.29	amd64
+libc6:amd64	2.35-0ubuntu3.15	amd64
+deb http://archive.ubuntu.com/ubuntu/ jammy main restricted
+deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+deb http://archive.ubuntu.com/ubuntu/ jammy universe
+deb http://archive.ubuntu.com/ubuntu/ jammy-updates universe
+deb http://archive.ubuntu.com/ubuntu/ jammy multiverse
+deb http://archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted
+deb http://security.ubuntu.com/ubuntu/ jammy-security universe
+deb http://security.ubuntu.com/ubuntu/ jammy-security multiverse

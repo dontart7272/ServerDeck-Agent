@@ -1,0 +1,9 @@
+BEFORE: original pending-map behavior in a new private copy; expected test failure
+--- FAIL: TestDifferentPairingCodesCannotOverwriteSamePendingRequest (0.18s)
+    transport_linux_test.go:395: reserved request overwritten
+FAIL
+FAIL	serverdeck.local/agent/internal/app	0.192s
+FAIL
+AFTER: authoritative fixed Linux copy; expected PASS
+ok  	serverdeck.local/agent/internal/app	0.477s
+PASS: reproduced before failure, fixed regression passed three times, authoritative source unchanged

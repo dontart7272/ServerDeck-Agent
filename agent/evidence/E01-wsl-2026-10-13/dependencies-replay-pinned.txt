@@ -1,0 +1,66 @@
+Hit:1 http://archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libc6-dev-arm64-cross is already the newest version (2.35-0ubuntu1cross3).
+make is already the newest version (4.3-4.1build1).
+binutils is already the newest version (2.38-4ubuntu2.12).
+binutils-aarch64-linux-gnu is already the newest version (2.38-4ubuntu2.12).
+ca-certificates is already the newest version (20260601~22.04.1).
+curl is already the newest version (7.81.0-1ubuntu1.29).
+gcc-11 is already the newest version (11.4.0-1ubuntu1~22.04.3).
+gcc-11-aarch64-linux-gnu is already the newest version (11.4.0-1ubuntu1~22.04.3cross1).
+libc6-dev is already the newest version (2.35-0ubuntu3.15).
+python3 is already the newest version (3.10.6-1~22.04.1).
+rsync is already the newest version (3.2.7-0ubuntu0.22.04.7).
+qemu-user is already the newest version (1:6.2+dfsg-2ubuntu6.31).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+binutils	2.38-4ubuntu2.12	amd64
+binutils-aarch64-linux-gnu	2.38-4ubuntu2.12	amd64
+gcc-11	11.4.0-1ubuntu1~22.04.3	amd64
+gcc-11-aarch64-linux-gnu	11.4.0-1ubuntu1~22.04.3cross1	amd64
+libc6:amd64	2.35-0ubuntu3.15	amd64
+libc6-dev:amd64	2.35-0ubuntu3.15	amd64
+libc6-dev-arm64-cross	2.35-0ubuntu1cross3	all
+qemu-user	1:6.2+dfsg-2ubuntu6.31	amd64
+gcc-11:
+  Installed: 11.4.0-1ubuntu1~22.04.3
+  Candidate: 11.4.0-1ubuntu1~22.04.3
+  Version table:
+ *** 11.4.0-1ubuntu1~22.04.3 500
+        500 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     11.2.0-19ubuntu1 500
+        500 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages
+gcc-11-aarch64-linux-gnu:
+  Installed: 11.4.0-1ubuntu1~22.04.3cross1
+  Candidate: 11.4.0-1ubuntu1~22.04.3cross1
+  Version table:
+ *** 11.4.0-1ubuntu1~22.04.3cross1 500
+        500 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     11.2.0-17ubuntu1cross1 500
+        500 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages
+libc6:
+  Installed: 2.35-0ubuntu3.15
+  Candidate: 2.35-0ubuntu3.15
+  Version table:
+ *** 2.35-0ubuntu3.15 500
+        500 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     2.35-0ubuntu3 500
+        500 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages
+libc6-dev-arm64-cross:
+  Installed: 2.35-0ubuntu1cross3
+  Candidate: 2.35-0ubuntu1cross3
+  Version table:
+ *** 2.35-0ubuntu1cross3 500
+        500 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages
+        100 /var/lib/dpkg/status

@@ -1,0 +1,2 @@
+PASS: 25 documents, 390 local links, 72 AFR + 31 ASEC, 103 ledger rows, 6 schemas, 164 compiled types, 11 valid examples, 13 negative fixtures, 12 defaults, 22 queries, 21 actions.
+This command validates documents only; it does not execute Agent runtime/security/host checks.

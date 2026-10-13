@@ -1,0 +1,7 @@
+ServerDeck Agent
+Copyright 2026 ServerDeck contributors
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+This E01-E03 source includes generated copies of the ServerDeck JSON contracts.
+It uses the Go standard library and the third-party components listed in
+THIRD_PARTY_NOTICES.md. Their licenses remain in force.

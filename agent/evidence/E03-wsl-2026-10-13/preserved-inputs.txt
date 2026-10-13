@@ -1,0 +1,3 @@
+PASS 41ef9791af93d8b272a0e91689c92f90c81345913294104af96d341c7ff8e3e4  agent/internal/storage/migrations/001.sql
+PASS fd29ee896826d80ef3cc06d546f73f1844f89a0d87fb627e6fe8bffa6a222ec9  agent/internal/contracts/declarations.go
+PASS a4de1c8f5d136eec1139d7c8fde113e2b5bc9246c1d3e45aba6410aa32cc1b0b  agent/internal/contracts/runtime.go

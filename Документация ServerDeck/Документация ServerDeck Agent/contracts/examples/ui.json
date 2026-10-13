@@ -1,0 +1,20 @@
+{
+  "ui_schema": 1,
+  "screens": [
+    {
+      "screen_id": "main",
+      "title_key": "main.title",
+      "root": {
+        "node_id": "root",
+        "type": "column",
+        "children": [
+          {
+            "node_id": "intro",
+            "type": "text",
+            "label_key": "main.intro"
+          }
+        ]
+      }
+    }
+  ]
+}

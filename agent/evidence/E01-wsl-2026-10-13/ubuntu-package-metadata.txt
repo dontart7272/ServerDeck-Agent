@@ -1,0 +1,963 @@
+Package: gcc-11
+Priority: optional
+Section: devel
+Installed-Size: 52747
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 11.4.0-1ubuntu1~22.04.3
+Recommends: libc6-dev (>= 2.13-0ubuntu6)
+Replaces: cpp-11 (<< 7.1.1-8)
+Suggests: gcc-11-multilib, gcc-11-doc (>= 11), gcc-11-locales (>= 11)
+Provides: c-compiler
+Depends: cpp-11 (= 11.4.0-1ubuntu1~22.04.3), gcc-11-base (= 11.4.0-1ubuntu1~22.04.3), libcc1-0 (>= 11.4.0-1ubuntu1~22.04.3), binutils (>= 2.38), libgcc-11-dev (= 11.4.0-1ubuntu1~22.04.3), libc6 (>= 2.34), libgcc-s1 (>= 3.0), libgmp10 (>= 2:6.2.1+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libstdc++6 (>= 5), libzstd1 (>= 1.4.0), zlib1g (>= 1:1.1.4)
+Filename: pool/main/g/gcc-11/gcc-11_11.4.0-1ubuntu1~22.04.3_amd64.deb
+Size: 20143406
+MD5sum: 6e78a35cc6982fee8e92fe85cd3bafd2
+SHA1: 0e68084942dc0d4fc45edac5cc2ebc8a449c96a9
+SHA256: 5422307110e695d62a2574c8b765bf38d48b2ed520206e5b7d2b9081a68008f3
+SHA512: 1c000bf4023ec04a349f7cc1a1ae1623d4d48105f2c5a68ed90825b9216b80ad484cdf7595d178e3b05fab3205eab1b9c076f4872adfa3f5b07c415c7a283744
+Homepage: http://gcc.gnu.org/
+Description-en: GNU C compiler
+ This is the GNU C compiler, a fairly portable optimizing compiler for C.
+Description-md5: 394374e688b1afb3af5f419895d29698
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Build-Essential: yes
+Task: ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, ubuntu-mate-desktop
+
+
+Package: cpp-11
+Source: gcc-11
+Priority: optional
+Section: interpreters
+Installed-Size: 26288
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 11.4.0-1ubuntu1~22.04.3
+Suggests: gcc-11-locales (>= 11)
+Depends: gcc-11-base (= 11.4.0-1ubuntu1~22.04.3), libc6 (>= 2.34), libgmp10 (>= 2:6.2.1+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libzstd1 (>= 1.4.0), zlib1g (>= 1:1.1.4)
+Breaks: hardening-wrapper (<< 2.8+nmu3), libmagics++-dev (<< 2.28.0-4)
+Filename: pool/main/g/gcc-11/cpp-11_11.4.0-1ubuntu1~22.04.3_amd64.deb
+Size: 10000304
+MD5sum: ff397385d142d993b7a8a9c1c4e9c69b
+SHA1: 6bbf0854e621213239e06aecd232ad98cb375cfd
+SHA256: 5243177370b810cc40341801a3b8def6cdd7477ac765862f7727a868629947a3
+SHA512: 25210e2ad1e8fd2b8bd1ee02384e0999bf85bf7247205f36538bc48487fdbf7169a5296cdf09400998ecffdf9d7fab0cd7fa9e94ebb9e3a73e52bb297d3e776b
+Homepage: http://gcc.gnu.org/
+Description-en: GNU C preprocessor
+ A macro processor that is used automatically by the GNU C compiler
+ to transform programs before actual compilation.
+ .
+ This package has been separated from gcc for the benefit of those who
+ require the preprocessor but not the compiler.
+Description-md5: 93a75b5e1f4b43c36eba0239b6fab6a3
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: ubuntu-desktop-minimal, ubuntu-desktop, ubuntu-desktop-raspi, kubuntu-desktop, xubuntu-core, xubuntu-desktop, lubuntu-desktop, ubuntustudio-desktop-core, ubuntustudio-desktop, ubuntukylin-desktop, ubuntu-mate-core, ubuntu-mate-desktop, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi
+Build-Essential: yes
+
+
+Package: gcc-11-base
+Source: gcc-11
+Priority: optional
+Section: libs
+Installed-Size: 274
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 11.4.0-1ubuntu1~22.04.3
+Breaks: gnat (<< 7)
+Filename: pool/main/g/gcc-11/gcc-11-base_11.4.0-1ubuntu1~22.04.3_amd64.deb
+Size: 215826
+MD5sum: 8076257d9a8e39eab76f35fac4ff8bcb
+SHA1: deb4953d2057876fc908907b6c165337745cae36
+SHA256: a0445a3889fd4441cc3b3a125d6d1589de3d2628ca4e92a352170ed0fea4d18b
+SHA512: 92911c5c43c2c6ac83e0eecededd0e0119ec871dc5c56544302064c49b5d69f01a273d53265b26f7048aa69d31a7bb8518e134fd77833a13ee6205fa1c9ec4a5
+Homepage: http://gcc.gnu.org/
+Description-en: GCC, the GNU Compiler Collection (base package)
+ This package contains files common to all languages and libraries
+ contained in the GNU Compiler Collection (GCC).
+Description-md5: b6e93638a6d08ea7a18929d7cf078e5d
+Multi-Arch: same
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: ubuntu-desktop-minimal, ubuntu-desktop, ubuntu-desktop-raspi, kubuntu-desktop, xubuntu-core, xubuntu-desktop, lubuntu-desktop, ubuntustudio-desktop-core, ubuntustudio-desktop, ubuntukylin-desktop, ubuntu-mate-core, ubuntu-mate-desktop, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi
+Build-Essential: yes
+
+
+Package: gcc-11-aarch64-linux-gnu
+Source: gcc-11-cross (11ubuntu1.4)
+Priority: optional
+Section: devel
+Installed-Size: 58487
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 11.4.0-1ubuntu1~22.04.3cross1
+Recommends: libc6-dev-arm64-cross (>= 2.13-0ubuntu6)
+Replaces: cpp-11-aarch64-linux-gnu (<< 7.1.1-8)
+Suggests: gcc-11-doc (>= 11), gcc-11-locales (>= 11)
+Provides: c-compiler-aarch64-linux-gnu
+Depends: cpp-11-aarch64-linux-gnu (= 11.4.0-1ubuntu1~22.04.3cross1), gcc-11-aarch64-linux-gnu-base (= 11.4.0-1ubuntu1~22.04.3cross1), libcc1-0 (>= 11), binutils-aarch64-linux-gnu (>= 2.38), libgcc-11-dev-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), libc6 (>= 2.34), libgcc-s1 (>= 3.0), libgmp10 (>= 2:6.2.1+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libstdc++6 (>= 5), libzstd1 (>= 1.4.0), zlib1g (>= 1:1.1.4)
+Conflicts: gcc-multilib
+Filename: pool/main/g/gcc-11-cross/gcc-11-aarch64-linux-gnu_11.4.0-1ubuntu1~22.04.3cross1_amd64.deb
+Size: 18796706
+MD5sum: bf4c55a87e64f2471a16ffa841349dca
+SHA1: dee82ac5035f32ff27e4d1a9b1fd5ff8379fdc73
+SHA256: aa7ad168a8404a22f7bc31d137be2336644b3cbc99174518da443dfe88d51411
+SHA512: 22f4274656dcab4a75f110c0ba5884d780d12b1b20bfc359651aace240de6e5cd395a12b57afe18b1a925e7ca0add9e09d6d541171dd2c09cb563b80198c9b2e
+Homepage: http://gcc.gnu.org/
+Description-en: GNU C compiler (cross compiler for arm64 architecture)
+ This is the GNU C compiler, a fairly portable optimizing compiler for C.
+ .
+ This package contains C cross-compiler for arm64 architecture.
+Description-md5: 6605467979c7b4a27b8a1c6ed7aabd06
+Built-Using: gcc-11 (= 11.4.0-1ubuntu1~22.04.3)
+Multi-Arch: foreign
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: cpp-11-aarch64-linux-gnu
+Source: gcc-11-cross (11ubuntu1.4)
+Priority: optional
+Section: devel
+Installed-Size: 28559
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 11.4.0-1ubuntu1~22.04.3cross1
+Suggests: gcc-11-locales (>= 11)
+Depends: gcc-11-aarch64-linux-gnu-base (= 11.4.0-1ubuntu1~22.04.3cross1), libc6 (>= 2.34), libgmp10 (>= 2:6.2.1+dfsg), libisl23 (>= 0.15), libmpc3 (>= 1.1.0), libmpfr6 (>= 3.1.3), libzstd1 (>= 1.4.0), zlib1g (>= 1:1.1.4)
+Breaks: libmagics++-dev (<< 2.28.0-4)
+Filename: pool/main/g/gcc-11-cross/cpp-11-aarch64-linux-gnu_11.4.0-1ubuntu1~22.04.3cross1_amd64.deb
+Size: 9420604
+MD5sum: 3b73a82d6d9aa2ee9dcbf9e7c82b15c5
+SHA1: d4af1e2a4fa1b6fcce088e21dec22a383cbd42ef
+SHA256: b1ccd3108ea2191519b988826631e148d99fb5c0e9e9264bd8370ceacc51e111
+SHA512: 6ffbc64aad53507c1fd30c43181bfc070cf3d3e7c679674996441cfc6acbbf5d453f5fe17bace2bceb3b8f306ae40d61347c7f54b9f3a368518df12298cd71e2
+Homepage: http://gcc.gnu.org/
+Description-en: GNU C preprocessor
+ A macro processor that is used automatically by the GNU C compiler
+ to transform programs before actual compilation.
+ .
+ This package has been separated from gcc for the benefit of those who
+ require the preprocessor but not the compiler.
+ .
+ This package contains preprocessor configured for arm64 architecture.
+Description-md5: 45f5a7d0ff0712ad443d07c2355c0a1a
+Built-Using: gcc-11 (= 11.4.0-1ubuntu1~22.04.3)
+Multi-Arch: foreign
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: gcc-11-aarch64-linux-gnu-base
+Source: gcc-11-cross (11ubuntu1.4)
+Priority: optional
+Section: devel
+Installed-Size: 274
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 11.4.0-1ubuntu1~22.04.3cross1
+Breaks: gnat (<< 7)
+Filename: pool/main/g/gcc-11-cross/gcc-11-aarch64-linux-gnu-base_11.4.0-1ubuntu1~22.04.3cross1_amd64.deb
+Size: 216088
+MD5sum: 16aa3b754048422b7dce379b12352cb1
+SHA1: 841a869352d7abfbaf9511dd430201a1d17bc41b
+SHA256: 5e2180045a16c4730f977265e44c46f2afcf847f3fa991e799f84217132eab99
+SHA512: 43bdd27665407fa96bfce17e5b66bf923b7c4f82dcaa10f7e4230e8ec1a62f07fceb16244f902c15cb2d7a27008b5291226e6359f32167d43195bfdbab10ecb3
+Homepage: http://gcc.gnu.org/
+Description-en: GCC, the GNU Compiler Collection (base package)
+ This package contains files common to all languages and libraries
+ contained in the GNU Compiler Collection (GCC).
+Description-md5: b6e93638a6d08ea7a18929d7cf078e5d
+Built-Using: gcc-11 (= 11.4.0-1ubuntu1~22.04.3)
+Multi-Arch: same
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: gcc-11-cross-base
+Source: gcc-11-cross (11ubuntu1.4)
+Priority: optional
+Section: devel
+Installed-Size: 267
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 11.4.0-1ubuntu1~22.04.3cross1
+Filename: pool/main/g/gcc-11-cross/gcc-11-cross-base_11.4.0-1ubuntu1~22.04.3cross1_all.deb
+Size: 210704
+MD5sum: d0ce7a1e708ad2b52ff1ff88a52ecffd
+SHA1: 2fd06a7ce292b9f30acebda107d6897afdfaf5c0
+SHA256: 321ae70ee97069b4aa5441a6a019b773eb611ba704d5eb3e41c4fdba22854195
+SHA512: 272f0b3e70ef7fc2867c23df68d9e8cc1537bc1c5ae759b68919d58a8353311084ebf6c77e99ed71531b700ef85eb42edebbcb351aea14c134435b8b66f6b854
+Homepage: http://gcc.gnu.org/
+Description-en: GCC, the GNU Compiler Collection (library base package)
+ This empty package contains changelog and copyright files common to
+ all libraries contained in the GNU Compiler Collection (GCC).
+Description-md5: 4c157f495e05e11e4ad2e3074ac017e0
+Built-Using: gcc-11 (= 11.4.0-1ubuntu1~22.04.3)
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: gcc-12-cross-base
+Source: gcc-12-cross (5ubuntu2.5)
+Priority: optional
+Section: devel
+Installed-Size: 265
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 12.3.0-1ubuntu1~22.04.3cross1
+Filename: pool/main/g/gcc-12-cross/gcc-12-cross-base_12.3.0-1ubuntu1~22.04.3cross1_all.deb
+Size: 210978
+MD5sum: cc9de93267a9452cca4abb2fbad2c944
+SHA1: f97f27a9a7bcd4b9a20fcf18d6c8cbb5a9190a49
+SHA256: 252d820ac4edf046549eab87e165a2a62d72ab27ff467229537f986b3a0dcfa9
+SHA512: 97006371973b5b8809018c30251fcca55f4f15fc4912dc39113acc2fa0a466d16113128962ea5d75e17a103034fa6202edf4906e7ded9eb71b6daac26c565757
+Homepage: http://gcc.gnu.org/
+Description-en: GCC, the GNU Compiler Collection (library base package)
+ This empty package contains changelog and copyright files common to
+ all libraries contained in the GNU Compiler Collection (GCC).
+Description-md5: 4c157f495e05e11e4ad2e3074ac017e0
+Built-Using: gcc-12 (= 12.3.0-1ubuntu1~22.04.3)
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: binutils
+Priority: optional
+Section: devel
+Installed-Size: 114
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 2.38-4ubuntu2.12
+Suggests: binutils-doc (>= 2.38-4ubuntu2.12)
+Provides: binutils-gold, elf-binutils
+Depends: binutils-common (= 2.38-4ubuntu2.12), libbinutils (= 2.38-4ubuntu2.12), binutils-x86-64-linux-gnu (= 2.38-4ubuntu2.12)
+Conflicts: binutils-mingw-w64-i686 (<< 2.23.52.20130612-1+3), binutils-mingw-w64-x86-64 (<< 2.23.52.20130612-1+3), binutils-multiarch (<< 2.27-8), modutils (<< 2.4.19-1)
+Filename: pool/main/b/binutils/binutils_2.38-4ubuntu2.12_amd64.deb
+Size: 3184
+MD5sum: ca17f0c70d6fa94aba9ef4ef03958266
+SHA1: f4b7626331a2b4a0585a474080e5a6e0c40fdee8
+SHA256: 7da8d527d9a4ba9b6fea5fe6126a98f81f538db3a4aaa4ced32d2a26761a4707
+SHA512: 900bd6f61f46153bc2bcc486dcc8c59ed87c6c7c435978ca9006fecf79b6819aea56d52ae49ac39c9a2a0225fc537f9cace936ae6bd15916433bcffb8c4e8fb1
+Homepage: https://www.gnu.org/software/binutils/
+Description-en: GNU assembler, linker and binary utilities
+ The programs in this package are used to assemble, link and manipulate
+ binary and object files.  They may be used in conjunction with a compiler
+ and various libraries to build programs.
+Description-md5: fde49b4cfeaad346a6e094f973da28d7
+Original-Maintainer: Matthias Klose <doko@debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: server-minimal, cloud-image, ubuntu-wsl, server, ubuntu-server-raspi, ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, ubuntu-mate-desktop
+Build-Essential: yes
+
+
+Package: binutils-common
+Source: binutils
+Priority: optional
+Section: devel
+Installed-Size: 508
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 2.38-4ubuntu2.12
+Replaces: binutils (<< 2.29.1-3.1~)
+Breaks: binutils (<< 2.29.1-3.1~)
+Filename: pool/main/b/binutils/binutils-common_2.38-4ubuntu2.12_amd64.deb
+Size: 222756
+MD5sum: 3fa0c7c984a033b27b7cc63982cfc736
+SHA1: 5d3f35eaef1ba7078b69119d1d98396dcd834f33
+SHA256: 53df914b289b688a0f75cbb6c26c5982f31f7ed951785fff2010ad8450249175
+SHA512: fa985f1250de34162a354e635201127573a5164b6689616ebe6ea4db6d2a07801f3aff166caf3cd3b44f7ed74c8c314db6b80d68248a982daa1690fb726e27de
+Homepage: https://www.gnu.org/software/binutils/
+Description-en: Common files for the GNU assembler, linker and binary utilities
+ This package contains the localization files used by binutils packages for
+ various target architectures and parts of the binutils documentation. It is
+ not useful on its own.
+Description-md5: 4ccec6ceb2c180320ed503f61b81ec4b
+Multi-Arch: same
+Original-Maintainer: Matthias Klose <doko@debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: server-minimal, cloud-image, ubuntu-wsl, server, ubuntu-server-raspi, ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, ubuntu-mate-desktop
+Build-Essential: yes
+
+
+Package: binutils-x86-64-linux-gnu
+Source: binutils
+Priority: extra
+Section: devel
+Installed-Size: 10423
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 2.38-4ubuntu2.12
+Replaces: binutils (<< 2.29-6)
+Suggests: binutils-doc (= 2.38-4ubuntu2.12)
+Depends: binutils-common (= 2.38-4ubuntu2.12), libbinutils (= 2.38-4ubuntu2.12), libc6 (>= 2.34), libctf-nobfd0 (>= 2.36), libctf0 (>= 2.36), libgcc-s1 (>= 4.2), zlib1g (>= 1:1.1.4)
+Breaks: binutils (<< 2.29-6)
+Filename: pool/main/b/binutils/binutils-x86-64-linux-gnu_2.38-4ubuntu2.12_amd64.deb
+Size: 2323634
+MD5sum: 42f74e2a711ee2c8f9d76c69b0253aaf
+SHA1: 65a8b3836b46faf2a6f08e88480758717bda887b
+SHA256: 6752566855c79448f8173e61eacde2ef582299480f1abcf4c2ba7ce84718ef32
+SHA512: 9f2fc178785cec1b952d5d3a559e4c7fc5477071fadc58f1d921da06a0b9313815656c08dc978529bcc06ab6440a9c7b0d9767f26f62f6c118a01873972cf628
+Homepage: https://www.gnu.org/software/binutils/
+Description-en: GNU binary utilities, for x86-64-linux-gnu target
+ This package provides GNU assembler, linker and binary utilities
+ for the x86-64-linux-gnu target.
+ .
+ You don't need this package unless you plan to cross-compile programs
+ for x86-64-linux-gnu and x86-64-linux-gnu is not your native platform.
+Description-md5: 7656652c296f89ae4e4e73a71d3c84f9
+Multi-Arch: allowed
+Original-Maintainer: Matthias Klose <doko@debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: server-minimal, cloud-image, ubuntu-wsl, server, ubuntu-server-raspi, ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, ubuntu-mate-desktop
+Build-Essential: yes
+
+
+Package: binutils-aarch64-linux-gnu
+Source: binutils
+Priority: extra
+Section: devel
+Installed-Size: 19524
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 2.38-4ubuntu2.12
+Replaces: binutils (<< 2.29-6)
+Suggests: binutils-doc (= 2.38-4ubuntu2.12)
+Depends: binutils-common (= 2.38-4ubuntu2.12), libc6 (>= 2.34), libgcc-s1 (>= 4.2), zlib1g (>= 1:1.1.4)
+Breaks: binutils (<< 2.29-6)
+Filename: pool/main/b/binutils/binutils-aarch64-linux-gnu_2.38-4ubuntu2.12_amd64.deb
+Size: 3623882
+MD5sum: ccacc5e1afc111e14b53229d05bf5ff5
+SHA1: 0d8eeefe8fc1762e663993fd12f488807d3388d3
+SHA256: 8b27d0c3811c025f76ee8683eb0c13bc57ec335fdfedc86d256c30c52a8b3982
+SHA512: 7b09af270ea39b9a0fd4ed186f53ca28cdca872600b2f8203cdc6e407d5f9cc60cc75475d462af655350ab576f405472e5eb2df6e5f8da4283440f3170bfdaa4
+Homepage: https://www.gnu.org/software/binutils/
+Description-en: GNU binary utilities, for aarch64-linux-gnu target
+ This package provides GNU assembler, linker and binary utilities
+ for the aarch64-linux-gnu target.
+ .
+ You don't need this package unless you plan to cross-compile programs
+ for aarch64-linux-gnu and aarch64-linux-gnu is not your native platform.
+Description-md5: 102820197d11c3672c0cd4ce0becb720
+Multi-Arch: allowed
+Original-Maintainer: Matthias Klose <doko@debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: libgcc-11-dev
+Source: gcc-11
+Priority: optional
+Section: libdevel
+Installed-Size: 13895
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 11.4.0-1ubuntu1~22.04.3
+Recommends: libc6-dev (>= 2.13-0ubuntu6)
+Replaces: libtsan0 (<< 11.2.0-11)
+Depends: gcc-11-base (= 11.4.0-1ubuntu1~22.04.3), libgcc-s1 (>= 11.4.0-1ubuntu1~22.04.3), libgomp1 (>= 11.4.0-1ubuntu1~22.04.3), libitm1 (>= 11.4.0-1ubuntu1~22.04.3), libatomic1 (>= 11.4.0-1ubuntu1~22.04.3), libasan6 (>= 11.4.0-1ubuntu1~22.04.3), liblsan0 (>= 11.4.0-1ubuntu1~22.04.3), libtsan0 (>= 11.4.0-1ubuntu1~22.04.3), libubsan1 (>= 11.4.0-1ubuntu1~22.04.3), libquadmath0 (>= 11.4.0-1ubuntu1~22.04.3)
+Breaks: libtsan0 (<< 11.2.0-11)
+Filename: pool/main/g/gcc-11/libgcc-11-dev_11.4.0-1ubuntu1~22.04.3_amd64.deb
+Size: 2517422
+MD5sum: ff688865be08a86edc1b86686574380d
+SHA1: 8d69e468a17bddf437486f06e5dbf3d686923f4d
+SHA256: 35ed68622daf796ac010f63c73abd8aff851fc6d862038461b053b55dbec93a6
+SHA512: b83b5d04749151c303340aefeaa3fe715f885163e6e4fcfb296ba79b7c9c6ee6047ea2d3deea92e33d4c7eb98820ad51f4449b6fc8cabd725746327eccfb661b
+Homepage: http://gcc.gnu.org/
+Description-en: GCC support library (development files)
+ This package contains the headers and static library files necessary for
+ building C programs which use libgcc, libgomp, libquadmath, libssp or libitm.
+Description-md5: 4ab7cb439b47e1d0796fbaf8447229ac
+Multi-Arch: same
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Build-Essential: yes
+Task: ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, ubuntu-mate-desktop
+
+
+Package: libgcc-11-dev-arm64-cross
+Source: gcc-11-cross (11ubuntu1.4)
+Priority: optional
+Section: libdevel
+Installed-Size: 11249
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 11.4.0-1ubuntu1~22.04.3cross1
+Recommends: libc6-dev-arm64-cross (>= 2.13-0ubuntu6)
+Replaces: libtsan0-arm64-cross (<< 11.2.0-11)
+Depends: gcc-11-cross-base (>= 11.4.0-1ubuntu1~22.04.3), libgcc-s1-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), libgomp1-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), libitm1-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), libatomic1-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), libasan6-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), liblsan0-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), libtsan0-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), libubsan1-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1), libhwasan0-arm64-cross (>= 11.4.0-1ubuntu1~22.04.3cross1)
+Breaks: libtsan0-arm64-cross (<< 11.2.0-11)
+Filename: pool/main/g/gcc-11-cross/libgcc-11-dev-arm64-cross_11.4.0-1ubuntu1~22.04.3cross1_all.deb
+Size: 1144756
+MD5sum: d0e61d525c7a89fbeaa21d90fd796d61
+SHA1: 21a891bce69ba0f2796872819b33185f104a54ef
+SHA256: bc16d649bfdfdb7fe505ec9ef9853463f4f379dad5459cffa3ff5cdf477c817e
+SHA512: 3021e28a40283546ead8fcb32bb1b6c2a28bc966d5fb0cf9c91c1ecf0047dc7045350e631111e895f1e36f2df92cfd4046a252c632d6bc0248375b39a736df2d
+Homepage: http://gcc.gnu.org/
+Description-en: GCC support library (development files)
+ This package contains the headers and static library files necessary for
+ building C programs which use libgcc, libgomp, libquadmath, libssp or libitm.
+Description-md5: 4ab7cb439b47e1d0796fbaf8447229ac
+Built-Using: gcc-11 (= 11.4.0-1ubuntu1~22.04.3)
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: libgcc-s1
+Source: gcc-12
+Priority: required
+Section: libs
+Installed-Size: 140
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 12.3.0-1ubuntu1~22.04.3
+Replaces: libgcc1 (<< 1:10)
+Provides: libgcc1 (= 1:12.3.0-1ubuntu1~22.04.3)
+Depends: gcc-12-base (= 12.3.0-1ubuntu1~22.04.3), libc6 (>= 2.35)
+Filename: pool/main/g/gcc-12/libgcc-s1_12.3.0-1ubuntu1~22.04.3_amd64.deb
+Size: 53896
+MD5sum: 405a1040f2161b796a9466ede4d899ab
+SHA1: 5e1095cdd4bf1c40cdb7333552e51f1b5b47d624
+SHA256: d383e642d83263147f7b4b69fb92cf1036e5246c6be3accf10b77f986684589a
+SHA512: d7e90d03c46012f6cb8af12ad2717a2e8aa55ed8964895d944b5636ad2cb9d6f49070c3cbd3d4be61b44fd338cac5b7ef0c0e0e84d391052a84bedc9a49290dc
+Homepage: http://gcc.gnu.org/
+Description-en: GCC support library
+ Shared version of the support library, a library of internal subroutines
+ that GCC uses to overcome shortcomings of particular machines, or
+ special needs for some languages.
+Description-md5: bbd60d723e97d8e06c04228ee4c76f10
+Multi-Arch: same
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: minimal, server-minimal
+
+
+Package: libgcc-s1-arm64-cross
+Source: gcc-12-cross (5ubuntu2.5)
+Priority: optional
+Section: devel
+Installed-Size: 99
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 12.3.0-1ubuntu1~22.04.3cross1
+Replaces: libgcc1-arm64-cross (<< 1:10)
+Provides: libgcc-s1-arm64-dcv1, libgcc1-arm64-cross (= 1:12.3.0-1ubuntu1~22.04.3)
+Depends: gcc-12-cross-base (>= 12.3.0-1ubuntu1~22.04.3), libc6-arm64-cross (>= 2.35)
+Breaks: libgcc1-arm64-cross (<< 1:10)
+Filename: pool/main/g/gcc-12-cross/libgcc-s1-arm64-cross_12.3.0-1ubuntu1~22.04.3cross1_all.deb
+Size: 39784
+MD5sum: fb79668496355b3ea6900ca38e196642
+SHA1: 279746979f2d507697adb4c73201ce3c23888207
+SHA256: 2a62fd8d05a8e1a934f781d4d608a41e6bc12673723c9c2f0e546f30313077c8
+SHA512: c27ebf2f76ecd94588490e8306c0f7bc5048db269338befd33248a8eb20a742e4e14d2f9410d41aa8b7603fad22be9e69d951015db49d2f6106982b103d5081a
+Homepage: http://gcc.gnu.org/
+Description-en: GCC support library (arm64)
+ Shared version of the support library, a library of internal subroutines
+ that GCC uses to overcome shortcomings of particular machines, or
+ special needs for some languages.
+ .
+ This package contains files for arm64 architecture, for use in cross-compile
+ environment.
+Description-md5: 30f5e940c21e92b2411b37b0a95424d1
+Built-Using: gcc-12 (= 12.3.0-1ubuntu1~22.04.3)
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: libc6
+Source: glibc
+Priority: required
+Section: libs
+Installed-Size: 13595
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 2.35-0ubuntu3.15
+Recommends: libidn2-0 (>= 2.0.5~), libnss-nis, libnss-nisplus
+Replaces: libc6-amd64
+Suggests: glibc-doc, debconf | debconf-2.0, locales
+Depends: libgcc-s1, libcrypt1 (>= 1:4.4.10-10ubuntu4)
+Breaks: busybox (<< 1.30.1-6), fakeroot (<< 1.25.3-1.1ubuntu2~), hurd (<< 1:0.9.git20170910-1), ioquake3 (<< 1.36+u20200211.f2c61c1~dfsg-2~), iraf-fitsutil (<< 2018.07.06-4), libgegl-0.4-0 (<< 0.4.18), libtirpc1 (<< 0.2.3), locales (<< 2.35), locales-all (<< 2.35), macs (<< 2.2.7.1-3~), nocache (<< 1.1-1~), nscd (<< 2.35), openarena (<< 0.8.8+dfsg-4~), openssh-server (<< 1:8.2p1-4), r-cran-later (<< 0.7.5+dfsg-2), wcc (<< 0.0.2+dfsg-3)
+Filename: pool/main/g/glibc/libc6_2.35-0ubuntu3.15_amd64.deb
+Size: 3234380
+MD5sum: e0ff6fdb8153d9d8768fa397dcf8bd64
+SHA1: 836ef214a2a1f6159dfaae9d1fc88738d51da85a
+SHA256: 79e35256227e16a607c154cdeb8d76ff12d20e31de286ea7fd9ad3b96fe0452d
+SHA512: 458a0db681b794e577926de26251bf236aad5bfe22630894630f2c733ff659ad4babd7aba53afcbd78d58e4700d9f14401da6e9248bbb74679599f258973eaaf
+Homepage: https://www.gnu.org/software/libc/libc.html
+Description-en: GNU C Library: Shared libraries
+ Contains the standard libraries that are used by nearly all programs on
+ the system. This package includes shared versions of the standard C library
+ and the standard math library, as well as many others.
+Description-md5: fc3001b0b90a1c8e6690b283a619d57f
+Multi-Arch: same
+Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Original-Vcs-Browser: https://salsa.debian.org/glibc-team/glibc
+Original-Vcs-Git: https://salsa.debian.org/glibc-team/glibc.git
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: minimal, server-minimal
+
+
+Package: libc6-dev
+Source: glibc
+Priority: optional
+Section: libdevel
+Installed-Size: 13039
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 2.35-0ubuntu3.15
+Suggests: glibc-doc, manpages-dev
+Provides: libc-dev
+Depends: libc6 (= 2.35-0ubuntu3.15), libc-dev-bin (= 2.35-0ubuntu3.15), linux-libc-dev, libcrypt-dev, rpcsvc-proto, libtirpc-dev, libnsl-dev
+Conflicts: libc0.1-dev, libc0.3-dev, libc6.1-dev
+Breaks: libc6-dev-amd64-cross (<< 2.35~), libgcc-10-dev (<< 10-20200321-1~), libgcc-7-dev (<< 7.5.0-6~), libgcc-8-dev (<< 8.4.0-2~), libgcc-9-dev (<< 9.3.0-5~), libperl5.26 (<< 5.26.1-3), python3.7 (<< 3.7.7-1+b1), python3.8 (<< 3.8.2-1+b1)
+Filename: pool/main/g/glibc/libc6-dev_2.35-0ubuntu3.15_amd64.deb
+Size: 2100232
+MD5sum: c4b946050868022195b6ee48c331fe95
+SHA1: c0eeb3e7bfe30b11be2c7d894dd99a6f54fe80b5
+SHA256: ce51ae233a9f800a040de2d0cd5983ef86f558c623b342c80942301d7f453f48
+SHA512: 2205ebc1080d7e0c4bd30ccec09c01e472b0fce710fd5212bd9ff9e202098fd1959c4a809754220a4a171e02d6c71abe040553f1309b1a3c5c897561900ca8ba
+Homepage: https://www.gnu.org/software/libc/libc.html
+Description-en: GNU C Library: Development Libraries and Header Files
+ Contains the symlinks, headers, and object files needed to compile
+ and link programs which use the standard C library.
+Description-md5: 1bbdc717d9acdb44db940928d570e749
+Multi-Arch: same
+Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Original-Vcs-Browser: https://salsa.debian.org/glibc-team/glibc
+Original-Vcs-Git: https://salsa.debian.org/glibc-team/glibc.git
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Build-Essential: yes
+Task: ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, ubuntu-mate-desktop
+
+
+Package: libc-dev-bin
+Source: glibc
+Priority: optional
+Section: libdevel
+Installed-Size: 301
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 2.35-0ubuntu3.15
+Recommends: manpages, manpages-dev, libc-devtools (>> 2.35)
+Depends: libc6 (>> 2.35), libc6 (<< 2.36)
+Filename: pool/main/g/glibc/libc-dev-bin_2.35-0ubuntu3.15_amd64.deb
+Size: 20282
+MD5sum: e66e3153aff2614b51b08e1d41f94dce
+SHA1: 07c45e62d42efa2695a9d3d66139aa72da5819a3
+SHA256: cd3e9a91ac20fbd978fa40be4e93716736c29a4619dcc1398343c2c1d1f67e10
+SHA512: a5c9138ab2671c936726adb479b60a2ed0e7d6edee667b1bc40641d509928d74743d0a01711fc065fdd9564e91d8fb49e84098b3caf336a2a9257f54fcce5a69
+Homepage: https://www.gnu.org/software/libc/libc.html
+Description-en: GNU C Library: Development binaries
+ This package contains utility programs related to the GNU C Library
+ development package.
+ .
+ * gencat: generate message catalogs
+ * rpcgen: compile RPC protocols to C
+Description-md5: 27982aa1e4c98f604c1702531b64361e
+Multi-Arch: foreign
+Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Original-Vcs-Browser: https://salsa.debian.org/glibc-team/glibc
+Original-Vcs-Git: https://salsa.debian.org/glibc-team/glibc.git
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Build-Essential: yes
+Task: ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, ubuntu-mate-desktop
+
+
+Package: libc6-arm64-cross
+Architecture: all
+Version: 2.35-0ubuntu1cross3
+Built-Using: binutils (= 2.38-2ubuntu1), linux (= 5.15.0-22.22), gcc-11 (= 11.2.0-16ubuntu1), glibc (= 2.35-0ubuntu1)
+Multi-Arch: foreign
+Priority: extra
+Section: libs
+Source: cross-toolchain-base (59ubuntu3)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Provides: libc6-lse-arm64-cross, libc6-arm64-dcv1
+Replaces: libc6-lse-arm64-cross
+Filename: pool/main/c/cross-toolchain-base/libc6-arm64-cross_2.35-0ubuntu1cross3_all.deb
+Size: 1146646
+MD5sum: 824eab89c0dae7f2a184493588765daa
+SHA1: 951fbdc0e7d11b94733c6a0178a3b133a0c2ae89
+SHA256: 32b6264502998dd170d21eff60b6686be8c682012df18e6cc9fdffcf42c5faae
+SHA512: 15b4fe28e7ab6e89b33c1b8d11334ff716e517000b00f201333a0c86e753c6d8f75fc8fab75667d609d12d6cb8cc453d4c15113996ff1ce569d0d609851a12e2
+Description-en: GNU C Library: Shared libraries (for cross-compiling)
+ This package was generated by dpkg-cross for cross compiling.
+ .
+ Contains the standard libraries that are used by nearly all programs on
+ the system. This package includes shared versions of the standard C library
+ and the standard math library, as well as many others.
+Description-md5: b266351f0a5ff19b39a85a1e2ab438d7
+
+
+Package: libc6-dev-arm64-cross
+Architecture: all
+Version: 2.35-0ubuntu1cross3
+Built-Using: binutils (= 2.38-2ubuntu1), linux (= 5.15.0-22.22), gcc-11 (= 11.2.0-16ubuntu1), glibc (= 2.35-0ubuntu1)
+Multi-Arch: foreign
+Priority: extra
+Section: libdevel
+Source: cross-toolchain-base (59ubuntu3)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Provides: libc-dev-arm64-cross, libc6-dev-arm64-dcv1
+Depends: libc6-arm64-cross (= 2.35-0ubuntu1cross3), linux-libc-dev-arm64-cross
+Conflicts: libc0.1-dev-arm64-cross, libc0.3-dev-arm64-cross, libc6.1-dev-arm64-cross
+Filename: pool/main/c/cross-toolchain-base/libc6-dev-arm64-cross_2.35-0ubuntu1cross3_all.deb
+Size: 1546300
+MD5sum: bef22fa81740ef5db267f81f6a4fcedb
+SHA1: fa5fc8205b26cd0e26ac5aad0ad1cd571a740372
+SHA256: 1c552b83243bc5ac6b1ac01078f2396d0f483e849ec0b577bce28e067f6bd65d
+SHA512: 536c2d7899835ffa025808c7736f66a858915f77a87f0bf0f46a136b1fb9f8743be25a6ec6fc2c170039b973658b1f84be08b5e418e2353b35f572ce0d5a2fa1
+Description-en: GNU C Library: Development Libraries and Header Files (for cross-compiling)
+ This package was generated by dpkg-cross for cross compiling.
+ .
+ Contains the symlinks, headers, and object files needed to compile
+ and link programs which use the standard C library.
+Description-md5: fc7d1124da33f2f1ca4b4e0833019db4
+
+
+Package: linux-libc-dev
+Source: linux
+Priority: optional
+Section: devel
+Installed-Size: 7239
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Architecture: amd64
+Version: 5.15.0-198.208
+Replaces: linux-kernel-headers
+Provides: aufs-dev, linux-kernel-headers
+Conflicts: linux-kernel-headers
+Filename: pool/main/l/linux/linux-libc-dev_5.15.0-198.208_amd64.deb
+Size: 1390974
+MD5sum: 7be0963097b30b6b9e8613d3bf2343e6
+SHA1: 65d583bce1374a4a3d1293fdea3e15278485a624
+SHA256: d7ba314f1e0e79745f104eaeeb662723fb72b1d4ab45c923d93db32867dd11e7
+SHA512: 93647c6824385cc14cb8f60ed5bc612220e02e032d0305c54cacfd507ae227d1d8c4d4637b82fcdc11ddfba25e18b166f87f1f3cfa603910d864c266564f41e9
+Description-en: Linux Kernel Headers for development
+ This package provides headers from the Linux kernel.  These headers
+ are used by the installed headers for GNU glibc and other system
+ libraries. They are NOT meant to be used to build third-party modules for
+ your kernel. Use linux-headers-* packages for that.
+Description-md5: d5d143e6dffc891f04a85464446f9451
+Multi-Arch: same
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Build-Essential: yes
+Task: ubuntustudio-video, ubuntustudio-publishing, ubuntu-mate-core, ubuntu-mate-desktop
+
+
+Package: linux-libc-dev-arm64-cross
+Architecture: all
+Version: 5.15.0-22.22cross3
+Built-Using: linux (= 5.15.0-22.22)
+Multi-Arch: foreign
+Priority: extra
+Section: devel
+Source: cross-toolchain-base (59ubuntu3)
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Cross Toolchain Base Team <cross-toolchain-base-devs@lists.launchpad.net>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 6123
+Provides: linux-kernel-headers-arm64-cross, linux-libc-dev-arm64-dcv1
+Filename: pool/main/c/cross-toolchain-base/linux-libc-dev-arm64-cross_5.15.0-22.22cross3_all.deb
+Size: 1215842
+MD5sum: 4423510352492fd45902c56b9cfc2c10
+SHA1: e33ab5a1f1d55ff9f80a3a9f0ea84141171a4eaf
+SHA256: 5f62ce5bee284a4c02ecb68bddcd96334ed71eda7e87c1638fac47e4f58f098d
+SHA512: a6999c947216d096b78bc54d1a0b6f6b017a9b74a5a980612b1e366946f3c0661eabfb695d711fd7b9fb6d6c5d6a4390c8b0e451a822fde5f6cec4b0544d714c
+Description-en: Linux Kernel Headers for development (for cross-compiling)
+ This package provides headers from the Linux kernel.  These headers
+ are used by the installed headers for GNU glibc and other system
+ libraries. They are NOT meant to be used to build third-party modules for
+ your kernel. Use linux-headers-* packages for that.
+Description-md5: 1451bbb6883623d253eaf0cf7565213a
+
+
+Package: libisl23
+Architecture: amd64
+Version: 0.24-2build1
+Multi-Arch: same
+Priority: optional
+Section: libs
+Source: isl
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 2159
+Depends: libc6 (>= 2.14), libgmp10 (>= 2:6.2.1+dfsg)
+Breaks: libisl-dbg (<< 0.19)
+Replaces: libisl-dbg (<< 0.19)
+Filename: pool/main/i/isl/libisl23_0.24-2build1_amd64.deb
+Size: 726854
+MD5sum: 408933ab46ed4888aeaec5db55e45773
+SHA1: ff662b858d933f659464a59444828df8895c098f
+SHA256: 4cb0faab32c896165cf4ebe3c3ebce3176bf869453636d7fe8be89dccc2ae5af
+SHA512: 1303032909a081a76fdaec75b80546c1c5face04bb01c7ea0105ce9cfd57e0c2fc64a623c2d549b8d61ad81046da3ff605bb2e6675c176bad3c9c6dc2648dc17
+Homepage: http://isl.gforge.inria.fr/
+Description-en: manipulating sets and relations of integer points bounded by linear constraints
+ isl is a library for manipulating sets and relations of integer points
+ bounded by linear constraints. Supported operations on sets include
+ intersection, union, set difference, emptiness check, convex hull,
+ (integer) affine hull, integer projection, and computing the lexicographic
+ minimum using parametric integer programming. It also includes an ILP solver
+ based on generalized basis reduction.
+ .
+ This package contains the runtime library.
+Description-md5: b718cf54a9174f62d55d1d78f6212d22
+Task: ubuntu-desktop-minimal, ubuntu-desktop, ubuntu-desktop-raspi, kubuntu-desktop, xubuntu-core, xubuntu-desktop, lubuntu-desktop, ubuntustudio-desktop-core, ubuntustudio-desktop, ubuntukylin-desktop, ubuntu-mate-core, ubuntu-mate-desktop, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi
+Build-Essential: yes
+
+
+Package: libmpc3
+Architecture: amd64
+Version: 1.2.1-2build1
+Multi-Arch: same
+Priority: extra
+Section: libs
+Source: mpclib3
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 125
+Depends: libc6 (>= 2.4), libgmp10 (>= 2:6.2.1+dfsg), libmpfr6 (>= 4.0.0)
+Filename: pool/main/m/mpclib3/libmpc3_1.2.1-2build1_amd64.deb
+Size: 46868
+MD5sum: 8022dd730341cdc9842ec8e9175cdb46
+SHA1: 9e7578cd98d46d20c741ad25b828103cbebfedd1
+SHA256: 6cd43b60ac14890737a3402a35350d6696bc1521de8731cdecc9e7ef10041446
+SHA512: f1732295871bcbffef5485fe9b02b6a444b0d481b61014a585ca97299ecba64086c4337dd4e83f54f360af2bd42b955f0dd070ff9cb72fae95b4f5148cd9102a
+Homepage: http://www.multiprecision.org/mpc/
+Description-en: multiple precision complex floating-point library
+ MPC is a portable library written in C for arbitrary precision
+ arithmetic on complex numbers providing correct rounding. For the time
+ being, it contains all arithmetic operations over complex numbers, the
+ exponential and the logarithm functions, the trigonometric and
+ hyperbolic functions.
+ .
+ Ultimately, it should implement a multiprecision equivalent of the ISO
+ C99 standard.
+ .
+ It builds upon the GNU MP and the MPFR libraries.
+Description-md5: ce4238ae925ae6ad84bc52508aa5e8ae
+Task: ubuntu-desktop-minimal, ubuntu-desktop, ubuntu-desktop-raspi, kubuntu-desktop, xubuntu-core, xubuntu-desktop, lubuntu-desktop, ubuntustudio-desktop-core, ubuntustudio-desktop, ubuntukylin-desktop, ubuntu-mate-core, ubuntu-mate-desktop, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi
+Build-Essential: yes
+
+
+Package: libmpfr6
+Architecture: amd64
+Version: 4.1.0-3build3
+Multi-Arch: same
+Priority: optional
+Section: libs
+Source: mpfr4
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 3405
+Depends: libc6 (>= 2.14), libgmp10 (>= 2:6.2.1+dfsg)
+Breaks: libgmp3 (<< 4.1.4-3), libmpc3 (<< 1.1.0-1~)
+Filename: pool/main/m/mpfr4/libmpfr6_4.1.0-3build3_amd64.deb
+Size: 1424734
+MD5sum: d660dfcf471227e1bcb71994b60a5810
+SHA1: c36b59d2973d911c2e5aeba9cbf578d6b4c2619e
+SHA256: ffdc36247e5fc96ba3fca5a9448856c9327e93631ce5646acd9fffd286d10de3
+SHA512: 849842b0fc7df64913002b3869abe4480bcd6eb3099fe18f7a7713fab688b1a7b4220e38de2ab9fe93cfd2dfdae94ea6347838418a23f385d89e5d8c760488cd
+Homepage: https://www.mpfr.org/
+Description-en: multiple precision floating-point computation
+ MPFR provides a library for multiple-precision floating-point computation
+ with correct rounding.  The computation is both efficient and has a
+ well-defined semantics. It copies the good ideas from the
+ ANSI/IEEE-754 standard for double-precision floating-point arithmetic
+ (53-bit mantissa).
+Description-md5: 97d2af3ed9ac83dc3fdaf77a6b27a294
+Task: server-minimal, ubuntu-desktop-minimal, ubuntu-desktop, cloud-image, ubuntu-desktop-raspi, ubuntu-wsl, server, ubuntu-server-raspi, kubuntu-desktop, xubuntu-core, xubuntu-desktop, lubuntu-desktop, ubuntustudio-desktop-core, ubuntustudio-desktop, ubuntukylin-desktop, ubuntu-mate-core, ubuntu-mate-desktop, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi
+Build-Essential: yes
+
+
+Package: libgmp10
+Architecture: amd64
+Version: 2:6.2.1+dfsg-3ubuntu1
+Multi-Arch: same
+Priority: required
+Section: libs
+Source: gmp
+Origin: Ubuntu
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 544
+Depends: libc6 (>= 2.14)
+Breaks: libmath-gmp-perl (<< 2.20-1), libmath-prime-util-gmp-perl (<< 0.51-2), postgresql-pgmp (<< 1.0.3-1)
+Filename: pool/main/g/gmp/libgmp10_6.2.1+dfsg-3ubuntu1_amd64.deb
+Size: 250148
+MD5sum: becdaadf88dbf40b05bc70dd6608bc3b
+SHA1: 46bc1645f7c04c925b4ea5b00fb27d8d7ae07cdf
+SHA256: d199a77e11701d4d620dd4f62e05740e3072dce893856ea3bbaa6ae9fa19fef1
+SHA512: 58a2245cd1417bfc109ea531ad379f4c7ecff2d715d335dc0a438594f2cc92cd52058611903a75618190f07f072e790c96ed98e48c4151c372518a9d43fdc2d1
+Homepage: https://gmplib.org/
+Description-en: Multiprecision arithmetic library
+ GNU MP is a programmer's library for arbitrary precision
+ arithmetic (ie, a bignum package).  It can operate on signed
+ integer, rational, and floating point numeric types.
+ .
+ It has a rich set of functions, and the functions have a regular
+ interface.
+Description-md5: cf6b3a218331a8f680398794acac47a0
+Task: minimal, server-minimal
+
+
+Package: qemu-user
+Source: qemu
+Priority: optional
+Section: universe/misc
+Installed-Size: 113157
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 1:6.2+dfsg-2ubuntu6.31
+Recommends: qemu-user-binfmt
+Depends: libc6 (>= 2.34), libgcc-s1 (>= 4.7), libglib2.0-0 (>= 2.37.1), libgnutls30 (>= 3.7.2), libstdc++6 (>= 5.2), liburing2 (>= 2.0), zlib1g (>= 1:1.1.4)
+Filename: pool/universe/q/qemu/qemu-user_6.2+dfsg-2ubuntu6.31_amd64.deb
+Size: 16007052
+MD5sum: c5243e86e0af323d48af6ee106c1437a
+SHA1: 58aa63900a765cbed547d42c4bccfd8ab4e1c199
+SHA256: fe186b3646936a0bb02c809b093f9c743085bec8f7539e39d2f78c573859911d
+SHA512: a50437a1ba8d50e709ca89fb8238d7b8af15eeadff06a17391f619f226a1487ee05fb172c80608b164520e7c5bc6f78838f91cedd268369180ae306c3bd641e3
+Homepage: http://www.qemu.org/
+Description-en: QEMU user mode emulation binaries
+ QEMU is a fast processor emulator: currently the package supports
+ ARM, CRIS, i386, M68k (ColdFire), MicroBlaze, MIPS, PowerPC, SH4,
+ SPARC and x86-64 emulation. By using dynamic translation it achieves
+ reasonable speed while being easy to port on new host CPUs.
+ .
+ This package provides the user mode emulation binaries. In this mode
+ QEMU can launch Linux processes compiled for one CPU on another CPU.
+ .
+ If qemu-user-binfmt package is also installed, it will register binary
+ format handlers from this qemu-user package with the kernel so it will
+ be possible to run foreign binaries directly.  However, this might not
+ be suitable for using inside foreign chroots, in which case it is
+ possible to use qemu-user-static package instead of qemu-user-binmft, --
+ qemu-user-static will register statically linked binfmt handlers instead.
+Description-md5: b7a34d8d1377ca0beb573e0e2b4ce914
+Multi-Arch: foreign
+Original-Maintainer: Debian QEMU Team <pkg-qemu-devel@lists.alioth.debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+
+
+Package: ubuntu-keyring
+Architecture: all
+Version: 2021.03.26
+Multi-Arch: foreign
+Priority: important
+Section: misc
+Origin: Ubuntu
+Maintainer: Dimitri John Ledkov <dimitri.ledkov@canonical.com>
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Installed-Size: 41
+Breaks: ubuntu-cloudimage-keyring (<< 2018.02.05)
+Replaces: ubuntu-cloudimage-keyring (<< 2018.02.05)
+Filename: pool/main/u/ubuntu-keyring/ubuntu-keyring_2021.03.26_all.deb
+Size: 20856
+MD5sum: 58f3369957565acd8a6cd32dbf2e4cbe
+SHA1: 414f97d1158a02564344f9a513668c7f3c56f37a
+SHA256: 0d0e7ed6b112f5d03eabf3c7eb01ebdacf9c57714b279e90495cfc58c8c4520f
+SHA512: 5ed5d515ae71d37af486a51f53ca061f1c89aa33a6db360ee94021c31014b7a80a7f8b1e10519990052a8853c669968b6c2beeb28d6e2da6157669a443ee4134
+Description-en: GnuPG keys of the Ubuntu archive
+ The Ubuntu project digitally signs its Release files. This package
+ contains the archive keys used for that.
+Description-md5: 50b1d2c58bfd75a47173455de2fe5cfe
+Task: minimal, server-minimal
+Build-Essential: yes
+
+
+Package: ca-certificates
+Priority: important
+Section: misc
+Installed-Size: 345
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 20260601~22.04.1
+Depends: openssl (>= 1.1.1), debconf (>= 0.5) | debconf-2.0
+Enhances: openssl
+Breaks: ca-certificates-java (<< 20121112+nmu1)
+Filename: pool/main/c/ca-certificates/ca-certificates_20260601~22.04.1_all.deb
+Size: 140666
+MD5sum: 7797498a50907b6f84453ea8f8469b21
+SHA1: 5d22145e9a4a079ba978aa724a67c0e779123975
+SHA256: 6e8cdcc8c86103acd4fc14649eac62ff2037108389074a7b167567af33c32245
+SHA512: 115de07e0a83d82ccc2e3369ec8d4dd59041f7ea61c9d31b59bd7b419616c264f26843b6ed48de64e99d40846c0c55a311acd9bc8a403f39750ed9a0ac032d03
+Description-en: Common CA certificates
+ Contains the certificate authorities shipped with Mozilla's browser to allow
+ SSL-based applications to check for the authenticity of SSL connections.
+ .
+ Please note that Debian can neither confirm nor deny whether the
+ certificate authorities whose certificates are included in this package
+ have in any way been audited for trustworthiness or RFC 3647 compliance.
+ Full responsibility to assess them belongs to the local system
+ administrator.
+Description-md5: e867d2a359bea1800b5bff209fc65bd1
+Multi-Arch: foreign
+Original-Maintainer: Julien Cristau <jcristau@debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: minimal, server-minimal
+
+
+Package: curl
+Priority: optional
+Section: web
+Installed-Size: 446
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: amd64
+Version: 7.81.0-1ubuntu1.29
+Depends: libc6 (>= 2.34), libcurl4 (= 7.81.0-1ubuntu1.29), zlib1g (>= 1:1.1.4)
+Filename: pool/main/c/curl/curl_7.81.0-1ubuntu1.29_amd64.deb
+Size: 194122
+MD5sum: 60e7e5ef5a1d43b6457c73cd29c4cbdd
+SHA1: c37359f9fc1417bb369a97aa8e6c8b250327772d
+SHA256: adbeb46ebd7a849c46898c089e8d3fc0737b1a8456cddb16ea29c4ba4cd6c972
+SHA512: 8f53ddf73c4c20e0a08dfb41e25e609302928d7f8c254d71989ebf2e91db8b4aea4982d5716297e12bb286794325b9291291d046ff60cf78760ec1a2717d6cb3
+Homepage: https://curl.haxx.se
+Description-en: command line tool for transferring data with URL syntax
+ curl is a command line tool for transferring data with URL syntax, supporting
+ DICT, FILE, FTP, FTPS, GOPHER, HTTP, HTTPS, IMAP, IMAPS, LDAP, LDAPS, POP3,
+ POP3S, RTMP, RTSP, SCP, SFTP, SMTP, SMTPS, TELNET and TFTP.
+ .
+ curl supports SSL certificates, HTTP POST, HTTP PUT, FTP uploading, HTTP form
+ based upload, proxies, cookies, user+password authentication (Basic, Digest,
+ NTLM, Negotiate, kerberos...), file transfer resume, proxy tunneling and a
+ busload of other useful tricks.
+Description-md5: f83293d10df083ae6f7bb7d01642913c
+Multi-Arch: foreign
+Original-Maintainer: Alessandro Ghedini <ghedo@debian.org>
+Origin: Ubuntu
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Task: server-minimal, cloud-image, ubuntu-wsl, server, ubuntu-server-raspi, ubuntustudio-publishing, ubuntu-budgie-desktop, ubuntu-budgie-desktop-raspi
+

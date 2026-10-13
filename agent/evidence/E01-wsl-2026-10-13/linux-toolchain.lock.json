@@ -1,0 +1,135 @@
+{
+  "os": "Ubuntu 22.04.5 WSL2",
+  "kernel": "6.6.87.2-microsoft-standard-WSL2",
+  "architecture": "x86_64",
+  "packages": {
+    "gcc-11": {
+      "version": "11.4.0-1ubuntu1~22.04.3",
+      "architecture": "amd64"
+    },
+    "cpp-11": {
+      "version": "11.4.0-1ubuntu1~22.04.3",
+      "architecture": "amd64"
+    },
+    "gcc-11-base:amd64": {
+      "version": "11.4.0-1ubuntu1~22.04.3",
+      "architecture": "amd64"
+    },
+    "gcc-11-aarch64-linux-gnu": {
+      "version": "11.4.0-1ubuntu1~22.04.3cross1",
+      "architecture": "amd64"
+    },
+    "cpp-11-aarch64-linux-gnu": {
+      "version": "11.4.0-1ubuntu1~22.04.3cross1",
+      "architecture": "amd64"
+    },
+    "gcc-11-aarch64-linux-gnu-base:amd64": {
+      "version": "11.4.0-1ubuntu1~22.04.3cross1",
+      "architecture": "amd64"
+    },
+    "gcc-11-cross-base": {
+      "version": "11.4.0-1ubuntu1~22.04.3cross1",
+      "architecture": "all"
+    },
+    "gcc-12-cross-base": {
+      "version": "12.3.0-1ubuntu1~22.04.3cross1",
+      "architecture": "all"
+    },
+    "binutils": {
+      "version": "2.38-4ubuntu2.12",
+      "architecture": "amd64"
+    },
+    "binutils-common:amd64": {
+      "version": "2.38-4ubuntu2.12",
+      "architecture": "amd64"
+    },
+    "binutils-x86-64-linux-gnu": {
+      "version": "2.38-4ubuntu2.12",
+      "architecture": "amd64"
+    },
+    "binutils-aarch64-linux-gnu": {
+      "version": "2.38-4ubuntu2.12",
+      "architecture": "amd64"
+    },
+    "libgcc-11-dev:amd64": {
+      "version": "11.4.0-1ubuntu1~22.04.3",
+      "architecture": "amd64"
+    },
+    "libgcc-11-dev-arm64-cross": {
+      "version": "11.4.0-1ubuntu1~22.04.3cross1",
+      "architecture": "all"
+    },
+    "libgcc-s1:amd64": {
+      "version": "12.3.0-1ubuntu1~22.04.3",
+      "architecture": "amd64"
+    },
+    "libgcc-s1-arm64-cross": {
+      "version": "12.3.0-1ubuntu1~22.04.3cross1",
+      "architecture": "all"
+    },
+    "libc6:amd64": {
+      "version": "2.35-0ubuntu3.15",
+      "architecture": "amd64"
+    },
+    "libc6-dev:amd64": {
+      "version": "2.35-0ubuntu3.15",
+      "architecture": "amd64"
+    },
+    "libc-dev-bin": {
+      "version": "2.35-0ubuntu3.15",
+      "architecture": "amd64"
+    },
+    "libc6-arm64-cross": {
+      "version": "2.35-0ubuntu1cross3",
+      "architecture": "all"
+    },
+    "libc6-dev-arm64-cross": {
+      "version": "2.35-0ubuntu1cross3",
+      "architecture": "all"
+    },
+    "linux-libc-dev:amd64": {
+      "version": "5.15.0-198.208",
+      "architecture": "amd64"
+    },
+    "linux-libc-dev-arm64-cross": {
+      "version": "5.15.0-22.22cross3",
+      "architecture": "all"
+    },
+    "libisl23:amd64": {
+      "version": "0.24-2build1",
+      "architecture": "amd64"
+    },
+    "libmpc3:amd64": {
+      "version": "1.2.1-2build1",
+      "architecture": "amd64"
+    },
+    "libmpfr6:amd64": {
+      "version": "4.1.0-3build3",
+      "architecture": "amd64"
+    },
+    "libgmp10:amd64": {
+      "version": "2:6.2.1+dfsg-3ubuntu1",
+      "architecture": "amd64"
+    },
+    "qemu-user": {
+      "version": "1:6.2+dfsg-2ubuntu6.31",
+      "architecture": "amd64"
+    },
+    "ubuntu-keyring": {
+      "version": "2021.03.26",
+      "architecture": "all"
+    },
+    "ca-certificates": {
+      "version": "20260601~22.04.1",
+      "architecture": "all"
+    },
+    "curl": {
+      "version": "7.81.0-1ubuntu1.29",
+      "architecture": "amd64"
+    }
+  },
+  "toolchain_manifest_sha256": "54780644cae8e7476bc486cb945a3f39e49b4d32e625831e43db830df3a6afa7",
+  "file_count": 4372,
+  "image_digest": null,
+  "note": "Package and content lock of the actual WSL builder; no container image is used."
+}

@@ -1,0 +1,51 @@
+{
+  "go": {
+    "version": "1.27.2",
+    "source": "https://go.dev/dl/?mode=json",
+    "archives": {
+      "windows-amd64": "1314008898bd40df77af4b014f777f08873dbdfbcd3d92308728ee03304fe04f",
+      "linux-amd64": "ecbadb99091a3f46e31f5f934b068b1864eafa7995211b39eaddf76996045fe5",
+      "linux-arm64": "94f3e30b8e374bc285e7dadc11e0865726b9bc6e85b841ccceaabc0214c6b7c8"
+    }
+  },
+  "windows_checks": {
+    "gcc": "16.1.0",
+    "distribution": "MSYS2 UCRT64 Rev5",
+    "status": "available"
+  },
+  "linux_release_baseline": {
+    "os": "Ubuntu 22.04",
+    "gcc": "11.4.0",
+    "glibc": "2.35",
+    "status": "AMD64_WSL_VERIFIED_ARM64_CROSS_VERIFIED_NATIVE_ARM64_PENDING",
+    "package_lock": "evidence/E01-wsl-2026-10-13/linux-toolchain.lock.json",
+    "note": "Ubuntu-22.04 WSL2 amd64 native checks and arm64 cgo cross-build verified; native ARM smoke/tests/race remain open. No container image used.",
+    "toolchain_files": "evidence/E01-wsl-2026-10-13/toolchain-files.json",
+    "max_required_glibc": "2.34"
+  },
+  "linux_verified_environment": {
+    "date": "2026-10-13",
+    "distribution": "Ubuntu-22.04",
+    "os": "Ubuntu 22.04.5 LTS",
+    "wsl": "2.6.1.0 / WSL 2",
+    "kernel": "6.6.87.2-microsoft-standard-WSL2",
+    "arch": "amd64",
+    "gcc_package": "11.4.0-1ubuntu1~22.04.3",
+    "cross_gcc_package": "11.4.0-1ubuntu1~22.04.3cross1",
+    "glibc_package": "2.35-0ubuntu3.15",
+    "arm64_sysroot_package": "2.35-0ubuntu1cross3",
+    "binutils_package": "2.38-4ubuntu2.12",
+    "qemu_user_package": "1:6.2+dfsg-2ubuntu6.31"
+  },
+  "websocket": {
+    "version": "v1.8.15",
+    "module": "github.com/coder/websocket",
+    "origin": "https://github.com/coder/websocket",
+    "commit": "9c8faadccd1b679e811a79ce506f8a10237251ad",
+    "license": "ISC",
+    "sum": "h1:6B2JPeOGlpff2Uz6vOEH1Vzpi0iUz20A+lPVhPHtNUA=",
+    "go_mod_sum": "h1:NX3SzP+inril6yawo5CQXx8+fk145lPDC6pumgx0mVg=",
+    "native_libraries": "none",
+    "provenance": "evidence/E03-wsl-2026-10-13/modules.json"
+  }
+}

@@ -1,0 +1,3 @@
+PASS: compared all 50 E01 compiled/tested inputs to current main project.
+Only existing changed files: agent/internal/app/cli.go, agent/internal/app/cli_test.go
+All pre-existing contracts/config/security fixes/schemas/module pins unchanged. New E02 files are additional.

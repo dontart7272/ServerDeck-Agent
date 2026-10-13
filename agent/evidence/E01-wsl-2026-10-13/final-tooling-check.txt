@@ -1,0 +1,13 @@
+PASS: bash syntax for all Linux scripts
+PASS: Python3 Linux generation + gofmt reproduces existing wire types
+PASS: exact package revisions and 4372 native/cross toolchain files match lock
+PASS: preserved project lock matches Linux snapshot; no silent lock replacement
+all modules verified
+Built linux/amd64 with cgo; ELF/GLIBC<=2.35 checked. Run smoke on the matching Linux host.
+all modules verified
+Built linux/arm64 with cgo; ELF/GLIBC<=2.35 checked. Run smoke on the matching Linux host.
+dist/linux-amd64/serverdeck-agent: OK
+dist/linux-amd64/serverdeckctl: OK
+dist/linux-arm64/serverdeck-agent: OK
+dist/linux-arm64/serverdeckctl: OK
+PASS: four exported binaries match the tested Linux binaries

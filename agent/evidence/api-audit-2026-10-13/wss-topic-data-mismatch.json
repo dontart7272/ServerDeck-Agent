@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "type": "changes",
+  "subscription_id": "s",
+  "server_time": "2026-10-13T00:00:00Z",
+  "topic": "events",
+  "data": [
+    {
+      "kind": "audit",
+      "status": "ok",
+      "used_bytes": "0",
+      "budget_bytes": "1",
+      "wal_bytes": "0",
+      "reserve_bytes": "0",
+      "reason": null
+    }
+  ],
+  "cursor": "synthetic"
+}

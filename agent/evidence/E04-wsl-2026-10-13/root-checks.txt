@@ -1,0 +1,89 @@
++ id
+uid=0(root) gid=0(root) groups=0(root)
++ uname -a
+Linux LABS-KOMPANIETS 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
++ /home/dontart7272/serverdeck-e04-2026-10-13/app.test -test.v -test.count=1 '-test.run=^(TestNativeServeCLIShutdownAndPortConflict|TestUnixPeerCLIAndPathProtection|TestForeignUIDAdminPeerIsRejected|TestMetricsHTTPSPagesScopeWSSAndRevocation)$'
+=== RUN   TestUnixPeerCLIAndPathProtection
+--- PASS: TestUnixPeerCLIAndPathProtection (0.14s)
+=== RUN   TestMetricsHTTPSPagesScopeWSSAndRevocation
+--- PASS: TestMetricsHTTPSPagesScopeWSSAndRevocation (3.42s)
+=== RUN   TestNativeServeCLIShutdownAndPortConflict
+--- PASS: TestNativeServeCLIShutdownAndPortConflict (0.46s)
+=== RUN   TestForeignUIDAdminPeerIsRejected
+--- PASS: TestForeignUIDAdminPeerIsRejected (0.09s)
+PASS
++ cd /home/dontart7272/serverdeck-e04-2026-10-13/source.fRHirt/agent/internal/metrics
++ /home/dontart7272/serverdeck-e04-2026-10-13/metrics.test -test.v -test.count=1
+=== RUN   TestLastGoodPermissionFailureStaleAndClockSegment
+--- PASS: TestLastGoodPermissionFailureStaleAndClockSegment (0.00s)
+=== RUN   TestStaleThresholdUsesMonotonicAndReadDoesNotRefresh
+--- PASS: TestStaleThresholdUsesMonotonicAndReadDoesNotRefresh (0.00s)
+=== RUN   TestCadencesLeaseExpiryAndHungSourceBound
+--- PASS: TestCadencesLeaseExpiryAndHungSourceBound (0.00s)
+=== RUN   TestProcessPagesFilterSortTieIdentityTTLAndBounds
+--- PASS: TestProcessPagesFilterSortTieIdentityTTLAndBounds (0.00s)
+=== RUN   TestSharedCollectionNoClientsManyReadersAndNativeHang
+--- PASS: TestSharedCollectionNoClientsManyReadersAndNativeHang (2.00s)
+=== RUN   TestSnapshotWireContract
+--- PASS: TestSnapshotWireContract (0.05s)
+=== RUN   TestTwoProcessSnapshotsPerOwnerAndGlobalRetentionBound
+--- PASS: TestTwoProcessSnapshotsPerOwnerAndGlobalRetentionBound (0.00s)
+=== RUN   TestScheduledIntervalsHaveExactBoundaries
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/system
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/cpu
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/memory
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/network
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/filesystems
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/processes
+--- PASS: TestScheduledIntervalsHaveExactBoundaries (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/system (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/cpu (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/memory (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/network (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/filesystems (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/processes (0.00s)
+=== RUN   TestProcessFailureUpdatesAttemptWithoutRefreshingMeasurement
+--- PASS: TestProcessFailureUpdatesAttemptWithoutRefreshingMeasurement (0.00s)
+=== RUN   TestPageRetentionDoesNotThrottleNormalThirtySecondWindow
+--- PASS: TestPageRetentionDoesNotThrottleNormalThirtySecondWindow (0.00s)
+=== RUN   TestCPUFormulaGuestResetZeroAndHotplug
+--- PASS: TestCPUFormulaGuestResetZeroAndHotplug (0.00s)
+=== RUN   TestMemoryNoFreeFallbackNoSwapAndOverflow
+--- PASS: TestMemoryNoFreeFallbackNoSwapAndOverflow (0.00s)
+=== RUN   TestProcessParserNameParenthesesMissingFieldsAndReuse
+--- PASS: TestProcessParserNameParenthesesMissingFieldsAndReuse (0.00s)
+=== RUN   TestNativeLinuxReadOnlySourcesAndContracts
+    linux_test.go:175: system metrics 0 records 1 processes 0 wire bytes 770
+    linux_test.go:175: cpu metrics 192 records 17 processes 0 wire bytes 65050
+    linux_test.go:175: memory metrics 8 records 0 processes 0 wire bytes 3155
+    linux_test.go:175: network metrics 20 records 3 processes 0 wire bytes 8874
+    linux_test.go:175: filesystems metrics 64 records 8 processes 0 wire bytes 23225
+    linux_test.go:175: processes metrics 0 records 0 processes 28 wire bytes 478
+    linux_test.go:177: UID 0 CLK_TCK 100 page size 4096 PID 435
+--- PASS: TestNativeLinuxReadOnlySourcesAndContracts (0.07s)
+=== RUN   TestMountEscapesAndBoundedReads
+--- PASS: TestMountEscapesAndBoundedReads (0.00s)
+=== RUN   TestProcessCollectionDetectsReuseDuringReadAndPermission
+--- PASS: TestProcessCollectionDetectsReuseDuringReadAndPermission (0.00s)
+=== RUN   TestRecognizedCPUTemperatureAndOtherSensorNotGuessed
+--- PASS: TestRecognizedCPUTemperatureAndOtherSensorNotGuessed (0.00s)
+=== RUN   TestHungStatfsDoesNotMultiplyOrHideOtherMounts
+--- PASS: TestHungStatfsDoesNotMultiplyOrHideOtherMounts (0.06s)
+=== RUN   TestNetworkResetChangesIdentityAndDoesNotProduceNegativeRate
+--- PASS: TestNetworkResetChangesIdentityAndDoesNotProduceNegativeRate (0.00s)
+=== RUN   TestFilesystemReservedSpaceRootOverlayAndPerMountDenial
+--- PASS: TestFilesystemReservedSpaceRootOverlayAndPerMountDenial (0.00s)
+=== RUN   TestHwmonProfileRejectsControlTemperatureOffset
+--- PASS: TestHwmonProfileRejectsControlTemperatureOffset (0.00s)
+=== RUN   TestFilesystemNativeSlotLimit
+--- PASS: TestFilesystemNativeSlotLimit (0.04s)
+=== RUN   TestRealTemporaryFilePermissionDoesNotBecomeZero
+--- PASS: TestRealTemporaryFilePermissionDoesNotBecomeZero (0.00s)
+=== RUN   TestSystemCPUFullPSIZeroIsUndefinedNotAvailable
+--- PASS: TestSystemCPUFullPSIZeroIsUndefinedNotAvailable (0.00s)
+=== RUN   TestNativeFilesystemDescriptorBindsExpectedMount
+--- PASS: TestNativeFilesystemDescriptorBindsExpectedMount (0.00s)
+PASS
++ echo 'PASS: root-owned temporary state, local admin and actual UID65534 rejection; no host configuration changed'
+PASS: root-owned temporary state, local admin and actual UID65534 rejection; no host configuration changed
++ rm -rf -- /tmp/serverdeck-e04-root.bORU9D

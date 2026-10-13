@@ -1,0 +1,359 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:serverdeck:config:1",
+  "title": "ServerDeck config specification 1.0",
+  "type": "object",
+  "properties": {
+    "config_version": {
+      "const": 1
+    },
+    "installation_id": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "runtime_user": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_.-]*\\$?$"
+    },
+    "paths": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^/"
+        },
+        "runtime": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^/"
+        },
+        "releases": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^/"
+        }
+      },
+      "required": [
+        "state",
+        "runtime",
+        "releases"
+      ],
+      "additionalProperties": false
+    },
+    "tls": {
+      "type": "object",
+      "properties": {
+        "certificate_file": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^/"
+        },
+        "private_key_file": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^/"
+        }
+      },
+      "required": [
+        "certificate_file",
+        "private_key_file"
+      ],
+      "additionalProperties": false
+    },
+    "transport": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "enum": [
+            "localhost",
+            "lan_vpn",
+            "external"
+          ]
+        },
+        "listen_addresses": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 253
+          },
+          "minItems": 1,
+          "maxItems": 16
+        },
+        "allowed_cidrs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "minItems": 0,
+          "maxItems": 64
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        }
+      },
+      "required": [
+        "mode",
+        "listen_addresses",
+        "allowed_cidrs",
+        "port"
+      ],
+      "additionalProperties": false
+    },
+    "adapters": {
+      "type": "object",
+      "properties": {
+        "docker_socket": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "pattern": "^/"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "security_sources": {
+          "const": "auto_supported"
+        },
+        "ping_executable": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096,
+          "pattern": "^/"
+        }
+      },
+      "required": [
+        "docker_socket",
+        "security_sources",
+        "ping_executable"
+      ],
+      "additionalProperties": false
+    },
+    "modules": {
+      "type": "object",
+      "properties": {
+        "cgroup_delegation": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "cgroup_delegation"
+      ],
+      "additionalProperties": false
+    },
+    "limits_profile": {
+      "const": "default-v1"
+    },
+    "runtime_initial": {
+      "type": "object",
+      "properties": {
+        "history": {
+          "type": "object",
+          "properties": {
+            "budget_bytes": {
+              "type": "integer",
+              "minimum": 16000000,
+              "maximum": 16000000000
+            },
+            "module_share_percent": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 25
+            }
+          },
+          "required": [
+            "budget_bytes",
+            "module_share_percent"
+          ],
+          "additionalProperties": false
+        },
+        "events": {
+          "type": "object",
+          "properties": {
+            "retention_days": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 365
+            },
+            "budget_bytes": {
+              "type": "integer",
+              "minimum": 1000000,
+              "maximum": 1000000000
+            }
+          },
+          "required": [
+            "retention_days",
+            "budget_bytes"
+          ],
+          "additionalProperties": false
+        },
+        "audit": {
+          "type": "object",
+          "properties": {
+            "retention_days": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 365
+            },
+            "budget_bytes": {
+              "type": "integer",
+              "minimum": 4000000,
+              "maximum": 2000000000
+            }
+          },
+          "required": [
+            "retention_days",
+            "budget_bytes"
+          ],
+          "additionalProperties": false
+        },
+        "files": {
+          "type": "object",
+          "properties": {
+            "full_text_bytes": {
+              "type": "integer",
+              "minimum": 1000,
+              "maximum": 1000000
+            },
+            "edit_bytes": {
+              "type": "integer",
+              "minimum": 1000,
+              "maximum": 512000
+            },
+            "upload_bytes": {
+              "type": "integer",
+              "minimum": 1000,
+              "maximum": 1000000000
+            },
+            "download_bytes": {
+              "type": "integer",
+              "minimum": 1000,
+              "maximum": 2000000000
+            },
+            "roots": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "root_id": {
+                    "type": "string",
+                    "minLength": 36,
+                    "maxLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                  },
+                  "path": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096,
+                    "pattern": "^/"
+                  }
+                },
+                "required": [
+                  "root_id",
+                  "path"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 32
+            }
+          },
+          "required": [
+            "full_text_bytes",
+            "edit_bytes",
+            "upload_bytes",
+            "download_bytes",
+            "roots"
+          ],
+          "additionalProperties": false
+        },
+        "trash": {
+          "type": "object",
+          "properties": {
+            "retention_days": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 365
+            },
+            "budget_bytes_per_fs": {
+              "type": "integer",
+              "minimum": 1000000,
+              "maximum": 100000000000
+            }
+          },
+          "required": [
+            "retention_days",
+            "budget_bytes_per_fs"
+          ],
+          "additionalProperties": false
+        },
+        "icmp": {
+          "type": "object",
+          "properties": {
+            "target": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 253
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "background_enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "target",
+            "background_enabled"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "history",
+        "events",
+        "audit",
+        "files",
+        "trash",
+        "icmp"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "config_version",
+    "installation_id",
+    "runtime_user",
+    "paths",
+    "tls",
+    "transport",
+    "adapters",
+    "modules",
+    "limits_profile",
+    "runtime_initial"
+  ],
+  "additionalProperties": false,
+  "definitions": {}
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "subscription_id": "storage",
+  "server_time": "2026-10-13T00:00:00Z",
+  "type": "changes",
+  "topic": "storage",
+  "cursor": "synthetic-example",
+  "data": [
+    {
+      "kind": "audit",
+      "status": "ok",
+      "used_bytes": "0",
+      "budget_bytes": "64000000",
+      "wal_bytes": "0",
+      "reserve_bytes": "0",
+      "reason": null
+    }
+  ]
+}

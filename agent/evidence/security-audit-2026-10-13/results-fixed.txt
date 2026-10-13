@@ -1,0 +1,5 @@
+control-forbidden-pattern: exit=1; SCHEMA_MISMATCH
+const-skips-properties: exit=1; SCHEMA_MISMATCH
+oneof-skips-properties: exit=1; SCHEMA_MISMATCH
+const-skips-recursive-reference: exit=1; SCHEMA_MISMATCH
+enum-skips-properties: exit=1; SCHEMA_MISMATCH

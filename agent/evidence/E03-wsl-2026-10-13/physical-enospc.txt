@@ -1,0 +1,3 @@
+=== RUN   TestPhysicalFullFilesystem
+--- PASS: TestPhysicalFullFilesystem (0.34s)
+PASS

@@ -1,0 +1,50 @@
+Recorded: 2026-10-13T00:01:58.2487036+03:00 Microsoft Windows NT 10.0.26200.0 PowerShell 7.6.5
+go version go1.27.2 windows/amd64
+1
+gcc
+windows
+amd64
+local
+https://proxy.golang.org,direct
+sum.golang.org
+gcc.exe (Rev5, Built by MSYS2 project) 16.1.0
+WSL read-only inventory: only docker-desktop, Stopped, WSL 2. No user Linux distribution. No WSL/Docker startup performed. Docker daemon pipe absent. Linux/ELF/cross compiler checks NOT RUN.
+	DLL Name: KERNEL32.dll
+	DLL Name: api-ms-win-crt-environment-l1-1-0.dll
+	DLL Name: api-ms-win-crt-heap-l1-1-0.dll
+	DLL Name: api-ms-win-crt-locale-l1-1-0.dll
+	DLL Name: api-ms-win-crt-math-l1-1-0.dll
+	DLL Name: api-ms-win-crt-private-l1-1-0.dll
+	DLL Name: api-ms-win-crt-runtime-l1-1-0.dll
+	DLL Name: api-ms-win-crt-stdio-l1-1-0.dll
+	DLL Name: api-ms-win-crt-string-l1-1-0.dll
+	DLL Name: api-ms-win-crt-time-l1-1-0.dll
+	DLL Name: api-ms-win-crt-utility-l1-1-0.dll
+PASS: Git Bash bash -n on Linux recipes (syntax only, not Linux execution)
+PASS: separately checked bash -n build-linux.sh and bash -n smoke-linux.sh; no scripts executed
+Fields from go env in the order above: CGO_ENABLED, CC, GOOS, GOARCH, GOTOOLCHAIN, GOPROXY, GOSUMDB.
+Go archive SHA256: 1314008898BD40DF77AF4B014F777F08873DBDFBCD3D92308728EE03304FE04F
+agent/dist/windows-amd64/serverdeck-agent.exe: go1.27.2
+	path	serverdeck.local/agent/cmd/serverdeck-agent
+	mod	serverdeck.local/agent	(devel)	
+	dep	github.com/mattn/go-sqlite3	v1.14.52	h1:wVbm2Qnf4OXkqhBTSPuCRZDRnxfbVrrmiCEroVdog8U=
+	dep	github.com/santhosh-tekuri/jsonschema/v5	v5.3.1	h1:lZUw3E0/J3roVtGQ+SCrUrg3ON6NgVqpn3+iol9aGu4=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	CGO_ENABLED=1
+	build	GOARCH=amd64
+	build	GOOS=windows
+	build	GOAMD64=v1
+agent/dist/windows-amd64/serverdeckctl.exe: go1.27.2
+	path	serverdeck.local/agent/cmd/serverdeckctl
+	mod	serverdeck.local/agent	(devel)	
+	dep	github.com/mattn/go-sqlite3	v1.14.52	h1:wVbm2Qnf4OXkqhBTSPuCRZDRnxfbVrrmiCEroVdog8U=
+	dep	github.com/santhosh-tekuri/jsonschema/v5	v5.3.1	h1:lZUw3E0/J3roVtGQ+SCrUrg3ON6NgVqpn3+iol9aGu4=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	CGO_ENABLED=1
+	build	GOARCH=amd64
+	build	GOOS=windows
+	build	GOAMD64=v1

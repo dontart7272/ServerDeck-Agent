@@ -1,0 +1,69 @@
+{
+  "config_version": 1,
+  "installation_id": "11111111-1111-4111-8111-111111111111",
+  "runtime_user": "operator",
+  "paths": {
+    "state": "/var/lib/serverdeck",
+    "runtime": "/run/serverdeck",
+    "releases": "/opt/serverdeck/releases"
+  },
+  "tls": {
+    "certificate_file": "/etc/serverdeck/tls/server.crt",
+    "private_key_file": "/etc/serverdeck/tls/server.key"
+  },
+  "transport": {
+    "mode": "localhost",
+    "listen_addresses": [
+      "127.0.0.1",
+      "::1"
+    ],
+    "allowed_cidrs": [
+      "127.0.0.0/8",
+      "::1/128"
+    ],
+    "port": 8443
+  },
+  "adapters": {
+    "docker_socket": null,
+    "security_sources": "auto_supported",
+    "ping_executable": "/usr/bin/ping"
+  },
+  "modules": {
+    "cgroup_delegation": false
+  },
+  "limits_profile": "default-v1",
+  "runtime_initial": {
+    "history": {
+      "budget_bytes": 256000000,
+      "module_share_percent": 25
+    },
+    "events": {
+      "retention_days": 7,
+      "budget_bytes": 32000000
+    },
+    "audit": {
+      "retention_days": 30,
+      "budget_bytes": 64000000
+    },
+    "files": {
+      "full_text_bytes": 1000000,
+      "edit_bytes": 512000,
+      "upload_bytes": 50000000,
+      "download_bytes": 100000000,
+      "roots": [
+        {
+          "root_id": "22222222-2222-4222-8222-222222222222",
+          "path": "/home/operator"
+        }
+      ]
+    },
+    "trash": {
+      "retention_days": 7,
+      "budget_bytes_per_fs": 1000000000
+    },
+    "icmp": {
+      "target": null,
+      "background_enabled": false
+    }
+  }
+}

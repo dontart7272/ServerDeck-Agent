@@ -1,0 +1,1678 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:serverdeck:module:1",
+  "title": "ServerDeck module specification 1.0",
+  "type": "object",
+  "properties": {
+    "manifest_version": {
+      "const": 1
+    },
+    "module_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9.-]*\\.[a-z0-9][a-z0-9.-]*$"
+    },
+    "publisher_id": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 128,
+      "pattern": "^[a-z0-9][a-z0-9.-]*\\.[a-z0-9][a-z0-9.-]*$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 80,
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "compatibility": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "const": "linux"
+        },
+        "architectures": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "amd64",
+              "arm64"
+            ]
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "agent": {
+          "type": "object",
+          "properties": {
+            "min_inclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            },
+            "max_exclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            }
+          },
+          "required": [
+            "min_inclusive",
+            "max_exclusive"
+          ],
+          "additionalProperties": false
+        },
+        "ipc": {
+          "type": "object",
+          "properties": {
+            "min_inclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            },
+            "max_exclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            }
+          },
+          "required": [
+            "min_inclusive",
+            "max_exclusive"
+          ],
+          "additionalProperties": false
+        },
+        "data_schema": {
+          "type": "object",
+          "properties": {
+            "min_inclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            },
+            "max_exclusive": {
+              "type": "string",
+              "minLength": 5,
+              "maxLength": 80,
+              "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+            }
+          },
+          "required": [
+            "min_inclusive",
+            "max_exclusive"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "os",
+        "architectures",
+        "agent",
+        "ipc",
+        "data_schema"
+      ],
+      "additionalProperties": false
+    },
+    "execution": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "managed"
+            },
+            "executable": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "pattern": "^/"
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 0,
+                "maxLength": 1024
+              },
+              "minItems": 0,
+              "maxItems": 64
+            },
+            "code_dir": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "pattern": "^/"
+            },
+            "data_dir": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "pattern": "^/"
+            }
+          },
+          "required": [
+            "mode",
+            "executable",
+            "args",
+            "code_dir",
+            "data_dir"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "const": "external"
+            },
+            "uid": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4294967295
+            },
+            "endpoint_id": {
+              "type": "string",
+              "minLength": 36,
+              "maxLength": 36,
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "launch_policy_id": {
+              "type": "string",
+              "minLength": 36,
+              "maxLength": 36,
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "code_dir": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "pattern": "^/"
+            },
+            "data_dir": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096,
+              "pattern": "^/"
+            }
+          },
+          "required": [
+            "mode",
+            "uid",
+            "endpoint_id",
+            "launch_policy_id",
+            "code_dir",
+            "data_dir"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "module_id": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9.-]*\\.[a-z0-9][a-z0-9.-]*$"
+          },
+          "version": {
+            "type": "object",
+            "properties": {
+              "min_inclusive": {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 80,
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+              },
+              "max_exclusive": {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 80,
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+              }
+            },
+            "required": [
+              "min_inclusive",
+              "max_exclusive"
+            ],
+            "additionalProperties": false
+          },
+          "required": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "module_id",
+          "version",
+          "required"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 32
+    },
+    "reads": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "schema_version": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 80,
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+          },
+          "params_schema": {
+            "type": "object",
+            "maxProperties": 128,
+            "additionalProperties": {
+              "$ref": "#/definitions/JsonValue"
+            }
+          },
+          "result_schema": {
+            "type": "object",
+            "maxProperties": 128,
+            "additionalProperties": {
+              "$ref": "#/definitions/JsonValue"
+            }
+          },
+          "timeout_ms": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000
+          }
+        },
+        "required": [
+          "id",
+          "schema_version",
+          "params_schema",
+          "result_schema",
+          "timeout_ms"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 64
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "schema_version": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 80,
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+          },
+          "params_schema": {
+            "type": "object",
+            "maxProperties": 128,
+            "additionalProperties": {
+              "$ref": "#/definitions/JsonValue"
+            }
+          },
+          "result_schema": {
+            "type": "object",
+            "maxProperties": 128,
+            "additionalProperties": {
+              "$ref": "#/definitions/JsonValue"
+            }
+          },
+          "effect": {
+            "enum": [
+              "read_only",
+              "mutation"
+            ]
+          },
+          "cancellation": {
+            "enum": [
+              "before_effect",
+              "supported",
+              "unsupported"
+            ]
+          },
+          "confirmation": {
+            "const": "native_plan"
+          },
+          "reconcile_supported": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "schema_version",
+          "params_schema",
+          "result_schema",
+          "effect",
+          "cancellation",
+          "confirmation",
+          "reconcile_supported"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 64
+    },
+    "series": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "schema_version": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 80,
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+          },
+          "unit": {
+            "enum": [
+              "percent",
+              "byte",
+              "byte_per_second",
+              "packet",
+              "packet_per_second",
+              "count",
+              "second",
+              "hertz",
+              "celsius",
+              "watt",
+              "bit_per_second",
+              "ratio",
+              "bool"
+            ]
+          },
+          "value_type": {
+            "enum": [
+              "number",
+              "u64",
+              "boolean"
+            ]
+          },
+          "aggregation": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "mean",
+                "min",
+                "max",
+                "last",
+                "sum",
+                "observed_true"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 6
+          },
+          "interval_ms": {
+            "type": "integer",
+            "minimum": 1000,
+            "maximum": 3600000
+          },
+          "max_cardinality": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 256
+          },
+          "history_allowed": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "schema_version",
+          "unit",
+          "value_type",
+          "aggregation",
+          "interval_ms",
+          "max_cardinality",
+          "history_allowed"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 256
+    },
+    "ui": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "package_digest": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5000000
+          },
+          "version": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 80,
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+          },
+          "publisher_id": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 128,
+            "pattern": "^[a-z0-9][a-z0-9.-]*\\.[a-z0-9][a-z0-9.-]*$"
+          },
+          "server_schema": {
+            "type": "object",
+            "properties": {
+              "min_inclusive": {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 80,
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+              },
+              "max_exclusive": {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 80,
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+              }
+            },
+            "required": [
+              "min_inclusive",
+              "max_exclusive"
+            ],
+            "additionalProperties": false
+          },
+          "client_components": {
+            "type": "object",
+            "properties": {
+              "min_inclusive": {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 80,
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+              },
+              "max_exclusive": {
+                "type": "string",
+                "minLength": 5,
+                "maxLength": 80,
+                "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+              }
+            },
+            "required": [
+              "min_inclusive",
+              "max_exclusive"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "package_digest",
+          "size_bytes",
+          "version",
+          "publisher_id",
+          "server_schema",
+          "client_components"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 16
+    },
+    "resource_request": {
+      "type": "object",
+      "properties": {
+        "max_series": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 256
+        },
+        "history_budget_bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4000000000
+        },
+        "memory_bytes": {
+          "type": "integer",
+          "minimum": 1000000,
+          "maximum": 16000000000
+        },
+        "cpu_percent": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "pids": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        }
+      },
+      "required": [
+        "max_series",
+        "history_budget_bytes",
+        "memory_bytes",
+        "cpu_percent",
+        "pids"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "manifest_version",
+    "module_id",
+    "publisher_id",
+    "version",
+    "compatibility",
+    "execution",
+    "dependencies",
+    "reads",
+    "actions",
+    "series",
+    "ui",
+    "resource_request"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "JsonValue": {
+      "$ref": "#/definitions/JsonValue32"
+    },
+    "JsonValue0": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        }
+      ]
+    },
+    "JsonValue1": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue0"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue0"
+          }
+        }
+      ]
+    },
+    "JsonValue2": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue1"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue1"
+          }
+        }
+      ]
+    },
+    "JsonValue3": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue2"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue2"
+          }
+        }
+      ]
+    },
+    "JsonValue4": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue3"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue3"
+          }
+        }
+      ]
+    },
+    "JsonValue5": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue4"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue4"
+          }
+        }
+      ]
+    },
+    "JsonValue6": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue5"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue5"
+          }
+        }
+      ]
+    },
+    "JsonValue7": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue6"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue6"
+          }
+        }
+      ]
+    },
+    "JsonValue8": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue7"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue7"
+          }
+        }
+      ]
+    },
+    "JsonValue9": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue8"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue8"
+          }
+        }
+      ]
+    },
+    "JsonValue10": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue9"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue9"
+          }
+        }
+      ]
+    },
+    "JsonValue11": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue10"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue10"
+          }
+        }
+      ]
+    },
+    "JsonValue12": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue11"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue11"
+          }
+        }
+      ]
+    },
+    "JsonValue13": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue12"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue12"
+          }
+        }
+      ]
+    },
+    "JsonValue14": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue13"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue13"
+          }
+        }
+      ]
+    },
+    "JsonValue15": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue14"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue14"
+          }
+        }
+      ]
+    },
+    "JsonValue16": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue15"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue15"
+          }
+        }
+      ]
+    },
+    "JsonValue17": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue16"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue16"
+          }
+        }
+      ]
+    },
+    "JsonValue18": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue17"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue17"
+          }
+        }
+      ]
+    },
+    "JsonValue19": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue18"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue18"
+          }
+        }
+      ]
+    },
+    "JsonValue20": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue19"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue19"
+          }
+        }
+      ]
+    },
+    "JsonValue21": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue20"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue20"
+          }
+        }
+      ]
+    },
+    "JsonValue22": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue21"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue21"
+          }
+        }
+      ]
+    },
+    "JsonValue23": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue22"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue22"
+          }
+        }
+      ]
+    },
+    "JsonValue24": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue23"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue23"
+          }
+        }
+      ]
+    },
+    "JsonValue25": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue24"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue24"
+          }
+        }
+      ]
+    },
+    "JsonValue26": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue25"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue25"
+          }
+        }
+      ]
+    },
+    "JsonValue27": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue26"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue26"
+          }
+        }
+      ]
+    },
+    "JsonValue28": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue27"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue27"
+          }
+        }
+      ]
+    },
+    "JsonValue29": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue28"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue28"
+          }
+        }
+      ]
+    },
+    "JsonValue30": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue29"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue29"
+          }
+        }
+      ]
+    },
+    "JsonValue31": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue30"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue30"
+          }
+        }
+      ]
+    },
+    "JsonValue32": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4096
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JsonValue31"
+          },
+          "minItems": 0,
+          "maxItems": 100
+        },
+        {
+          "type": "object",
+          "maxProperties": 100,
+          "additionalProperties": {
+            "$ref": "#/definitions/JsonValue31"
+          }
+        }
+      ]
+    }
+  }
+}

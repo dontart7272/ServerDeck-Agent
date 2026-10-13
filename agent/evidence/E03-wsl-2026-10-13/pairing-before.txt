@@ -1,0 +1,5 @@
+--- FAIL: TestDifferentPairingCodesCannotOverwriteSamePendingRequest (0.18s)
+    transport_linux_test.go:395: reserved request overwritten
+FAIL
+FAIL	serverdeck.local/agent/internal/app	0.192s
+FAIL

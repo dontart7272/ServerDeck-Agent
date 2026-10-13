@@ -1,0 +1,7 @@
+/.tools/
+/agent/dist/
+/agent/.cache/
+/design-concepts/
+/stitch_serverdeck_android_ui_mockup/
+/.agents/
+/skills-lock.json

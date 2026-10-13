@@ -1,0 +1,27 @@
+{
+	"Path": "serverdeck.local/agent",
+	"Main": true,
+	"Dir": "/home/dontart7272/serverdeck-e01-2026-10-13/source.J1hfMJ/agent",
+	"GoMod": "/home/dontart7272/serverdeck-e01-2026-10-13/source.J1hfMJ/agent/go.mod",
+	"GoVersion": "1.27.2"
+}
+{
+	"Path": "github.com/mattn/go-sqlite3",
+	"Version": "v1.14.52",
+	"Time": "2026-09-05T04:18:43Z",
+	"Dir": "/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath/pkg/mod/github.com/mattn/go-sqlite3@v1.14.52",
+	"GoMod": "/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath/pkg/mod/cache/download/github.com/mattn/go-sqlite3/@v/v1.14.52.mod",
+	"GoVersion": "1.21",
+	"Sum": "h1:wVbm2Qnf4OXkqhBTSPuCRZDRnxfbVrrmiCEroVdog8U=",
+	"GoModSum": "h1:6JTjA44L93a0QCyJef5YvlPoKXntQPjzWv5gtm9sB6w="
+}
+{
+	"Path": "github.com/santhosh-tekuri/jsonschema/v5",
+	"Version": "v5.3.1",
+	"Time": "2023-07-22T18:48:50Z",
+	"Dir": "/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath/pkg/mod/github.com/santhosh-tekuri/jsonschema/v5@v5.3.1",
+	"GoMod": "/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath/pkg/mod/cache/download/github.com/santhosh-tekuri/jsonschema/v5/@v/v5.3.1.mod",
+	"GoVersion": "1.19",
+	"Sum": "h1:lZUw3E0/J3roVtGQ+SCrUrg3ON6NgVqpn3+iol9aGu4=",
+	"GoModSum": "h1:uToXkOrWAZ6/Oc07xWQrPOhJotwFIyu2bBVN41fcDUY="
+}

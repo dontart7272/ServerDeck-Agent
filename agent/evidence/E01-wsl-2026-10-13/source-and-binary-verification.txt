@@ -1,0 +1,1 @@
+PASS: all 50 original compiled/tested inputs and four exported binary SHA256 match Linux evidence; manifests decoded as UTF-8.

@@ -1,0 +1,334 @@
+{
+  "origin": "/mnt/d/Projects/ServerDeck",
+  "copy": "/home/dontart7272/serverdeck-e02-2026-10-13/source.aL0l7v",
+  "files": [
+    {
+      "path": "agent/cmd/serverdeck-agent/main.go",
+      "sha256": "7f4052e4f97ec59ee73d41ca4a8cca652b84ef22c9bdc885eef96893e78cf43a"
+    },
+    {
+      "path": "agent/cmd/serverdeckctl/main.go",
+      "sha256": "7a42ff91a38827377abfd48b325d3b9016bc50e8b6803fa1a0f620ff76344172"
+    },
+    {
+      "path": "agent/go.mod",
+      "sha256": "e824f110feb52332e171701550aeb8008795d33c981915e76f6b3141d453dbeb"
+    },
+    {
+      "path": "agent/go.sum",
+      "sha256": "024037f354e82fb008d888b7c572ad890b6c30260a95fb4d752959f267f2c8a1"
+    },
+    {
+      "path": "agent/internal/app/cli.go",
+      "sha256": "9887bdfef9bb5639d3eef93bd03baa4b3e4e1ad0de954958ec7835204b109cb9"
+    },
+    {
+      "path": "agent/internal/app/cli_test.go",
+      "sha256": "56b9a074e9bba58b95da1f795d84e6e9b5c4b25a69a3ccfae225911c2929fa79"
+    },
+    {
+      "path": "agent/internal/app/sqlite.go",
+      "sha256": "f4fe86bf24c1df6a48fbad0dc38d1355a1f73d59e8e19a79f6c41be7bd07dd4b"
+    },
+    {
+      "path": "agent/internal/app/state.go",
+      "sha256": "2b86dc24c3ef16da0eed64e3029ebbf412133be437c585488195caa72b7bdfa0"
+    },
+    {
+      "path": "agent/internal/config/config.go",
+      "sha256": "f4c475c51202756b6f353f4c6086db422ca195bb9ad8fc50cae4208dc20d1964"
+    },
+    {
+      "path": "agent/internal/config/config_test.go",
+      "sha256": "a2790a397b5c4d6b8935a533a4ebfcb3ea6aee161c99b007d1a7b470dbf7c3e4"
+    },
+    {
+      "path": "agent/internal/contracts/api_security_test.go",
+      "sha256": "1d7ccf396a9e531b8f2a89f636cfa26d46f15f5bed626f7adc8db90bf86a7e44"
+    },
+    {
+      "path": "agent/internal/contracts/catalog_test.go",
+      "sha256": "3a1956d54aaeba6be019ea34c716728be85df5fff60604c992620b60d942ec7a"
+    },
+    {
+      "path": "agent/internal/contracts/declarations.go",
+      "sha256": "fd29ee896826d80ef3cc06d546f73f1844f89a0d87fb627e6fe8bffa6a222ec9"
+    },
+    {
+      "path": "agent/internal/contracts/declarations_test.go",
+      "sha256": "fdd49d3e50b2deab60b5098c2d7881bf45feebd26fdbb36b5df44979774a4e81"
+    },
+    {
+      "path": "agent/internal/contracts/encode.go",
+      "sha256": "31c6c2fa81a3ae07f4d73db2347dfc587cf5ba4a61d1f4435fecb710a8f88c18"
+    },
+    {
+      "path": "agent/internal/contracts/ipc.go",
+      "sha256": "d8115e3d36a87b13f5a3794370467ad1a09ef114777da5e8a8b9ca0039967119"
+    },
+    {
+      "path": "agent/internal/contracts/json.go",
+      "sha256": "eed523dc2a40046b390794ead3dcdac03d3478d2b6a2f77eff18cbc1dc379055"
+    },
+    {
+      "path": "agent/internal/contracts/json_test.go",
+      "sha256": "9699d659e34b6bd66a9ce390faa0bc4c4aa96f83387dc031aea4f8a2a3099ac8"
+    },
+    {
+      "path": "agent/internal/contracts/runtime.go",
+      "sha256": "a4de1c8f5d136eec1139d7c8fde113e2b5bc9246c1d3e45aba6410aa32cc1b0b"
+    },
+    {
+      "path": "agent/internal/contracts/schema.go",
+      "sha256": "92be8e914eb39b030e3994005bbd6e9337245b99351b8efb111ca528089f4c23"
+    },
+    {
+      "path": "agent/internal/contracts/schema_test.go",
+      "sha256": "3af9d426d39b7ec4e135d6ec6d448cf81d0eec38a69af3603346bf8eabb476b8"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/api.schema.json",
+      "sha256": "2b796d189b89d16693f13b8a5c53042dd485755bb86acdc99d3fda5729962887"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/config.schema.json",
+      "sha256": "84ccdaa91897e92e6d5b710aad4145b3df3d42ed9e63f2dacddd6e4289b5b90f"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/ipc.schema.json",
+      "sha256": "14c6a934abf1ecfbc50dc0882c005497991bb241d817e8da07245c251746d6de"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/module.schema.json",
+      "sha256": "085151c8fa4b9cf15ce3a0745e94a88a540c1eddd24fd98fdfcbb1a71dd342f7"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/release.schema.json",
+      "sha256": "bd461f75043d8764e8017ba71d064840a8ac9aa42d03bbcd7720a08720dceb9f"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/ui.schema.json",
+      "sha256": "363812bc6e543954a17c68c33bfed1baaf9d35a435c9ac3edcdfc8ac338aa031"
+    },
+    {
+      "path": "agent/internal/contracts/semantic.go",
+      "sha256": "25a330922b7a0f2f0529735df7113488f7a9c5d39ca108fea25b6ea962868a79"
+    },
+    {
+      "path": "agent/internal/contracts/types.go",
+      "sha256": "e38d4f02a7997cd21964cc0155b18d291411936eac42e5214f56c462bf8aff62"
+    },
+    {
+      "path": "agent/internal/contracts/wire_generated.go",
+      "sha256": "ce814f068d5f2383c2282629fac8cdfe7b81bf7aa8cec9c435d254e1b145fa90"
+    },
+    {
+      "path": "agent/internal/contracts/wss.go",
+      "sha256": "3a7adc4669a5fde0305d64efc5ddf9ff36edec67cc033295546925b0d262487d"
+    },
+    {
+      "path": "agent/internal/operations/config.go",
+      "sha256": "4c956f0d0773c1600490f1bc762b9929ae91e346b9403c78cfec1351645588d1"
+    },
+    {
+      "path": "agent/internal/operations/full_linux_test.go",
+      "sha256": "a589df0816433decb7f230767ab86bd5ef8528bfa723212ea8c8f83bb9f2752c"
+    },
+    {
+      "path": "agent/internal/operations/maintenance.go",
+      "sha256": "8183d081f407dc10897e3725f865382f37058212ece9d0346d429e89b550bbfd"
+    },
+    {
+      "path": "agent/internal/operations/service.go",
+      "sha256": "07b2bdec9c642ac8f196445ed1360beae93c09f099e54acc65df815d268640f7"
+    },
+    {
+      "path": "agent/internal/operations/service_linux_test.go",
+      "sha256": "e7afe0af28d937c10bfee9b06cbc80c719005f1617c4df068b4628846953f03b"
+    },
+    {
+      "path": "agent/internal/storage/backup.go",
+      "sha256": "8da6fef73e403571047db853553ea24c2750f821c21f717c581b5451ccf81f4c"
+    },
+    {
+      "path": "agent/internal/storage/migrations/001.sql",
+      "sha256": "41ef9791af93d8b272a0e91689c92f90c81345913294104af96d341c7ff8e3e4"
+    },
+    {
+      "path": "agent/internal/storage/operations.go",
+      "sha256": "d4766b73a2acb1561fac99e96a817e181d8a02eab06e52474d687da48fd40cd4"
+    },
+    {
+      "path": "agent/internal/storage/platform_linux.go",
+      "sha256": "f7a703e92ec953177221b2aae41924455f8021c1ce98d1121dabf6f2d8930ae9"
+    },
+    {
+      "path": "agent/internal/storage/platform_windows.go",
+      "sha256": "359f12a23495c4231be47ef86558c6f708310bf4f31dfe6a7e155ba1b20fe6ad"
+    },
+    {
+      "path": "agent/internal/storage/resolve.go",
+      "sha256": "250fe9081d3f0f2b09a6c6011996899c38192943a428ffee07799a597a962aeb"
+    },
+    {
+      "path": "agent/internal/storage/store.go",
+      "sha256": "be26ff10e28b7112a045f26a249aa07db63e1831ded28079d5348ef2a8543416"
+    },
+    {
+      "path": "agent/internal/storage/store_linux_test.go",
+      "sha256": "9e42cfe041744101c8b673ab5f5b8e1798fd2e99f290b214da0546b7d6e78329"
+    },
+    {
+      "path": "agent/internal/storage/types.go",
+      "sha256": "3909de0a1c18734d085cf0d7828037325a1234b8d9b393a23837f8ee1df203ad"
+    },
+    {
+      "path": "agent/toolchains.json",
+      "sha256": "eab99df5a111d06d5d53dc340a3c82b1115ff35ebe014cd56bf5087b007b5828"
+    },
+    {
+      "path": "agent/tools/build-linux.sh",
+      "sha256": "c15eac1af41e48e6402f134699cf93754ea080a02fba1921e9695294c7c8ba22"
+    },
+    {
+      "path": "agent/tools/capture-linux-toolchain.py",
+      "sha256": "e415ca0744313194365d3c3786369b572b1b823f13d2964520cc93a8db37b22b"
+    },
+    {
+      "path": "agent/tools/e02-full-filesystem.sh",
+      "sha256": "10b2e1fe5f51e6fdc9dc0ebe5c2acf8031198c3c0fb610f45134581c20e65198"
+    },
+    {
+      "path": "agent/tools/generate-types.py",
+      "sha256": "cb5b8b23ce5cac143c88fa02ed3ffe4817ed7d7d59f477815cf56884ecc5308a"
+    },
+    {
+      "path": "agent/tools/inspect-linux.py",
+      "sha256": "00040e6045a4623bff016d2d7b89cda55338a7cbdcc50be406c7f9400ad700e4"
+    },
+    {
+      "path": "agent/tools/smoke-linux.sh",
+      "sha256": "b071bf1ca5a276d31d00ffc15a50fb38cd517861b2d7692d3f3c53a99d3037be"
+    },
+    {
+      "path": "agent/tools/state-smoke-linux.sh",
+      "sha256": "aecbdbf9bba34bcac28e9c60e65397dd4ed20afe746f911e24c549aea88c3890"
+    },
+    {
+      "path": "agent/tools/verify-linux-toolchain.py",
+      "sha256": "0120aefc213932f154c8d8e20394bf65f6b1e60916d3329c0025757e6ce7cd8d"
+    },
+    {
+      "path": "agent/tools/wsl-e02-export.sh",
+      "sha256": "aa862f60651d204dcc2da59ffb2816cd8ba791b552ea42537d290685743f0695"
+    },
+    {
+      "path": "agent/tools/wsl-e02.sh",
+      "sha256": "8e707f5c24bb3a234644f71362c6b249fe1d5566e43e8b2687a4b2d1830ee33e"
+    },
+    {
+      "path": "agent/tools/wsl-export-evidence.sh",
+      "sha256": "3230b62df3b5b1072186cd865dfa6f7957deeff0214e1273a0be9aa03a42542f"
+    },
+    {
+      "path": "agent/tools/wsl-finish-checks.sh",
+      "sha256": "cbb891d1de8ab723561ae7e736710b783cdbe2c9c92a801e78880cf01dc5ee60"
+    },
+    {
+      "path": "agent/tools/wsl-install-deps.sh",
+      "sha256": "ccc2dfd7ee0630aaba43c9aa7fa729e2c61b892525d79e7f258407308bef4b74"
+    },
+    {
+      "path": "agent/tools/wsl-inventory.sh",
+      "sha256": "2330c79134c0d96d9131e35d90bcd560242619fb862cedb5ccf934a4fb05a002"
+    },
+    {
+      "path": "agent/tools/wsl-prepare.sh",
+      "sha256": "a2b22123f7e1aad7ed575c9197ff41f33f6aac5c5a7c43766283f14a98a80a54"
+    },
+    {
+      "path": "agent/tools/wsl-run-checks.sh",
+      "sha256": "34cade5ac21df23298148030b5effea63613a0092a418437236fdd75c81b5348"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/api.schema.json",
+      "sha256": "2b796d189b89d16693f13b8a5c53042dd485755bb86acdc99d3fda5729962887"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/config.schema.json",
+      "sha256": "84ccdaa91897e92e6d5b710aad4145b3df3d42ed9e63f2dacddd6e4289b5b90f"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/catalog.json",
+      "sha256": "40390c54feec9cfab66d2921736033e69923e63c7fe4e2d339a1ca0ab830dd11"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/config.json",
+      "sha256": "cd959c6a16c80f9db0abedf94d7e36d857756c81e9b429f6423f3be51904765c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/error.json",
+      "sha256": "a447c038459ad5242d100743c460755b31d2752a24ae7034a97b228dd7eb012c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/ipc-response.json",
+      "sha256": "8514123f5ac0b080c4889d2f23ee3f32fffc407d277baca028698673ef0d6d93"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/ipc.json",
+      "sha256": "0d9190f2771f7574d24b687a900a752571013cf676809eb580e15da7e29a9334"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/module.json",
+      "sha256": "6b86f8e6bc9d9998c296d99597f6932fc0c07ee7d2128bce6ee846306ea7daf0"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/operation-state.json",
+      "sha256": "ad87feffd6293c5936f848314e5f05f55f9208d0b59c5346ba420197bf9ee55c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/operation.json",
+      "sha256": "97e411254bc7897dc3018dd780987c04fecc0bce18750342a6278bc7c39583b0"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/query.json",
+      "sha256": "c062efa3a62748d41f4b00078f00129631e4d34192019adb6dfb8d2cbb2f9390"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/release.json",
+      "sha256": "dad61b6fee9005dfee8f0793854650fa67709cede7b8daca8f12b35d361c3863"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/snapshot-response.json",
+      "sha256": "eeae445aae3ed4188ecbb61ced6fce1d43837cfa0f3d3feec854b439539d0b5a"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/ui.json",
+      "sha256": "a29ff62caff35a9cf32757efea239386146f4f1dced0289804a8f581748433af"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/wss-client.json",
+      "sha256": "3e75393212a15158fbeaec89a3f955af7f0095b8b980cf34d618f112de9db6af"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/wss-server.json",
+      "sha256": "33bd6de5176990be3277def1f5ecb03d3f64402dbe828764c643bf5ba93086d3"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/ipc.schema.json",
+      "sha256": "14c6a934abf1ecfbc50dc0882c005497991bb241d817e8da07245c251746d6de"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/module.schema.json",
+      "sha256": "085151c8fa4b9cf15ce3a0745e94a88a540c1eddd24fd98fdfcbb1a71dd342f7"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/release.schema.json",
+      "sha256": "bd461f75043d8764e8017ba71d064840a8ac9aa42d03bbcd7720a08720dceb9f"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/ui.schema.json",
+      "sha256": "363812bc6e543954a17c68c33bfed1baaf9d35a435c9ac3edcdfc8ac338aa031"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+?   	serverdeck.local/agent/cmd/serverdeck-agent	[no test files]
+?   	serverdeck.local/agent/cmd/serverdeckctl	[no test files]
+ok  	serverdeck.local/agent/internal/app	1.669s
+ok  	serverdeck.local/agent/internal/config	1.368s
+ok  	serverdeck.local/agent/internal/contracts	35.320s

@@ -1,0 +1,2 @@
+FAIL: Broken link in 11. Журнал проверки требований.md: ../../agent/evidence/E03-wsl-2026-10-13/docs-checks.txt
+FAIL: Broken link in README.md: docs-checks.txt

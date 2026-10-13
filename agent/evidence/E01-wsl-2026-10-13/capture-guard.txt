@@ -1,0 +1,2 @@
+Lock already exists; preserve it and capture a new environment into a separate directory
+EXPECTED NEGATIVE RESULT: exit1, existing lock refused before package snapshot writes; guard passed.

@@ -1,0 +1,734 @@
++ date -u --iso-8601=seconds
+2026-10-13T20:23:23+00:00
++ uname -a
+Linux LABS-KOMPANIETS 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
++ id
+uid=1000(dontart7272) gid=1000(dontart7272) groups=1000(dontart7272),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev)
++ cat /etc/os-release
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
++ go version
+go version go1.27.2 linux/amd64
++ /usr/bin/gcc-11 --version
+gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
++ ldd --version
+ldd (Ubuntu GLIBC 2.35-0ubuntu3.15) 2.35
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Written by Roland McGrath and Ulrich Drepper.
++ go env GOOS GOARCH CGO_ENABLED CC GOTOOLCHAIN GOPATH GOCACHE GOTMPDIR
+linux
+amd64
+1
+/usr/bin/gcc-11
+local
+/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath
+/home/dontart7272/serverdeck-e04-2026-10-13/cache
+/home/dontart7272/serverdeck-e04-2026-10-13/tmp
++ command -v go gcc-11 aarch64-linux-gnu-gcc-11 readelf python3 rsync
+/home/dontart7272/serverdeck-e01-2026-10-13/toolchains/go/bin/go
+/usr/bin/gcc-11
+/usr/bin/aarch64-linux-gnu-gcc-11
+/usr/bin/readelf
+/usr/bin/python3
+/usr/bin/rsync
++ command -v govulncheck
++ true
++ python3 tools/verify-linux-toolchain.py /mnt/d/Projects/ServerDeck/agent/evidence/E01-wsl-2026-10-13/linux-toolchain.lock.json
+PASS: exact package revisions and 4372 native/cross toolchain files match lock
+++ gofmt -l internal cmd
++ test -z ''
++ go mod verify
+all modules verified
++ go vet ./...
++ go test -v -count=1 ./...
+?   	serverdeck.local/agent/cmd/serverdeck-agent	[no test files]
+?   	serverdeck.local/agent/cmd/serverdeckctl	[no test files]
+=== RUN   TestOfflineCommands
+--- PASS: TestOfflineCommands (0.00s)
+=== RUN   TestSQLiteVersion
+    cli_test.go:34: sqlite_version=3.53.4 sqlite_source_id=2026-07-24 19:02:57 bf7c7f30031888f4e796e429ab3978879485813aaca6f641c7b33e4e09459bcc compile_options=ATOMIC_INTRINSICS=1;COMPILER=gcc-11.4.0;DEFAULT_AUTOVACUUM;DEFAULT_CACHE_SIZE=-2000;DEFAULT_FILE_FORMAT=4;DEFAULT_JOURNAL_SIZE_LIMIT=-1;DEFAULT_MMAP_SIZE=0;DEFAULT_PAGE_SIZE=4096;DEFAULT_PCACHE_INITSZ=20;DEFAULT_RECURSIVE_TRIGGERS;DEFAULT_SECTOR_SIZE=4096;DEFAULT_SYNCHRONOUS=2;DEFAULT_WAL_AUTOCHECKPOINT=1000;DEFAULT_WAL_SYNCHRONOUS=1;DEFAULT_WORKER_THREADS=0;DIRECT_OVERFLOW_READ;ENABLE_FTS3;ENABLE_FTS3_PARENTHESIS;ENABLE_RTREE;ENABLE_UPDATE_DELETE_LIMIT;MALLOC_SOFT_LIMIT=1024;MAX_ATTACHED=10;MAX_COLUMN=2000;MAX_COMPOUND_SELECT=500;MAX_DEFAULT_PAGE_SIZE=8192;MAX_EXPR_DEPTH=1000;MAX_FUNCTION_ARG=1000;MAX_LENGTH=1000000000;MAX_LIKE_PATTERN_LENGTH=50000;MAX_MMAP_SIZE=0x7fff0000;MAX_PAGE_COUNT=0xfffffffe;MAX_PAGE_SIZE=65536;MAX_SQL_LENGTH=1000000000;MAX_TRIGGER_DEPTH=1000;MAX_VARIABLE_NUMBER=32766;MAX_VDBE_OP=250000000;MAX_WORKER_THREADS=8;MUTEX_PTHREADS;OMIT_DEPRECATED;SYSTEM_MALLOC;TEMP_STORE=1;THREADSAFE=1
+--- PASS: TestSQLiteVersion (0.00s)
+=== RUN   TestPairingAtomicReplayAttemptsRestartAndSecrets
+--- PASS: TestPairingAtomicReplayAttemptsRestartAndSecrets (0.52s)
+=== RUN   TestHTTPSGuardsAndTypedQueries
+--- PASS: TestHTTPSGuardsAndTypedQueries (0.92s)
+=== RUN   TestTLSRejectsWrongPinSANExpiryAndOldProtocol
+--- PASS: TestTLSRejectsWrongPinSANExpiryAndOldProtocol (0.20s)
+=== RUN   TestRevocationClosesWSSAndPreventsReplayAfterRestore
+--- PASS: TestRevocationClosesWSSAndPreventsReplayAfterRestore (0.74s)
+=== RUN   TestConcurrentPairingHasOneWinner
+--- PASS: TestConcurrentPairingHasOneWinner (0.13s)
+=== RUN   TestUnixPeerCLIAndPathProtection
+--- PASS: TestUnixPeerCLIAndPathProtection (0.09s)
+=== RUN   TestMetricsHTTPSPagesScopeWSSAndRevocation
+--- PASS: TestMetricsHTTPSPagesScopeWSSAndRevocation (3.28s)
+=== RUN   TestMetricReadContinuesAfterAuditFailure
+--- PASS: TestMetricReadContinuesAfterAuditFailure (0.14s)
+=== RUN   TestNativeProcessHelper
+--- PASS: TestNativeProcessHelper (0.00s)
+=== RUN   TestNativeServeCLIShutdownAndPortConflict
+--- PASS: TestNativeServeCLIShutdownAndPortConflict (0.51s)
+=== RUN   TestIPv6TLSLoopback
+--- PASS: TestIPv6TLSLoopback (0.13s)
+=== RUN   TestForeignPeerHelper
+--- PASS: TestForeignPeerHelper (0.00s)
+=== RUN   TestForeignUIDAdminPeerIsRejected
+    peer_root_linux_test.go:37: separate isolated root procedure runs actual foreign UID peer
+--- SKIP: TestForeignUIDAdminPeerIsRejected (0.00s)
+=== RUN   TestAuditFailureCannotPairOrRevokeAndObservationKeepsFailureVisible
+=== RUN   TestAuditFailureCannotPairOrRevokeAndObservationKeepsFailureVisible/issue
+=== RUN   TestAuditFailureCannotPairOrRevokeAndObservationKeepsFailureVisible/pair
+=== RUN   TestAuditFailureCannotPairOrRevokeAndObservationKeepsFailureVisible/revoke
+--- PASS: TestAuditFailureCannotPairOrRevokeAndObservationKeepsFailureVisible (0.47s)
+    --- PASS: TestAuditFailureCannotPairOrRevokeAndObservationKeepsFailureVisible/issue (0.16s)
+    --- PASS: TestAuditFailureCannotPairOrRevokeAndObservationKeepsFailureVisible/pair (0.16s)
+    --- PASS: TestAuditFailureCannotPairOrRevokeAndObservationKeepsFailureVisible/revoke (0.16s)
+=== RUN   TestHTTPPreparedRevokeIdempotencyVersionsAndInitiator
+--- PASS: TestHTTPPreparedRevokeIdempotencyVersionsAndInitiator (0.41s)
+=== RUN   TestWSSBoundsDuplicateSubscriptionsCrossAckAndOrigin
+--- PASS: TestWSSBoundsDuplicateSubscriptionsCrossAckAndOrigin (0.13s)
+=== RUN   TestRateBoundsAndCursorScopeTamper
+--- PASS: TestRateBoundsAndCursorScopeTamper (0.25s)
+=== RUN   TestMalformedHeadersAndPairingFlood
+--- PASS: TestMalformedHeadersAndPairingFlood (0.11s)
+=== RUN   TestFloorPublicationFailurePreservesCommittedRevocation
+--- PASS: TestFloorPublicationFailurePreservesCommittedRevocation (0.15s)
+=== RUN   TestRetiredRegistryBoundDoesNotResurrectPrunedToken
+--- PASS: TestRetiredRegistryBoundDoesNotResurrectPrunedToken (3.47s)
+=== RUN   TestHTTPCancellationHasTypedAuditedTooLateResult
+--- PASS: TestHTTPCancellationHasTypedAuditedTooLateResult (0.15s)
+=== RUN   TestDifferentPairingCodesCannotOverwriteSamePendingRequest
+--- PASS: TestDifferentPairingCodesCannotOverwriteSamePendingRequest (0.15s)
+PASS
+ok  	serverdeck.local/agent/internal/app	11.969s
+=== RUN   TestMonotonicPairingExpirySlotsAndTokenBoundaries
+--- PASS: TestMonotonicPairingExpirySlotsAndTokenBoundaries (0.17s)
+PASS
+ok  	serverdeck.local/agent/internal/auth	0.179s
+=== RUN   TestConfig
+=== RUN   TestConfig/unknown
+=== RUN   TestConfig/version
+=== RUN   TestConfig/port
+=== RUN   TestConfig/nonlocal
+=== RUN   TestConfig/hostname-listener
+=== RUN   TestConfig/broad-cidr
+=== RUN   TestConfig/noncanonical-cidr
+=== RUN   TestConfig/relative-path
+=== RUN   TestConfig/dot-path
+=== RUN   TestConfig/overlap
+=== RUN   TestConfig/edit-over-full
+=== RUN   TestConfig/history-over-bound
+=== RUN   TestConfig/icmp-missing
+=== RUN   TestConfig/icmp-url
+=== RUN   TestConfig/icmp-flag
+--- PASS: TestConfig (0.01s)
+    --- PASS: TestConfig/unknown (0.00s)
+    --- PASS: TestConfig/version (0.00s)
+    --- PASS: TestConfig/port (0.00s)
+    --- PASS: TestConfig/nonlocal (0.00s)
+    --- PASS: TestConfig/hostname-listener (0.00s)
+    --- PASS: TestConfig/broad-cidr (0.00s)
+    --- PASS: TestConfig/noncanonical-cidr (0.00s)
+    --- PASS: TestConfig/relative-path (0.00s)
+    --- PASS: TestConfig/dot-path (0.00s)
+    --- PASS: TestConfig/overlap (0.00s)
+    --- PASS: TestConfig/edit-over-full (0.00s)
+    --- PASS: TestConfig/history-over-bound (0.00s)
+    --- PASS: TestConfig/icmp-missing (0.00s)
+    --- PASS: TestConfig/icmp-url (0.00s)
+    --- PASS: TestConfig/icmp-flag (0.00s)
+PASS
+ok  	serverdeck.local/agent/internal/config	0.016s
+=== RUN   TestWssDirectionAndTopics
+--- PASS: TestWssDirectionAndTopics (0.14s)
+=== RUN   TestRuntimeAPISharedSemantics
+--- PASS: TestRuntimeAPISharedSemantics (0.18s)
+=== RUN   TestApplyRuntimeChanges
+--- PASS: TestApplyRuntimeChanges (0.00s)
+=== RUN   TestRequestCatalogBranches
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/A
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/B
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/C
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/D
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/E
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/F
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/G
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/H
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/I
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/J
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/K
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/L
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/M
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/N
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/O
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/P
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/Q
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/R
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/S
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/T
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/U
+=== RUN   TestRequestCatalogBranches/api/QueryRequest/V
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/A
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/B
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/C
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/D
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/E
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/F
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/G
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/H
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/I
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/J
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/K
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/L
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/M
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/N
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/O
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/P
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/Q
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/R
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/S
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/T
+=== RUN   TestRequestCatalogBranches/api/PrepareRequest/U
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/A
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/B
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/C
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/D
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/E
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/F
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/G
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/H
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/I
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/J
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/K
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/L
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/M
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/N
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/O
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/P
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/Q
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/R
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/S
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/T
+=== RUN   TestRequestCatalogBranches/api/OperationRequest/U
+=== RUN   TestRequestCatalogBranches/ipc/Request/A
+=== RUN   TestRequestCatalogBranches/ipc/Request/B
+=== RUN   TestRequestCatalogBranches/ipc/Request/C
+=== RUN   TestRequestCatalogBranches/ipc/Request/D
+=== RUN   TestRequestCatalogBranches/ipc/Request/E
+=== RUN   TestRequestCatalogBranches/ipc/Request/F
+=== RUN   TestRequestCatalogBranches/ipc/Request/G
+=== RUN   TestRequestCatalogBranches/ipc/Request/H
+=== RUN   TestRequestCatalogBranches/ipc/Request/I
+=== RUN   TestRequestCatalogBranches/ipc/Request/J
+=== RUN   TestRequestCatalogBranches/ipc/Request/K
+--- PASS: TestRequestCatalogBranches (0.14s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/A (0.04s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/B (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/C (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/D (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/E (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/F (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/G (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/H (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/I (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/J (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/K (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/L (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/M (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/N (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/O (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/P (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/Q (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/R (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/S (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/T (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/U (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/QueryRequest/V (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/A (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/B (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/C (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/D (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/E (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/F (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/G (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/H (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/I (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/J (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/K (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/L (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/M (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/N (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/O (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/P (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/Q (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/R (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/S (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/T (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/PrepareRequest/U (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/A (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/B (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/C (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/D (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/E (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/F (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/G (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/H (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/I (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/J (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/K (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/L (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/M (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/N (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/O (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/P (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/Q (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/R (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/S (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/T (0.00s)
+    --- PASS: TestRequestCatalogBranches/api/OperationRequest/U (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/A (0.05s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/B (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/C (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/D (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/E (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/F (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/G (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/H (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/I (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/J (0.00s)
+    --- PASS: TestRequestCatalogBranches/ipc/Request/K (0.00s)
+=== RUN   TestDataSchemaSubset
+--- PASS: TestDataSchemaSubset (0.00s)
+=== RUN   TestDataSchemaSiblingGuards
+=== RUN   TestDataSchemaSiblingGuards/oneOf/items-format
+=== RUN   TestDataSchemaSiblingGuards/oneOf/additionalProperties-remote
+=== RUN   TestDataSchemaSiblingGuards/oneOf/additionalProperties-pattern
+=== RUN   TestDataSchemaSiblingGuards/oneOf/properties-recursive
+=== RUN   TestDataSchemaSiblingGuards/oneOf/properties-unbounded
+=== RUN   TestDataSchemaSiblingGuards/oneOf/items-unbounded
+=== RUN   TestDataSchemaSiblingGuards/oneOf/unused-definitions
+=== RUN   TestDataSchemaSiblingGuards/oneOf/properties-pattern
+=== RUN   TestDataSchemaSiblingGuards/const/additionalProperties-remote
+=== RUN   TestDataSchemaSiblingGuards/const/additionalProperties-pattern
+=== RUN   TestDataSchemaSiblingGuards/const/properties-recursive
+=== RUN   TestDataSchemaSiblingGuards/const/properties-unbounded
+=== RUN   TestDataSchemaSiblingGuards/const/items-unbounded
+=== RUN   TestDataSchemaSiblingGuards/const/unused-definitions
+=== RUN   TestDataSchemaSiblingGuards/const/properties-pattern
+=== RUN   TestDataSchemaSiblingGuards/const/items-format
+=== RUN   TestDataSchemaSiblingGuards/enum/additionalProperties-remote
+=== RUN   TestDataSchemaSiblingGuards/enum/additionalProperties-pattern
+=== RUN   TestDataSchemaSiblingGuards/enum/properties-recursive
+=== RUN   TestDataSchemaSiblingGuards/enum/properties-unbounded
+=== RUN   TestDataSchemaSiblingGuards/enum/items-unbounded
+=== RUN   TestDataSchemaSiblingGuards/enum/unused-definitions
+=== RUN   TestDataSchemaSiblingGuards/enum/properties-pattern
+=== RUN   TestDataSchemaSiblingGuards/enum/items-format
+--- PASS: TestDataSchemaSiblingGuards (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/oneOf/items-format (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/oneOf/additionalProperties-remote (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/oneOf/additionalProperties-pattern (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/oneOf/properties-recursive (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/oneOf/properties-unbounded (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/oneOf/items-unbounded (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/oneOf/unused-definitions (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/oneOf/properties-pattern (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/const/additionalProperties-remote (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/const/additionalProperties-pattern (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/const/properties-recursive (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/const/properties-unbounded (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/const/items-unbounded (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/const/unused-definitions (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/const/properties-pattern (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/const/items-format (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/enum/additionalProperties-remote (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/enum/additionalProperties-pattern (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/enum/properties-recursive (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/enum/properties-unbounded (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/enum/items-unbounded (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/enum/unused-definitions (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/enum/properties-pattern (0.00s)
+    --- PASS: TestDataSchemaSiblingGuards/enum/items-format (0.00s)
+=== RUN   TestDataSchemaSiblingDepth
+--- PASS: TestDataSchemaSiblingDepth (0.00s)
+=== RUN   TestUIDeclarationLimits
+--- PASS: TestUIDeclarationLimits (0.00s)
+=== RUN   TestUITotalAndDepth
+--- PASS: TestUITotalAndDepth (0.00s)
+=== RUN   TestParseBoundaries
+--- PASS: TestParseBoundaries (0.01s)
+=== RUN   TestReadBounded
+--- PASS: TestReadBounded (0.00s)
+=== RUN   TestNonzeroUnderflow
+--- PASS: TestNonzeroUnderflow (0.00s)
+=== RUN   TestU64
+--- PASS: TestU64 (0.00s)
+=== RUN   TestTimestamp
+--- PASS: TestTimestamp (0.00s)
+=== RUN   TestLocation
+--- PASS: TestLocation (0.00s)
+=== RUN   TestEncodePreflight
+--- PASS: TestEncodePreflight (0.00s)
+=== RUN   TestFrames
+--- PASS: TestFrames (0.00s)
+=== RUN   TestPendingResponse
+--- PASS: TestPendingResponse (0.15s)
+=== RUN   TestTypedRoundtrip
+--- PASS: TestTypedRoundtrip (0.00s)
+=== RUN   TestConcurrentValidation
+--- PASS: TestConcurrentValidation (0.00s)
+=== RUN   TestEmbeddedSchemasMatchSource
+--- PASS: TestEmbeddedSchemasMatchSource (6.00s)
+=== RUN   TestExamples
+=== RUN   TestExamples/operation-state
+=== RUN   TestExamples/config
+=== RUN   TestExamples/ipc
+=== RUN   TestExamples/snapshot-response
+=== RUN   TestExamples/wss-client
+=== RUN   TestExamples/wss-server
+=== RUN   TestExamples/query
+=== RUN   TestExamples/operation
+=== RUN   TestExamples/module
+=== RUN   TestExamples/ui
+=== RUN   TestExamples/release
+=== RUN   TestExamples/ipc-response
+=== RUN   TestExamples/error
+--- PASS: TestExamples (0.01s)
+    --- PASS: TestExamples/operation-state (0.00s)
+    --- PASS: TestExamples/config (0.00s)
+    --- PASS: TestExamples/ipc (0.00s)
+    --- PASS: TestExamples/snapshot-response (0.00s)
+    --- PASS: TestExamples/wss-client (0.00s)
+    --- PASS: TestExamples/wss-server (0.00s)
+    --- PASS: TestExamples/query (0.00s)
+    --- PASS: TestExamples/operation (0.00s)
+    --- PASS: TestExamples/module (0.00s)
+    --- PASS: TestExamples/ui (0.00s)
+    --- PASS: TestExamples/release (0.00s)
+    --- PASS: TestExamples/ipc-response (0.00s)
+    --- PASS: TestExamples/error (0.00s)
+=== RUN   TestDirectionAndSemantics
+--- PASS: TestDirectionAndSemantics (0.00s)
+PASS
+ok  	serverdeck.local/agent/internal/contracts	6.677s
+=== RUN   TestLastGoodPermissionFailureStaleAndClockSegment
+--- PASS: TestLastGoodPermissionFailureStaleAndClockSegment (0.00s)
+=== RUN   TestStaleThresholdUsesMonotonicAndReadDoesNotRefresh
+--- PASS: TestStaleThresholdUsesMonotonicAndReadDoesNotRefresh (0.00s)
+=== RUN   TestCadencesLeaseExpiryAndHungSourceBound
+--- PASS: TestCadencesLeaseExpiryAndHungSourceBound (0.00s)
+=== RUN   TestProcessPagesFilterSortTieIdentityTTLAndBounds
+--- PASS: TestProcessPagesFilterSortTieIdentityTTLAndBounds (0.00s)
+=== RUN   TestSharedCollectionNoClientsManyReadersAndNativeHang
+--- PASS: TestSharedCollectionNoClientsManyReadersAndNativeHang (2.01s)
+=== RUN   TestSnapshotWireContract
+--- PASS: TestSnapshotWireContract (0.06s)
+=== RUN   TestTwoProcessSnapshotsPerOwnerAndGlobalRetentionBound
+--- PASS: TestTwoProcessSnapshotsPerOwnerAndGlobalRetentionBound (0.00s)
+=== RUN   TestScheduledIntervalsHaveExactBoundaries
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/system
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/cpu
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/memory
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/network
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/filesystems
+=== RUN   TestScheduledIntervalsHaveExactBoundaries/processes
+--- PASS: TestScheduledIntervalsHaveExactBoundaries (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/system (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/cpu (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/memory (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/network (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/filesystems (0.00s)
+    --- PASS: TestScheduledIntervalsHaveExactBoundaries/processes (0.00s)
+=== RUN   TestCPUFormulaGuestResetZeroAndHotplug
+--- PASS: TestCPUFormulaGuestResetZeroAndHotplug (0.00s)
+=== RUN   TestMemoryNoFreeFallbackNoSwapAndOverflow
+--- PASS: TestMemoryNoFreeFallbackNoSwapAndOverflow (0.00s)
+=== RUN   TestProcessParserNameParenthesesMissingFieldsAndReuse
+--- PASS: TestProcessParserNameParenthesesMissingFieldsAndReuse (0.00s)
+=== RUN   TestNativeLinuxReadOnlySourcesAndContracts
+    linux_test.go:175: system metrics 0 records 1 processes 0 wire bytes 768
+    linux_test.go:175: cpu metrics 192 records 17 processes 0 wire bytes 65048
+    linux_test.go:175: memory metrics 8 records 0 processes 0 wire bytes 3154
+    linux_test.go:175: network metrics 20 records 3 processes 0 wire bytes 8872
+    linux_test.go:175: filesystems metrics 64 records 8 processes 0 wire bytes 23209
+    linux_test.go:175: processes metrics 0 records 0 processes 12 wire bytes 494
+    linux_test.go:177: UID 1000 CLK_TCK 100 page size 4096 PID 1000
+--- PASS: TestNativeLinuxReadOnlySourcesAndContracts (0.08s)
+=== RUN   TestMountEscapesAndBoundedReads
+--- PASS: TestMountEscapesAndBoundedReads (0.00s)
+=== RUN   TestProcessCollectionDetectsReuseDuringReadAndPermission
+--- PASS: TestProcessCollectionDetectsReuseDuringReadAndPermission (0.00s)
+=== RUN   TestRecognizedCPUTemperatureAndOtherSensorNotGuessed
+--- PASS: TestRecognizedCPUTemperatureAndOtherSensorNotGuessed (0.01s)
+=== RUN   TestHungStatfsDoesNotMultiplyOrHideOtherMounts
+--- PASS: TestHungStatfsDoesNotMultiplyOrHideOtherMounts (0.05s)
+=== RUN   TestNetworkResetChangesIdentityAndDoesNotProduceNegativeRate
+--- PASS: TestNetworkResetChangesIdentityAndDoesNotProduceNegativeRate (0.00s)
+=== RUN   TestFilesystemReservedSpaceRootOverlayAndPerMountDenial
+--- PASS: TestFilesystemReservedSpaceRootOverlayAndPerMountDenial (0.00s)
+=== RUN   TestHwmonProfileRejectsControlTemperatureOffset
+--- PASS: TestHwmonProfileRejectsControlTemperatureOffset (0.01s)
+=== RUN   TestFilesystemNativeSlotLimit
+--- PASS: TestFilesystemNativeSlotLimit (0.04s)
+=== RUN   TestRealTemporaryFilePermissionDoesNotBecomeZero
+--- PASS: TestRealTemporaryFilePermissionDoesNotBecomeZero (0.00s)
+PASS
+ok  	serverdeck.local/agent/internal/metrics	2.289s
+=== RUN   TestPhysicalFullFilesystem
+    full_linux_test.go:20: requires private <=32MB ext4 mount; tools/e02-full-filesystem.sh
+--- SKIP: TestPhysicalFullFilesystem (0.00s)
+=== RUN   TestIntentFailureHasNoEffect
+--- PASS: TestIntentFailureHasNoEffect (0.19s)
+=== RUN   TestResultFailureNoDuplicateAndRestartUnknown
+--- PASS: TestResultFailureNoDuplicateAndRestartUnknown (0.19s)
+=== RUN   TestConcurrentRepeatIdentityAndExternalVersion
+--- PASS: TestConcurrentRepeatIdentityAndExternalVersion (0.33s)
+=== RUN   TestCancellationBeforeEffect
+--- PASS: TestCancellationBeforeEffect (0.11s)
+=== RUN   TestDisconnectAfterIntentDoesNotCancel
+--- PASS: TestDisconnectAfterIntentDoesNotCancel (0.13s)
+=== RUN   TestAuditedCancellationRequiresDurableControlAndCanWinBeforeEffect
+--- PASS: TestAuditedCancellationRequiresDurableControlAndCanWinBeforeEffect (0.14s)
+=== RUN   TestRealConfigCAS
+--- PASS: TestRealConfigCAS (0.19s)
+=== RUN   TestQueueBoundsParallelismAndFairness
+--- PASS: TestQueueBoundsParallelismAndFairness (0.09s)
+=== RUN   TestCrashChild
+--- PASS: TestCrashChild (0.00s)
+=== RUN   TestCrashRecoveryRealProcess
+=== RUN   TestCrashRecoveryRealProcess/before_intent
+=== RUN   TestCrashRecoveryRealProcess/after_intent
+=== RUN   TestCrashRecoveryRealProcess/before_effect
+=== RUN   TestCrashRecoveryRealProcess/after_effect
+=== RUN   TestCrashRecoveryRealProcess/after_result
+--- PASS: TestCrashRecoveryRealProcess (1.02s)
+    --- PASS: TestCrashRecoveryRealProcess/before_intent (0.19s)
+    --- PASS: TestCrashRecoveryRealProcess/after_intent (0.21s)
+    --- PASS: TestCrashRecoveryRealProcess/before_effect (0.22s)
+    --- PASS: TestCrashRecoveryRealProcess/after_effect (0.18s)
+    --- PASS: TestCrashRecoveryRealProcess/after_result (0.22s)
+PASS
+ok  	serverdeck.local/agent/internal/operations	2.406s
+=== RUN   TestAuthMigrationPreservesV1ChecksumAndDisablesLegacyPlaceholders
+--- PASS: TestAuthMigrationPreservesV1ChecksumAndDisablesLegacyPlaceholders (0.19s)
+=== RUN   TestOperationChangeRotationReportsGap
+--- PASS: TestOperationChangeRotationReportsGap (0.11s)
+=== RUN   TestRealV1BackupRestoresThroughV2Migration
+--- PASS: TestRealV1BackupRestoresThroughV2Migration (0.38s)
+=== RUN   TestOpenRejectsBootstrapInstallationMismatch
+--- PASS: TestOpenRejectsBootstrapInstallationMismatch (0.10s)
+=== RUN   TestDurabilityMigrationPermissions
+--- PASS: TestDurabilityMigrationPermissions (0.12s)
+=== RUN   TestMigrationAndCorruptionFailClosed
+=== RUN   TestMigrationAndCorruptionFailClosed/future
+=== RUN   TestMigrationAndCorruptionFailClosed/checksum
+=== RUN   TestMigrationAndCorruptionFailClosed/extra_table
+=== RUN   TestMigrationAndCorruptionFailClosed/corrupt
+=== RUN   TestMigrationAndCorruptionFailClosed/lost_key
+=== RUN   TestMigrationAndCorruptionFailClosed/incomplete
+--- PASS: TestMigrationAndCorruptionFailClosed (0.52s)
+    --- PASS: TestMigrationAndCorruptionFailClosed/future (0.10s)
+    --- PASS: TestMigrationAndCorruptionFailClosed/checksum (0.10s)
+    --- PASS: TestMigrationAndCorruptionFailClosed/extra_table (0.10s)
+    --- PASS: TestMigrationAndCorruptionFailClosed/corrupt (0.07s)
+    --- PASS: TestMigrationAndCorruptionFailClosed/lost_key (0.09s)
+    --- PASS: TestMigrationAndCorruptionFailClosed/incomplete (0.07s)
+=== RUN   TestPrivatePaths
+--- PASS: TestPrivatePaths (0.09s)
+=== RUN   TestRealSQLiteWriteFailures
+=== RUN   TestRealSQLiteWriteFailures/read_only
+=== RUN   TestRealSQLiteWriteFailures/sqlite_full
+=== RUN   TestRealSQLiteWriteFailures/audit_abort
+--- PASS: TestRealSQLiteWriteFailures (0.31s)
+    --- PASS: TestRealSQLiteWriteFailures/read_only (0.10s)
+    --- PASS: TestRealSQLiteWriteFailures/sqlite_full (0.10s)
+    --- PASS: TestRealSQLiteWriteFailures/audit_abort (0.11s)
+=== RUN   TestBusyCheckpointLongReaderAndBoundedRead
+--- PASS: TestBusyCheckpointLongReaderAndBoundedRead (2.12s)
+=== RUN   TestRetentionUnknownProtectionAndCursor
+--- PASS: TestRetentionUnknownProtectionAndCursor (0.26s)
+=== RUN   TestBackupRestoreSecurityFloor
+--- PASS: TestBackupRestoreSecurityFloor (0.21s)
+=== RUN   TestFingerprintCanonicalAndNoRawParams
+--- PASS: TestFingerprintCanonicalAndNoRawParams (0.05s)
+=== RUN   TestOperationQuotaAndAdministrativeResolution
+--- PASS: TestOperationQuotaAndAdministrativeResolution (0.08s)
+=== RUN   TestRawRollbackAndLostFloorRefused
+=== RUN   TestRawRollbackAndLostFloorRefused/rollback
+=== RUN   TestRawRollbackAndLostFloorRefused/lost_floor
+=== RUN   TestRawRollbackAndLostFloorRefused/read_only_file
+--- PASS: TestRawRollbackAndLostFloorRefused (0.30s)
+    --- PASS: TestRawRollbackAndLostFloorRefused/rollback (0.10s)
+    --- PASS: TestRawRollbackAndLostFloorRefused/lost_floor (0.10s)
+    --- PASS: TestRawRollbackAndLostFloorRefused/read_only_file (0.10s)
+PASS
+ok  	serverdeck.local/agent/internal/storage	4.852s
++ go test -race -count=1 ./...
+?   	serverdeck.local/agent/cmd/serverdeck-agent	[no test files]
+?   	serverdeck.local/agent/cmd/serverdeckctl	[no test files]
+ok  	serverdeck.local/agent/internal/app	19.877s
+ok  	serverdeck.local/agent/internal/auth	1.491s
+ok  	serverdeck.local/agent/internal/config	1.071s
+ok  	serverdeck.local/agent/internal/contracts	40.475s
+ok  	serverdeck.local/agent/internal/metrics	3.863s
+ok  	serverdeck.local/agent/internal/operations	5.420s
+ok  	serverdeck.local/agent/internal/storage	6.451s
++ bash tools/build-linux.sh amd64
+all modules verified
+Built linux/amd64 with cgo; ELF/GLIBC<=2.35 checked. Run smoke on the matching Linux host.
++ for command in serverdeck-agent serverdeckctl
++ dist/linux-amd64/serverdeck-agent version
+serverdeck-agent development E04 api=1 schema=1.0 ipc=1 go1.27.2 linux/amd64
++ dist/linux-amd64/serverdeck-agent sqlite-info
+sqlite_version=3.53.4 sqlite_source_id=2026-07-24 19:02:57 bf7c7f30031888f4e796e429ab3978879485813aaca6f641c7b33e4e09459bcc compile_options=ATOMIC_INTRINSICS=1;COMPILER=gcc-11.4.0;DEFAULT_AUTOVACUUM;DEFAULT_CACHE_SIZE=-2000;DEFAULT_FILE_FORMAT=4;DEFAULT_JOURNAL_SIZE_LIMIT=-1;DEFAULT_MMAP_SIZE=0;DEFAULT_PAGE_SIZE=4096;DEFAULT_PCACHE_INITSZ=20;DEFAULT_RECURSIVE_TRIGGERS;DEFAULT_SECTOR_SIZE=4096;DEFAULT_SYNCHRONOUS=2;DEFAULT_WAL_AUTOCHECKPOINT=1000;DEFAULT_WAL_SYNCHRONOUS=1;DEFAULT_WORKER_THREADS=0;DIRECT_OVERFLOW_READ;ENABLE_FTS3;ENABLE_FTS3_PARENTHESIS;ENABLE_RTREE;ENABLE_UPDATE_DELETE_LIMIT;MALLOC_SOFT_LIMIT=1024;MAX_ATTACHED=10;MAX_COLUMN=2000;MAX_COMPOUND_SELECT=500;MAX_DEFAULT_PAGE_SIZE=8192;MAX_EXPR_DEPTH=1000;MAX_FUNCTION_ARG=1000;MAX_LENGTH=1000000000;MAX_LIKE_PATTERN_LENGTH=50000;MAX_MMAP_SIZE=0x7fff0000;MAX_PAGE_COUNT=0xfffffffe;MAX_PAGE_SIZE=65536;MAX_SQL_LENGTH=1000000000;MAX_TRIGGER_DEPTH=1000;MAX_VARIABLE_NUMBER=32766;MAX_VDBE_OP=250000000;MAX_WORKER_THREADS=8;MUTEX_PTHREADS;OMIT_DEPRECATED;SYSTEM_MALLOC;TEMP_STORE=1;THREADSAFE=1
++ ldd dist/linux-amd64/serverdeck-agent
+	linux-vdso.so.1 (0x00007ffcb9530000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000078562d200000)
+	/lib64/ld-linux-x86-64.so.2 (0x000078562d49b000)
++ for command in serverdeck-agent serverdeckctl
++ dist/linux-amd64/serverdeckctl version
+serverdeckctl development E04 api=1 schema=1.0 ipc=1 go1.27.2 linux/amd64
++ dist/linux-amd64/serverdeckctl sqlite-info
+sqlite_version=3.53.4 sqlite_source_id=2026-07-24 19:02:57 bf7c7f30031888f4e796e429ab3978879485813aaca6f641c7b33e4e09459bcc compile_options=ATOMIC_INTRINSICS=1;COMPILER=gcc-11.4.0;DEFAULT_AUTOVACUUM;DEFAULT_CACHE_SIZE=-2000;DEFAULT_FILE_FORMAT=4;DEFAULT_JOURNAL_SIZE_LIMIT=-1;DEFAULT_MMAP_SIZE=0;DEFAULT_PAGE_SIZE=4096;DEFAULT_PCACHE_INITSZ=20;DEFAULT_RECURSIVE_TRIGGERS;DEFAULT_SECTOR_SIZE=4096;DEFAULT_SYNCHRONOUS=2;DEFAULT_WAL_AUTOCHECKPOINT=1000;DEFAULT_WAL_SYNCHRONOUS=1;DEFAULT_WORKER_THREADS=0;DIRECT_OVERFLOW_READ;ENABLE_FTS3;ENABLE_FTS3_PARENTHESIS;ENABLE_RTREE;ENABLE_UPDATE_DELETE_LIMIT;MALLOC_SOFT_LIMIT=1024;MAX_ATTACHED=10;MAX_COLUMN=2000;MAX_COMPOUND_SELECT=500;MAX_DEFAULT_PAGE_SIZE=8192;MAX_EXPR_DEPTH=1000;MAX_FUNCTION_ARG=1000;MAX_LENGTH=1000000000;MAX_LIKE_PATTERN_LENGTH=50000;MAX_MMAP_SIZE=0x7fff0000;MAX_PAGE_COUNT=0xfffffffe;MAX_PAGE_SIZE=65536;MAX_SQL_LENGTH=1000000000;MAX_TRIGGER_DEPTH=1000;MAX_VARIABLE_NUMBER=32766;MAX_VDBE_OP=250000000;MAX_WORKER_THREADS=8;MUTEX_PTHREADS;OMIT_DEPRECATED;SYSTEM_MALLOC;TEMP_STORE=1;THREADSAFE=1
++ ldd dist/linux-amd64/serverdeckctl
+	linux-vdso.so.1 (0x00007fffd4d47000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000074f723e00000)
+	/lib64/ld-linux-x86-64.so.2 (0x000074f7240bd000)
++ SERVERDECK_E03_AGENT_BINARY=/home/dontart7272/serverdeck-e04-2026-10-13/source.iqYW2T/agent/dist/linux-amd64/serverdeck-agent
++ SERVERDECK_E03_CTL_BINARY=/home/dontart7272/serverdeck-e04-2026-10-13/source.iqYW2T/agent/dist/linux-amd64/serverdeckctl
++ go test -v -count=1 -run '^TestNativeServeCLIShutdownAndPortConflict$' ./internal/app
+=== RUN   TestNativeServeCLIShutdownAndPortConflict
+--- PASS: TestNativeServeCLIShutdownAndPortConflict (0.59s)
+PASS
+ok  	serverdeck.local/agent/internal/app	0.602s
++ bash tools/state-smoke-linux.sh
+OK: critical schema v2; existing settings preserved
+{"available":true,"audit_available":true,"security_floor_available":true,"failures":0,"code":"","allocated_bytes":114688,"wal_bytes":0,"temporal_expiry":false}
+{"operation_id":"22222222-2222-4222-8222-222222222222","initiator":"local:1000","action":"storage.backup","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1791923071635391,"updated_us":1791923071677933,"dedup_until_us":1792527871677933}
+{"operation_id":"22222222-2222-4222-8222-222222222222","initiator":"local:1000","action":"storage.backup","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1791923071635391,"updated_us":1791923071677933,"dedup_until_us":1792527871677933}
+{"operation_id":"22222222-2222-4222-8222-222222222222","initiator":"local:1000","action":"storage.backup","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1791923071635391,"updated_us":1791923071677933,"dedup_until_us":1792527871677933}
+{"operation_id":"44444444-4444-4444-8444-444444444444","initiator":"local:1000","action":"storage.restore","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1791923071912305,"updated_us":1791923071971081,"dedup_until_us":1792527871971081}
+{"available":true,"audit_available":true,"security_floor_available":true,"failures":0,"code":"","allocated_bytes":114688,"wal_bytes":0,"temporal_expiry":false}
+{"operation_id":"44444444-4444-4444-8444-444444444444","initiator":"local:1000","action":"storage.restore","state":"succeeded","phase":"admin_resolved","effect_status":"applied","audit_status":"durable","code":"ADMIN_RESOLUTION","revision":4,"created_us":1791923071912305,"updated_us":1791923072142552,"dedup_until_us":1792527872142552}
+PASS: E02 offline CLI init/status/backup/replay/restore/admin-resolution in private Linux temp storage
++ CC=/usr/bin/aarch64-linux-gnu-gcc-11
++ bash tools/build-linux.sh arm64
+all modules verified
+Built linux/arm64 with cgo; ELF/GLIBC<=2.35 checked. Run smoke on the matching Linux host.
++ python3 tools/inspect-linux.py amd64
+[
+  {
+    "path": "dist/linux-amd64/serverdeck-agent",
+    "sha256": "13b9cf85618142a9808b5eb5a393bf89a960b675982871f0ca27e07f644ac584",
+    "machine": "Advanced Micro Devices X86-64",
+    "class": "ELF64",
+    "interpreter": "/lib64/ld-linux-x86-64.so.2",
+    "needed": [
+      "libc.so.6"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  },
+  {
+    "path": "dist/linux-amd64/serverdeckctl",
+    "sha256": "973e760a63a67eb726d99c9b867d8b1a32431337266d145e0a30d824fbabc13c",
+    "machine": "Advanced Micro Devices X86-64",
+    "class": "ELF64",
+    "interpreter": "/lib64/ld-linux-x86-64.so.2",
+    "needed": [
+      "libc.so.6"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  }
+]
++ python3 tools/inspect-linux.py arm64
+[
+  {
+    "path": "dist/linux-arm64/serverdeck-agent",
+    "sha256": "423e8aa48877b39a261365f83f9366c11384292d7331296b96738c71593336a0",
+    "machine": "AArch64",
+    "class": "ELF64",
+    "interpreter": "/lib/ld-linux-aarch64.so.1",
+    "needed": [
+      "libc.so.6",
+      "ld-linux-aarch64.so.1"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  },
+  {
+    "path": "dist/linux-arm64/serverdeckctl",
+    "sha256": "22af01a413a747592ec63eff4a6435c71abc5b97ed1881d0120757b5f509d21e",
+    "machine": "AArch64",
+    "class": "ELF64",
+    "interpreter": "/lib/ld-linux-aarch64.so.1",
+    "needed": [
+      "libc.so.6",
+      "ld-linux-aarch64.so.1"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  }
+]
++ sha256sum dist/linux-amd64/serverdeck-agent dist/linux-amd64/serverdeckctl dist/linux-arm64/serverdeck-agent dist/linux-arm64/serverdeckctl
++ go test -c ./internal/app -o /home/dontart7272/serverdeck-e04-2026-10-13/app.test
++ go test -c ./internal/metrics -o /home/dontart7272/serverdeck-e04-2026-10-13/metrics.test
++ for file in tools/*.sh
++ bash -n tools/build-linux.sh
++ for file in tools/*.sh
++ bash -n tools/e02-full-filesystem.sh
++ for file in tools/*.sh
++ bash -n tools/e03-root-tests.sh
++ for file in tools/*.sh
++ bash -n tools/e04-root-tests.sh
++ for file in tools/*.sh
++ bash -n tools/smoke-linux.sh
++ for file in tools/*.sh
++ bash -n tools/state-smoke-linux.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-e02-export.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-e02.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-e03-export.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-e03.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-e04-export.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-e04.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-export-evidence.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-finish-checks.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-install-deps.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-inventory.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-prepare.sh
++ for file in tools/*.sh
++ bash -n tools/wsl-run-checks.sh
++ echo 'PASS E04 Linux WSL checks; native ARM and host matrix not tested'
+PASS E04 Linux WSL checks; native ARM and host matrix not tested

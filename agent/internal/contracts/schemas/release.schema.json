@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "urn:serverdeck:release:1",
+  "title": "ServerDeck release specification 1.0",
+  "type": "object",
+  "properties": {
+    "release_id": {
+      "type": "string",
+      "minLength": 36,
+      "maxLength": 36,
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 80,
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+    },
+    "os": {
+      "const": "linux"
+    },
+    "architecture": {
+      "enum": [
+        "amd64",
+        "arm64"
+      ]
+    },
+    "kernel_min": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "glibc_min": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "native_libraries": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "minItems": 0,
+      "maxItems": 32
+    },
+    "api_majors": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 100
+      },
+      "minItems": 1,
+      "maxItems": 2
+    },
+    "ipc": {
+      "type": "object",
+      "properties": {
+        "min_inclusive": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 80,
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+        },
+        "max_exclusive": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 80,
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$"
+        }
+      },
+      "required": [
+        "min_inclusive",
+        "max_exclusive"
+      ],
+      "additionalProperties": false
+    },
+    "ui_schema": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "security_floor_version": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000
+    },
+    "databases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "enum": [
+              "critical",
+              "events",
+              "history"
+            ]
+          },
+          "read_min": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000000
+          },
+          "read_max": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000000
+          },
+          "write_version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000000
+          }
+        },
+        "required": [
+          "name",
+          "read_min",
+          "read_max",
+          "write_version"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "rollback_release_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 36,
+        "maxLength": 36,
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "minItems": 0,
+      "maxItems": 16
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "size_bytes": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20,
+            "pattern": "^(0|[1-9][0-9]{0,19})$"
+          },
+          "sha256": {
+            "type": "string",
+            "minLength": 64,
+            "maxLength": 64,
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "size_bytes",
+          "sha256"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 256
+    }
+  },
+  "required": [
+    "release_id",
+    "version",
+    "os",
+    "architecture",
+    "kernel_min",
+    "glibc_min",
+    "native_libraries",
+    "api_majors",
+    "ipc",
+    "ui_schema",
+    "security_floor_version",
+    "databases",
+    "rollback_release_ids",
+    "files"
+  ],
+  "additionalProperties": false,
+  "definitions": {}
+}

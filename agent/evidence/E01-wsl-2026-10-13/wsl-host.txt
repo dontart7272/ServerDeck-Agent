@@ -1,0 +1,12 @@
+  NAME              STATE           VERSION
+* docker-desktop    Stopped         2
+  Ubuntu-22.04      Stopped         2
+
+Версия WSL: 2.6.1.0
+Версия ядра: 6.6.87.2-1
+Версия WSLg: 1.0.66
+Версия MSRDC: 1.2.6353
+Версия Direct3D: 1.611.1-81528511
+Версия DXCore: 10.0.26100.1-240331-1435.ge-release
+Версия Windows: 10.0.26200.9457
+

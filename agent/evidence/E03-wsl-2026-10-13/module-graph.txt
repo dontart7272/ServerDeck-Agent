@@ -1,0 +1,7 @@
+serverdeck.local/agent github.com/coder/websocket@v1.8.15
+serverdeck.local/agent github.com/mattn/go-sqlite3@v1.14.52
+serverdeck.local/agent github.com/santhosh-tekuri/jsonschema/v5@v5.3.1
+serverdeck.local/agent go@1.27.2
+github.com/coder/websocket@v1.8.15 go@1.23
+github.com/mattn/go-sqlite3@v1.14.52 go@1.21
+go@1.27.2 toolchain@go1.27.2

@@ -1,0 +1,7 @@
+  NAME              STATE           VERSION
+
+* docker-desktop    Stopped         2
+
+  Ubuntu-22.04      Stopped         2
+
+

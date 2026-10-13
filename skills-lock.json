@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "api-audit": {
+      "source": "briiirussell/cybersecurity-skills",
+      "sourceType": "github",
+      "skillPath": "skills/api-audit/SKILL.md",
+      "computedHash": "7eefd82c5cbc7c87c3ec93da3cbf5e86c2f3eb152e1c3e8e505ec6ad2b4ac9df"
+    },
+    "owasp-audit": {
+      "source": "briiirussell/cybersecurity-skills",
+      "sourceType": "github",
+      "skillPath": "skills/owasp-audit/SKILL.md",
+      "computedHash": "bf18262a2bef3508e4078b7726c1cfdbfd4c17926e3039fea1ab4432f9184e05"
+    }
+  }
+}

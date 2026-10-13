@@ -1,0 +1,68 @@
+[
+  {
+    "path": "dist/linux-amd64/serverdeck-agent",
+    "sha256": "5bbefcdc7a2343d930cb39a41533832c725eb9c29a7cf3511338b4695e3d5f87",
+    "machine": "Advanced Micro Devices X86-64",
+    "needed": [
+      "libc.so.6"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  },
+  {
+    "path": "dist/linux-amd64/serverdeckctl",
+    "sha256": "6fca8e38a0817e0f5217e5772dbcebc2a3432292b7818ae933291024813f588f",
+    "machine": "Advanced Micro Devices X86-64",
+    "needed": [
+      "libc.so.6"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  }
+]
+[
+  {
+    "path": "dist/linux-arm64/serverdeck-agent",
+    "sha256": "7fda367679ee376183ff6936ac4aa1d0e0bb0e721db4e40fdb256246663c39d9",
+    "machine": "AArch64",
+    "needed": [
+      "libc.so.6",
+      "ld-linux-aarch64.so.1"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  },
+  {
+    "path": "dist/linux-arm64/serverdeckctl",
+    "sha256": "db570ec26a8760b456c1e8e2f892b2069d03468b919cae84e52040d64a1e1e9b",
+    "machine": "AArch64",
+    "needed": [
+      "libc.so.6",
+      "ld-linux-aarch64.so.1"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  }
+]
+OK: contract shape; authorization, signatures and effects NOT verified
+PASS: current original and compiled/tested Linux inputs match: 50 files
+Reproducibility: new source path=/home/dontart7272/serverdeck-e01-2026-10-13/rebuild.jEYLnC empty build cache=/home/dontart7272/serverdeck-e01-2026-10-13/rebuild.jEYLnC/cache
+COMMAND: CGO_ENABLED=1 GOOS=linux GOARCH=amd64 CC=/usr/bin/gcc-11 go build -mod=readonly -trimpath -buildvcs=false -o dist/linux-amd64/serverdeck-agent ./cmd/serverdeck-agent
+5bbefcdc7a2343d930cb39a41533832c725eb9c29a7cf3511338b4695e3d5f87  dist/linux-amd64/serverdeck-agent
+COMMAND: CGO_ENABLED=1 GOOS=linux GOARCH=amd64 CC=/usr/bin/gcc-11 go build -mod=readonly -trimpath -buildvcs=false -o dist/linux-amd64/serverdeckctl ./cmd/serverdeckctl
+6fca8e38a0817e0f5217e5772dbcebc2a3432292b7818ae933291024813f588f  dist/linux-amd64/serverdeckctl
+COMMAND: CGO_ENABLED=1 GOOS=linux GOARCH=arm64 CC=/usr/bin/aarch64-linux-gnu-gcc-11 go build -mod=readonly -trimpath -buildvcs=false -o dist/linux-arm64/serverdeck-agent ./cmd/serverdeck-agent
+7fda367679ee376183ff6936ac4aa1d0e0bb0e721db4e40fdb256246663c39d9  dist/linux-arm64/serverdeck-agent
+COMMAND: CGO_ENABLED=1 GOOS=linux GOARCH=arm64 CC=/usr/bin/aarch64-linux-gnu-gcc-11 go build -mod=readonly -trimpath -buildvcs=false -o dist/linux-arm64/serverdeckctl ./cmd/serverdeckctl
+db570ec26a8760b456c1e8e2f892b2069d03468b919cae84e52040d64a1e1e9b  dist/linux-arm64/serverdeckctl
+PASS: all four cgo binaries byte-identical after rebuild from another Linux source path with fresh cache
+BUILD_PATH=/home/dontart7272/serverdeck-e01-2026-10-13/source.J1hfMJ
+REBUILD_PATH=/home/dontart7272/serverdeck-e01-2026-10-13/rebuild.jEYLnC
+TMPDIR=/home/dontart7272/serverdeck-e01-2026-10-13/tmp
+GOTMPDIR=/home/dontart7272/serverdeck-e01-2026-10-13/tmp
+
+EXIT=0 LINE=1

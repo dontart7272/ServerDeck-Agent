@@ -1,0 +1,89 @@
+{
+  "manifest_version": 1,
+  "module_id": "example.health",
+  "publisher_id": "example.publisher",
+  "version": "1.0.0",
+  "compatibility": {
+    "os": "linux",
+    "architectures": [
+      "amd64",
+      "arm64"
+    ],
+    "agent": {
+      "min_inclusive": "1.0.0",
+      "max_exclusive": "2.0.0"
+    },
+    "ipc": {
+      "min_inclusive": "1.0.0",
+      "max_exclusive": "2.0.0"
+    },
+    "data_schema": {
+      "min_inclusive": "1.0.0",
+      "max_exclusive": "2.0.0"
+    }
+  },
+  "execution": {
+    "mode": "managed",
+    "executable": "/opt/serverdeck/modules/example.health/1.0.0/health",
+    "args": [],
+    "code_dir": "/opt/serverdeck/modules/example.health/1.0.0",
+    "data_dir": "/var/lib/serverdeck/modules/example.health"
+  },
+  "dependencies": [],
+  "reads": [
+    {
+      "id": "audit.probe",
+      "schema_version": "1.0.0",
+      "timeout_ms": 1000,
+      "params_schema": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "a"
+              }
+            },
+            "required": [
+              "kind"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "const": "b"
+              }
+            },
+            "required": [
+              "kind"
+            ],
+            "additionalProperties": false
+          }
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "pattern": "a|b"
+          }
+        }
+      },
+      "result_schema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  ],
+  "actions": [],
+  "series": [],
+  "ui": [],
+  "resource_request": {
+    "max_series": 0,
+    "history_budget_bytes": 0,
+    "memory_bytes": 128000000,
+    "cpu_percent": 25,
+    "pids": 64
+  }
+}

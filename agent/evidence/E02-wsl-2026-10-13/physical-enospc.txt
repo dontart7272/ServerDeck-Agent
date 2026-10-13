@@ -1,0 +1,19 @@
+2026-10-13; Ubuntu-22.04 WSL2; final E02 snapshot, native amd64.
+Command (PowerShell, project root):
+wsl -d Ubuntu-22.04 -u root -- unshare --mount -- bash /mnt/d/Projects/ServerDeck/agent/tools/e02-full-filesystem.sh
+
+Actual stdout:
+=== RUN   TestPhysicalFullFilesystem
+--- PASS: TestPhysicalFullFilesystem (0.30s)
+PASS
+Process exit code: 0.
+
+Fixture: 16000000-byte ext4 image, root-only private mount namespace;
+test binary executed as dontart7272 UID1000. Test refuses root, non-ext4,
+or filesystem >32000000 bytes. Writes bounded at32000000 bytes until ENOSPC.
+No host disk filling; no global mount changes. Trap unmounts private fixture.
+Before intent: NO_SPACE, effect count0.
+After effect: known applied/result_pending, RAM audit health unavailable.
+Retry and restart after freeing fixture file: no second effect; durable unknown.
+
+This checks real filesystem ENOSPC, not power loss or host/systemd integration.

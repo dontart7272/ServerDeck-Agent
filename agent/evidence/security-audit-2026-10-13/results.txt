@@ -1,0 +1,4 @@
+control-forbidden-pattern: exit=1; SCHEMA_MISMATCH
+const-skips-properties: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+oneof-skips-properties: exit=0; OK: contract shape; authorization, signatures and effects NOT verified
+const-skips-recursive-reference: exit=0; OK: contract shape; authorization, signatures and effects NOT verified

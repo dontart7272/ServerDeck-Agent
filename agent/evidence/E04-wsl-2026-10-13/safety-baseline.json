@@ -1,0 +1,109 @@
+{
+  "baseline": "E03-wsl-2026-10-13/build-inputs.json",
+  "unchanged": [
+    {
+      "path": "agent/internal/auth/auth.go",
+      "sha256": "15a47c6a047813ff9abeb7fcd4f8b6d58b52d3c2c0aeb9d815e48562622b99f1"
+    },
+    {
+      "path": "agent/internal/auth/auth_linux_test.go",
+      "sha256": "600c36fce79ea8789533456c3941c69cffb6857becffb98be829fc1a2d27c447"
+    },
+    {
+      "path": "agent/internal/auth/files_linux.go",
+      "sha256": "cec263354cf01b9a679f7bd857f98fdba72c5f5cf406c3418ad3509b884bf30e"
+    },
+    {
+      "path": "agent/internal/auth/files_windows.go",
+      "sha256": "0f28adf636319b11aff16f74a412f684ff67a9967236420f1b2b48946d7ff1be"
+    },
+    {
+      "path": "agent/internal/auth/tls.go",
+      "sha256": "edf0bbd95bd80dc3d9f9b4cf68fe20034043cc639c63346cecfdea11cfa9b76c"
+    },
+    {
+      "path": "agent/internal/contracts/declarations.go",
+      "sha256": "fd29ee896826d80ef3cc06d546f73f1844f89a0d87fb627e6fe8bffa6a222ec9"
+    },
+    {
+      "path": "agent/internal/contracts/runtime.go",
+      "sha256": "a4de1c8f5d136eec1139d7c8fde113e2b5bc9246c1d3e45aba6410aa32cc1b0b"
+    },
+    {
+      "path": "agent/internal/operations/config.go",
+      "sha256": "4c956f0d0773c1600490f1bc762b9929ae91e346b9403c78cfec1351645588d1"
+    },
+    {
+      "path": "agent/internal/operations/full_linux_test.go",
+      "sha256": "a589df0816433decb7f230767ab86bd5ef8528bfa723212ea8c8f83bb9f2752c"
+    },
+    {
+      "path": "agent/internal/operations/maintenance.go",
+      "sha256": "8183d081f407dc10897e3725f865382f37058212ece9d0346d429e89b550bbfd"
+    },
+    {
+      "path": "agent/internal/operations/service.go",
+      "sha256": "b187cf534886f77eceac3a6e1152e6a0c14aaedf1dfc9f4707335cd990597d35"
+    },
+    {
+      "path": "agent/internal/operations/service_linux_test.go",
+      "sha256": "66da14405ae231ede513c25d7d86a4afa1205bffdbab3d366f29a99b29f6e71b"
+    },
+    {
+      "path": "agent/internal/storage/auth.go",
+      "sha256": "b61cbc647b80e8dce8b5249117bc4bae33806498b9c3ad691fab498666b6d6ad"
+    },
+    {
+      "path": "agent/internal/storage/auth_linux_test.go",
+      "sha256": "c3a58a8ca9228f56fad155ad455809f4b6703a71dad755cde034f0548f614e8a"
+    },
+    {
+      "path": "agent/internal/storage/backup.go",
+      "sha256": "9020d674ba772f6196b40b6fd9fb7a7ae7d584e769fec721f70cf053f94fdd03"
+    },
+    {
+      "path": "agent/internal/storage/cancellation.go",
+      "sha256": "94171c4e7f478c75b8fb56356b9414acc944438b0a711f6ed405e9cf156b960b"
+    },
+    {
+      "path": "agent/internal/storage/migrations/001.sql",
+      "sha256": "41ef9791af93d8b272a0e91689c92f90c81345913294104af96d341c7ff8e3e4"
+    },
+    {
+      "path": "agent/internal/storage/migrations/002.sql",
+      "sha256": "2fe15f2eeb4fbc30914b5fb82f70013526263a74a25d527c659b723a968ef909"
+    },
+    {
+      "path": "agent/internal/storage/operations.go",
+      "sha256": "f19a1f06cbc1e92d685945e82e27099b497e91aa7ab9d5b1cb6f84feefc4f22b"
+    },
+    {
+      "path": "agent/internal/storage/platform_linux.go",
+      "sha256": "f7a703e92ec953177221b2aae41924455f8021c1ce98d1121dabf6f2d8930ae9"
+    },
+    {
+      "path": "agent/internal/storage/platform_windows.go",
+      "sha256": "359f12a23495c4231be47ef86558c6f708310bf4f31dfe6a7e155ba1b20fe6ad"
+    },
+    {
+      "path": "agent/internal/storage/resolve.go",
+      "sha256": "250fe9081d3f0f2b09a6c6011996899c38192943a428ffee07799a597a962aeb"
+    },
+    {
+      "path": "agent/internal/storage/store.go",
+      "sha256": "5800f82f2dc6925ecd8ceb04ec2d975e174c107bf3b1a5548c3cecb4e716396b"
+    },
+    {
+      "path": "agent/internal/storage/store_linux_test.go",
+      "sha256": "7d19cb0777fd92a9d7b19c60b24bc6f7dbab475f360c747c9e1f26f1d24687bc"
+    },
+    {
+      "path": "agent/internal/storage/transport.go",
+      "sha256": "d4ce6670c96b861039394941b4651fc17e7cf570cd4a5421d3c73996632a49d4"
+    },
+    {
+      "path": "agent/internal/storage/types.go",
+      "sha256": "c2dbe94a9bf0698b5f4158ca6279d6b0463ac471bc112279a5779a8f6ccef311"
+    }
+  ]
+}
