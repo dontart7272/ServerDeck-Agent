@@ -15,7 +15,7 @@ func TestOfflineCommands(t *testing.T) {
 		}
 	}
 	var out, err bytes.Buffer
-	if Run("serverdeckctl", []string{"version"}, &out, &err) != 0 || !strings.Contains(out.String(), "E04") {
+	if Run("serverdeckctl", []string{"version"}, &out, &err) != 0 || !strings.Contains(out.String(), "E08") {
 		t.Fatal("version")
 	}
 	out.Reset()

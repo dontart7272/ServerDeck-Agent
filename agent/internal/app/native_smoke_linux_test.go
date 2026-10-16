@@ -3,6 +3,8 @@ package app
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"io"
 	"net"
@@ -14,6 +16,8 @@ import (
 	"path/filepath"
 	"serverdeck.local/agent/internal/auth"
 	"serverdeck.local/agent/internal/config"
+	"serverdeck.local/agent/internal/contracts"
+	"serverdeck.local/agent/internal/fileaccess"
 	"strconv"
 	"syscall"
 	"testing"
@@ -30,6 +34,10 @@ func TestNativeProcessHelper(t *testing.T) {
 
 func TestNativeServeCLIShutdownAndPortConflict(t *testing.T) {
 	g, state, _ := newTestGateway(t)
+	fileRoot := fixtureFiles(t, g)
+	settings, _, _ := g.Store.Settings(t.Context())
+	var runtimeConfig contracts.RuntimeConfig
+	json.Unmarshal(settings, &runtimeConfig)
 	g.Close()
 	g.Store.Close()
 	base := filepath.Dir(state)
@@ -62,6 +70,19 @@ func TestNativeServeCLIShutdownAndPortConflict(t *testing.T) {
 	cfgPath := filepath.Join(base, "config.json")
 	data, _ := json.Marshal(cfg)
 	os.WriteFile(cfgPath, data, 0600)
+	confirmation := filepath.Join(base, "inventory-confirm.json")
+	os.WriteFile(confirmation, []byte(`{"known_regions":[],"absent_operation_ids":[]}`), 0600)
+	if binary := os.Getenv("SERVERDECK_E03_CTL_BINARY"); binary != "" {
+		if b, e := exec.Command(binary, "state-inventory-confirm", state, confirmation, newID(t), "--confirm").CombinedOutput(); e != nil {
+			t.Fatal("compiled inventory confirmation", e, string(b))
+		}
+	} else if Run("serverdeckctl", []string{"state-inventory-confirm", state, confirmation, newID(t), "--confirm"}, io.Discard, io.Discard) != 0 {
+		t.Fatal("inventory confirmation")
+	}
+	payload := []byte("compiled local file transfer")
+	if e = os.WriteFile(filepath.Join(fileRoot, "payload"), payload, 0600); e != nil {
+		t.Fatal(e)
+	}
 	var output bytes.Buffer
 	if e = nativeCommand("serverdeck-agent", cfgPath, &output); e == nil || e.Error() != "PORT_IN_USE" {
 		reserve.Close()
@@ -143,6 +164,69 @@ func TestNativeServeCLIShutdownAndPortConflict(t *testing.T) {
 	}
 	if decodeMap(t, output.Bytes())["query"] != "snapshot.get" {
 		t.Fatal("native snapshot response")
+	}
+	localJSON := func(action string, value any) map[string]any {
+		b, _ := json.Marshal(value)
+		if e := os.WriteFile(qp, b, 0600); e != nil {
+			t.Fatal(e)
+		}
+		output.Reset()
+		if ctl([]string{"local", "--config", cfgPath, action, qp}) != 0 {
+			t.Fatal("native local", action)
+		}
+		return decodeMap(t, output.Bytes())
+	}
+	parent := fileaccess.Location{RootID: string(runtimeConfig.Files.Roots[0].RootID), Components: []string{}}
+	rootStatus, rootBody := query(t, client, url, token, "files.roots", map[string]any{})
+	if rootStatus != 200 {
+		t.Fatal("native roots status", rootStatus)
+	}
+	rootData := decodeMap(t, rootBody)["data"].(map[string]any)
+	rootItems := rootData["items"].([]any)
+	for _, item := range rootItems {
+		if reason := item.(map[string]any)["reason"]; reason != nil {
+			t.Fatal("native root gate", reason)
+		}
+	}
+	location := parent
+	location.Components = []string{"cGF5bG9hZA"}
+	fileStat := localJSON("query", map[string]any{"schema_version": "1.0", "request_id": newID(t), "query": "files.stat", "params": map[string]any{"location": location}})["data"].(map[string]any)
+	ticket := localJSON("query", map[string]any{"schema_version": "1.0", "request_id": newID(t), "query": "files.download", "params": map[string]any{"location": location, "expected_version": fileStat["version"]}})["data"].(map[string]any)
+	desc := localTransferParams{ID: ticket["transfer_id"].(string), Size: int64(len(payload)), SHA: ticket["sha256"].(string)}
+	descBytes, _ := json.Marshal(desc)
+	os.WriteFile(qp, descBytes, 0600)
+	output.Reset()
+	if ctl([]string{"local", "--config", cfgPath, "download", qp}) != 0 || !bytes.Equal(output.Bytes(), payload) {
+		t.Fatal("compiled CLI download mismatch")
+	}
+	operation := func(action string, params any) map[string]any {
+		id := newID(t)
+		plan := localJSON("prepare", map[string]any{"schema_version": "1.0", "request_id": newID(t), "operation_id": id, "action": action, "params": params})
+		result := localJSON("execute", map[string]any{"schema_version": "1.0", "request_id": newID(t), "operation_id": id, "action": action, "params": params, "plan_id": plan["plan_id"]})
+		if result["state"] != "succeeded" {
+			t.Fatal("compiled local effect", action, result["state"], result["code"])
+		}
+		return result["result"].(map[string]any)
+	}
+	parentStat := localJSON("query", map[string]any{"schema_version": "1.0", "request_id": newID(t), "query": "files.stat", "params": map[string]any{"location": parent}})["data"].(map[string]any)
+	sum := sha256.Sum256(payload)
+	upload := operation("files.upload.begin", uploadParams{Parent: parent, Name: "dXBsb2FkZWQ", ParentVersion: parentStat["version"].(string), Size: int64(len(payload)), SHA: hex.EncodeToString(sum[:]), Conflict: "fail"})
+	desc = localTransferParams{ID: upload["transfer_id"].(string), Size: int64(len(payload)), SHA: hex.EncodeToString(sum[:])}
+	descBytes, _ = json.Marshal(desc)
+	os.WriteFile(qp, descBytes, 0600)
+	output.Reset()
+	if binary := os.Getenv("SERVERDECK_E03_CTL_BINARY"); binary != "" {
+		command := exec.Command(binary, "local", "--config", cfgPath, "upload", qp)
+		command.Stdin = bytes.NewReader(payload)
+		if b, e := command.CombinedOutput(); e != nil {
+			t.Fatal("compiled CLI upload", e, string(b))
+		}
+	} else if e := localTransfer(cfg, "upload", descBytes, bytes.NewReader(payload), &output); e != nil {
+		t.Fatal(e)
+	}
+	operation("files.transfer.commit", commitParams{ID: desc.ID, Size: desc.Size, SHA: desc.SHA, Expected: upload["file_version"].(string)})
+	if b, e := os.ReadFile(filepath.Join(fileRoot, "uploaded")); e != nil || !bytes.Equal(b, payload) {
+		t.Fatal("compiled CLI publication", e)
 	}
 	if cmd.Process.Signal(syscall.SIGTERM) != nil {
 		t.Fatal("stop signal")

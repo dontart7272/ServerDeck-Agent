@@ -58,7 +58,7 @@ func (g *Gateway) position(token, kind, scope string) (cursorValue, error) {
 	var c cursorValue
 	d := json.NewDecoder(bytes.NewReader(b))
 	d.DisallowUnknownFields()
-	if d.Decode(&c) != nil || c.Version != 1 || c.Agent != g.AgentID || !storage.ValidID(c.Epoch) || c.Kind != kind || c.Scope != scope || c.Position < 0 {
+	if d.Decode(&c) != nil || c.Version != 1 || c.Agent != g.AgentID || !validCursorEpoch(c.Kind, c.Epoch) || c.Kind != kind || c.Scope != scope || c.Position < 0 {
 		return c, storage.ErrCursor
 	}
 	if c.Expires <= time.Now().Unix() {
@@ -90,6 +90,18 @@ func (g *Gateway) Query(ctx context.Context, name string, raw []byte) (any, erro
 	}
 	digest := scope(raw)
 	switch name {
+	case "trash.list":
+		return g.trashList(ctx, raw)
+	case "files.roots", "files.list", "files.stat", "files.text", "files.download":
+		return g.fileQuery(ctx, name, raw)
+	case "diagnostics.icmp":
+		c, e := g.icmpConfig(ctx)
+		if e != nil {
+			return nil, e
+		}
+		return g.Diagnostics.Last(c), nil
+	case "history.get", "history.series", "events.list", "problems.list", "rules.list":
+		return g.telemetryQuery(ctx, name, raw)
 	case "snapshot.get", "processes.list", "processes.get":
 		return g.metricQuery(ctx, name, raw)
 	case "agent.info":
@@ -255,6 +267,9 @@ func (g *Gateway) info() map[string]any {
 	if g.Metrics != nil {
 		sources = g.Metrics.Sources()
 	}
+	if g.Metrics == nil {
+		sources = append(sources, map[string]any{"id": "security.ssh", "available": false, "reason": "SOURCE_UNAVAILABLE", "version": "1"})
+	}
 	fingerprint := ""
 	expiry := time.Now()
 	if g.Certificate != nil {
@@ -262,11 +277,48 @@ func (g *Gateway) info() map[string]any {
 		expiry = g.Certificate.NotAfter
 	}
 	caps := []any{}
-	for _, id := range []string{"agent.info", "devices.list", "devices.revoke", "config.get", "operations.list", "operations.cancel", "audit.list", "transport.https", "transport.wss"} {
+	for _, id := range []string{"agent.info", "devices.list", "devices.revoke", "config.get", "operations.list", "operations.cancel", "audit.list", "rules.list", "rules.put", "rules.delete", "config.set.history", "config.set.events", "config.set.audit", "transport.https", "transport.wss"} {
 		caps = append(caps, map[string]any{"id": id, "available": true, "reason": nil, "version": "1"})
 	}
-	for _, id := range []string{"history.get", "files", "modules", "events", "problems"} {
-		caps = append(caps, map[string]any{"id": id, "available": false, "reason": "NOT_IMPLEMENTED", "version": "1"})
+	for _, id := range []string{"diagnostics.icmp", "diagnostics.icmp.run", "config.set.icmp", "process.term", "process.kill"} {
+		var reason any
+		available := true
+		if (id == "process.term" || id == "process.kill") && (g.Metrics == nil || g.Control.Available() != nil) {
+			available = false
+			reason = "SAFETY_UNAVAILABLE"
+		}
+		caps = append(caps, map[string]any{"id": id, "available": available, "reason": reason, "version": "1"})
+	}
+	for _, id := range []string{"files.roots", "files.list", "files.stat", "files.text", "files.download"} {
+		var reason any
+		ready := g.Files != nil && (id == "files.roots" || g.filesReady(context.Background()) == nil)
+		if !ready {
+			reason = "SAFETY_UNAVAILABLE"
+		}
+		caps = append(caps, map[string]any{"id": id, "available": ready, "reason": reason, "version": "1"})
+	}
+	for _, id := range []string{"files", "files.create", "files.write.begin", "files.upload.begin", "files.transfer.commit", "files.rename", "files.move", "files.trash", "trash.restore", "trash.purge"} {
+		ready := g.filesReady(context.Background()) == nil
+		var reason any
+		if !ready {
+			reason = "SAFETY_UNAVAILABLE"
+		} else if id != "files" && !g.Store.Health().AuditAvailable {
+			ready = false
+			reason = "AUDIT_UNAVAILABLE"
+		}
+		caps = append(caps, map[string]any{"id": id, "available": ready, "reason": reason, "version": "1"})
+	}
+	caps = append(caps, map[string]any{"id": "modules", "available": false, "reason": "NOT_IMPLEMENTED", "version": "1"})
+	for _, id := range []string{"history.get", "history.series", "events.list", "problems.list"} {
+		available := g.History != nil
+		if id != "history.get" && id != "history.series" {
+			available = g.Events != nil
+		}
+		var reason any
+		if !available {
+			reason = "STORAGE_UNAVAILABLE"
+		}
+		caps = append(caps, map[string]any{"id": id, "available": available, "reason": reason, "version": "1"})
 	}
 	for _, id := range []string{"snapshot.get", "processes.list", "processes.get"} {
 		var reason any = "NOT_IMPLEMENTED"
@@ -278,5 +330,13 @@ func (g *Gateway) info() map[string]any {
 		}
 		caps = append(caps, map[string]any{"id": id, "available": g.Metrics != nil, "reason": reason, "version": "1"})
 	}
-	return map[string]any{"agent_id": g.AgentID, "agent_run_id": g.RunID, "version": "0.4.0-e04", "api_majors": []int{1}, "ipc_min": "1.0.0", "ipc_max": "1.0.0", "ui_schema": 1, "runtime": map[string]any{"user": g.RuntimeUser, "uid": os.Geteuid(), "gid": os.Getegid(), "root_warning": os.Geteuid() == 0}, "capabilities": caps, "storage": []any{g.storageInfo()}, "limits": map[string]any{"json_bytes": 1000000, "history_bytes": 4000000, "history_points": 2000, "process_page": 100, "active_operations": 4, "file_transfers": 2}, "tls": map[string]any{"fingerprint_sha256": fingerprint, "not_after": timestamp(expiry), "rotation_warning": time.Until(expiry) <= 30*24*time.Hour}, "sources": sources}
+	return map[string]any{"agent_id": g.AgentID, "agent_run_id": g.RunID, "version": "0.8.0-e08", "api_majors": []int{1}, "ipc_min": "1.0.0", "ipc_max": "1.0.0", "ui_schema": 1, "runtime": map[string]any{"user": g.RuntimeUser, "uid": os.Geteuid(), "gid": os.Getegid(), "root_warning": os.Geteuid() == 0}, "capabilities": caps, "storage": g.storageInfos(), "limits": map[string]any{"json_bytes": 1000000, "history_bytes": 4000000, "history_points": 2000, "process_page": 100, "active_operations": 4, "file_transfers": 2}, "tls": map[string]any{"fingerprint_sha256": fingerprint, "not_after": timestamp(expiry), "rotation_warning": time.Until(expiry) <= 30*24*time.Hour}, "sources": sources}
+}
+
+func validCursorEpoch(kind, epoch string) bool {
+	if kind == "files.list" || kind == "files.text" || kind == "trash.list" {
+		b, e := hex.DecodeString(epoch)
+		return e == nil && len(b) == 32 && hex.EncodeToString(b) == epoch
+	}
+	return storage.ValidID(epoch)
 }

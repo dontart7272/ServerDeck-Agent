@@ -1,0 +1,92 @@
+{
+  "files": [
+    {
+      "path": "binaries.sha256",
+      "sha256": "73ac8f64e577ef0910bc8dae8b337aabbc2206e9295782d5f9a9c8aa5ca9a07c"
+    },
+    {
+      "path": "build-amd64.txt",
+      "sha256": "59fb4d8d5c3633d17d60967fcab4a48173557be86fd44f08d2f4ee18fe53a5aa"
+    },
+    {
+      "path": "build-arm64.txt",
+      "sha256": "00d9cb7db69d854bb190c0f3d70d20ed052b15c30e3f16e2c14179db8628b75e"
+    },
+    {
+      "path": "build-inputs.json",
+      "sha256": "ed77b66654c35c0dcb18b7ddb37ed5910aae2405576756c2e48d74cf009e9642"
+    },
+    {
+      "path": "docs-check.txt",
+      "sha256": "80d474fbc73d91ed4e397dee9a9ba34b0c46ac33340c6f698fdef6cc8e8a292d"
+    },
+    {
+      "path": "docs-snapshot.json",
+      "sha256": "a4d2ff2c3d78e791fbcdb026825870486a0cc557687a1fba853c65ed083cd2fb"
+    },
+    {
+      "path": "elf-amd64.json",
+      "sha256": "d646d823e80b6aa796d08654561f098d9375487e26862b48a561709cf483ada7"
+    },
+    {
+      "path": "elf-arm64.json",
+      "sha256": "9de7c3b5a449759d151449a42de597d9b5ef3ccc10654e55fbb993e52594272d"
+    },
+    {
+      "path": "extra-commands.sh",
+      "sha256": "122ac62f72f808d9965de0b06c5cd7cf05cada6964c46da2384c4abfb5296a26"
+    },
+    {
+      "path": "foreign-uid.txt",
+      "sha256": "b95089f8ed96f0109f1c8b6a437bb3b06b9831a93ee9414b133746013f3a0d91"
+    },
+    {
+      "path": "iputils-copyright.txt",
+      "sha256": "4ce239ce157bf55305737d8c32f5938baee5d2793069195a6875e6c5eaedbc9d"
+    },
+    {
+      "path": "linux-checks.txt",
+      "sha256": "fcf2afe525244e1052fce2efd3cf383d8ea16b08b9e11aced559347552246388"
+    },
+    {
+      "path": "ping-provenance.txt",
+      "sha256": "79fca45d73323c9cda325dfae73b303fc15bb43048e00aa05394b8847c559d09"
+    },
+    {
+      "path": "pre-final-permission-fixtures.txt",
+      "sha256": "596ec4fbbfcae2fa955336363e0c598a7745f2c0d14e533ac56885de6096ffa6"
+    },
+    {
+      "path": "pre-final-pid1-fix.txt",
+      "sha256": "2d7e7391abbe73dd331ec6931cb36382488e5f0bf51f2617aa429c7493fb312b"
+    },
+    {
+      "path": "pre-final-version-test.txt",
+      "sha256": "c48f9d6aa902b86dc6aa6872be537d6017af804d04631e0f73d3d9098f8c3835"
+    },
+    {
+      "path": "preflight-fmt.txt",
+      "sha256": "62b3386ab8d5b600f0d3c095824fb4e7f0c7ef335894f1b6dfd9a9862f19d4d6"
+    },
+    {
+      "path": "README.md",
+      "sha256": "66e259f5844d7119be1340b1fb3159adb00a193faa56e954de5dc5d2922e7798"
+    },
+    {
+      "path": "runtime-dependencies.txt",
+      "sha256": "6f453383d681861038db4c588bbb53babcad90768d2fdb9d1d0399a97a2cd02c"
+    },
+    {
+      "path": "seal.py",
+      "sha256": "8b270a0d11461f1e2ad5dd75b4bbdbe292971f07bfc88203caacfdc61c576329"
+    },
+    {
+      "path": "source-copy.json",
+      "sha256": "2d2cef2caa364a7798e8bd97506ef658552f35bd2a46b1c0c9020bf5cd164e27"
+    },
+    {
+      "path": "wsl-distributions.txt",
+      "sha256": "38f07af53afd1cc69935bd318b4429d26bffb83c6681ae86f8df3f297877a1b5"
+    }
+  ]
+}

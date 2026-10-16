@@ -181,6 +181,10 @@ func (g *Gateway) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 	defer release()
 	actor := operations.Device(credential)
+	if strings.HasPrefix(r.URL.Path, "/api/v1/transfers/") {
+		g.fileContent(w, r, session)
+		return
+	}
 	if r.URL.Path == "/api/v1/stream" {
 		if r.Method != "GET" {
 			g.fail(w, fallback, storage.ErrInvalid, "")
@@ -294,7 +298,13 @@ func readJSON(w http.ResponseWriter, r *http.Request) ([]byte, error) {
 }
 func (g *Gateway) reply(w http.ResponseWriter, status int, definition string, value any) {
 	var b bytes.Buffer
-	if e := contracts.Encode(&b, contracts.Target{Family: "api", Definition: definition}, value, contracts.MaxJSONBytes); e != nil {
+	limit := int64(contracts.MaxJSONBytes)
+	if definition == "QueryResponse" {
+		if v, ok := value.(map[string]any); ok && v["query"] == "history.get" {
+			limit = 4000000
+		}
+	}
+	if e := contracts.Encode(&b, contracts.Target{Family: "api", Definition: definition}, value, limit); e != nil {
 		g.fail(w, "00000000-0000-4000-8000-000000000000", errors.New("INTERNAL_ERROR"), "")
 		return
 	}
@@ -307,7 +317,7 @@ func errorCode(e error) string {
 		return "INTERNAL_ERROR"
 	}
 	switch e.Error() {
-	case "UNAUTHORIZED", "PAIRING_REJECTED", "POLICY_DENIED", "VERSION_CONFLICT", "IDEMPOTENCY_CONFLICT", "CURSOR_GAP", "CURSOR_EXPIRED", "BUSY", "PLAN_EXPIRED", "LIMIT_EXCEEDED", "INCOMPATIBLE_VERSION", "RATE_LIMITED", "AUDIT_UNAVAILABLE", "STORAGE_UNAVAILABLE", "SOURCE_UNAVAILABLE", "NO_SPACE", "QUOTA_EXCEEDED", "SAFETY_UNAVAILABLE", "UNSUPPORTED_ACTION", "UNSUPPORTED_QUERY", "INTERNAL_ERROR", "OPERATION_NOT_FOUND":
+	case "PROTECTED_OBJECT", "OBJECT_CHANGED", "NOT_FOUND", "PERMISSION_DENIED", "UNAUTHORIZED", "PAIRING_REJECTED", "POLICY_DENIED", "VERSION_CONFLICT", "IDEMPOTENCY_CONFLICT", "CURSOR_GAP", "CURSOR_EXPIRED", "BUSY", "PLAN_EXPIRED", "LIMIT_EXCEEDED", "INCOMPATIBLE_VERSION", "RATE_LIMITED", "AUDIT_UNAVAILABLE", "STORAGE_UNAVAILABLE", "SOURCE_UNAVAILABLE", "NO_SPACE", "QUOTA_EXCEEDED", "SAFETY_UNAVAILABLE", "UNSUPPORTED_ACTION", "UNSUPPORTED_QUERY", "INTERNAL_ERROR", "OPERATION_NOT_FOUND":
 		return e.Error()
 	}
 	if errors.Is(e, contracts.ErrLimit) {
@@ -321,11 +331,11 @@ func (g *Gateway) fail(w http.ResponseWriter, request string, e error, operation
 	switch code {
 	case "UNAUTHORIZED", "PAIRING_REJECTED":
 		status = 401
-	case "POLICY_DENIED":
+	case "POLICY_DENIED", "PROTECTED_OBJECT", "PERMISSION_DENIED":
 		status = 403
-	case "OPERATION_NOT_FOUND":
+	case "OPERATION_NOT_FOUND", "NOT_FOUND":
 		status = 404
-	case "VERSION_CONFLICT", "IDEMPOTENCY_CONFLICT", "CURSOR_GAP", "BUSY", "PLAN_EXPIRED":
+	case "VERSION_CONFLICT", "OBJECT_CHANGED", "IDEMPOTENCY_CONFLICT", "CURSOR_GAP", "BUSY", "PLAN_EXPIRED":
 		status = 409
 	case "CURSOR_EXPIRED":
 		status = 410
@@ -347,6 +357,9 @@ func (g *Gateway) fail(w http.ResponseWriter, request string, e error, operation
 		request = "00000000-0000-4000-8000-000000000000"
 	}
 	errValue := map[string]any{"code": code, "message": code, "retryable": code == "RATE_LIMITED" || code == "BUSY"}
+	if details := gapDetails(e); details != nil {
+		errValue["details"] = details
+	}
 	if storage.ValidID(operation) {
 		errValue["operation_id"] = operation
 	}

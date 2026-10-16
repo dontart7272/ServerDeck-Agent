@@ -1,0 +1,28 @@
+[
+  {
+    "path": "dist/linux-amd64/serverdeck-agent",
+    "sha256": "a332e8081c096bf96b5f848f6bef6fcd68473347ff2dc7acbe7abe7d8d75d874",
+    "machine": "Advanced Micro Devices X86-64",
+    "class": "ELF64",
+    "interpreter": "/lib64/ld-linux-x86-64.so.2",
+    "needed": [
+      "libc.so.6"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  },
+  {
+    "path": "dist/linux-amd64/serverdeckctl",
+    "sha256": "f4a1ca258f89b673445f266bf707917f5ae605466209a3008b67552f8a2af8e1",
+    "machine": "Advanced Micro Devices X86-64",
+    "class": "ELF64",
+    "interpreter": "/lib64/ld-linux-x86-64.so.2",
+    "needed": [
+      "libc.so.6"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  }
+]

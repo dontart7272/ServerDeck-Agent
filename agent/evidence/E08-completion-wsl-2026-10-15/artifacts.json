@@ -1,0 +1,84 @@
+{
+  "files": [
+    {
+      "path": "binaries.sha256",
+      "sha256": "33fbe7033e730bd6d35c674d23508024936dc9029c7931bacf01fd4c26598b22"
+    },
+    {
+      "path": "build-amd64.txt",
+      "sha256": "bfd5a42da0ed1154d82e9afd4c891118d3b0cba26c7e56ae5fe276686d12e84e"
+    },
+    {
+      "path": "build-arm64.txt",
+      "sha256": "427f88f10426d685fe9269131218d6f3620d4f7179730c8da8b21d85c88e3761"
+    },
+    {
+      "path": "build-inputs.json",
+      "sha256": "dbddfbdab2df66c6320210244d4a9094c2c0db2d42ad3a0c09307c5ed085c600"
+    },
+    {
+      "path": "docs-check.txt",
+      "sha256": "cbf2f38a2f0e1aa56637e16b9bed771965ac22d2453e616f4ea2e60037b0a4bb"
+    },
+    {
+      "path": "docs-snapshot.json",
+      "sha256": "7593bdb16768ee15114cb542da8b7f3a1718a833741d1193c51aa6decb51cbbd"
+    },
+    {
+      "path": "elf-amd64.json",
+      "sha256": "0346cd95769148b0db5eb54337a23727be19494968524ba79281d158fdd6f688"
+    },
+    {
+      "path": "elf-arm64.json",
+      "sha256": "ea199dd5eb347f67dce435d3dcb3e7ad44aaf5454aba235dc8da64359a41c2b5"
+    },
+    {
+      "path": "inventory-confirm-cli.sh",
+      "sha256": "4768edf6b3d8802a4c15318e4f7eabc9a6d9ce63f4ccd235a8093e521073e310"
+    },
+    {
+      "path": "inventory-confirm-cli.txt",
+      "sha256": "f5d09539a5903f0367c5f052d188f0d14fe7c2e082c560bb23d594933a228ce8"
+    },
+    {
+      "path": "iputils-copyright.txt",
+      "sha256": "4ce239ce157bf55305737d8c32f5938baee5d2793069195a6875e6c5eaedbc9d"
+    },
+    {
+      "path": "linux-checks.txt",
+      "sha256": "3b6bb8a2c4fa965cf3adafa16667463c7bb04c2d7273ec3b13d352639249c02e"
+    },
+    {
+      "path": "ping-provenance.txt",
+      "sha256": "786eca596c14efc2edd13b05d5da0418666acac1061a576a345d2551bade9cbd"
+    },
+    {
+      "path": "private-race-test.sha256",
+      "sha256": "ca87a3945e4890bf5ca0135eb165249f8c4039e4b9e6109c9ecb291f2253ed4e"
+    },
+    {
+      "path": "README.md",
+      "sha256": "ed419bc52bb2209151fa547a962c66d6683246cf7ef07dfa03c18eab285ce849"
+    },
+    {
+      "path": "seal.py",
+      "sha256": "6d1d2ecafaf4b586eb50d3eab02117589bafb5dd033bf381a82d9c7e2317ecc4"
+    },
+    {
+      "path": "separate-filesystem-race.txt",
+      "sha256": "b0a548e5df390b85caa8b7888c9da576d1c3ac0718ef3fd584cd78fc9ece0eee"
+    },
+    {
+      "path": "separate-filesystem.txt",
+      "sha256": "967094f2398f5032c6e4b3d1e8ff77902ba18240c1af4092956f007b89e85074"
+    },
+    {
+      "path": "source-copy.json",
+      "sha256": "e6843925c9a8db0b58c30416830ccd5703be8ab19b530c99b4ae3171f93eb858"
+    },
+    {
+      "path": "wsl-e08-race-root.sh",
+      "sha256": "9375a04b703fbb803709e06fb1f8b17f0eb49175886396d11d8633bbb1ea8ac5"
+    }
+  ]
+}

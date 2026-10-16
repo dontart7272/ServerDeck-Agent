@@ -1,0 +1,4 @@
+38154ab80266e28e30bc6609ba371f4d3f8cb6e1caf4b3430ab65854ccab4220  dist/linux-amd64/serverdeck-agent
+f4781717c1e2120cdc443a9fb6583822335e0cae9ee114252418bfaed4522d94  dist/linux-amd64/serverdeckctl
+38f0b0bb54da61d1c259b76dfb368999848cc4dedab33c207cc8e200466cca8d  dist/linux-arm64/serverdeck-agent
+0e66bcc1f55e9cabd88d780fc82b64019aa5eb72c6bf4d66da1e839351b1585f  dist/linux-arm64/serverdeckctl

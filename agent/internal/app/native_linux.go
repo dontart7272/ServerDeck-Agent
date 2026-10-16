@@ -27,10 +27,11 @@ import (
 )
 
 func nativeCommand(name, path string, out io.Writer) error {
-	cfg, e := readNativeConfig(path)
+	cfg, cfgPin, e := readNativeConfigPinned(path)
 	if e != nil {
 		return storage.ErrInvalid
 	}
+	defer cfgPin.Close()
 	if name == "serverdeckctl" {
 		return localIssue(cfg, out)
 	}
@@ -38,14 +39,16 @@ func nativeCommand(name, path string, out io.Writer) error {
 	if e != nil || u.Username != cfg.RuntimeUser {
 		return storage.ErrSafety
 	}
-	certPEM, e := auth.ReadTrusted(cfg.TLS.CertificateFile, 65536, false)
+	certPEM, certPin, e := auth.ReadTrustedPinned(cfg.TLS.CertificateFile, 65536, false, uint32(os.Geteuid()))
 	if e != nil {
 		return e
 	}
-	keyPEM, e := auth.ReadTrusted(cfg.TLS.PrivateKeyFile, 65536, true)
+	defer certPin.Close()
+	keyPEM, keyPin, e := auth.ReadTrustedPinned(cfg.TLS.PrivateKeyFile, 65536, true, uint32(os.Geteuid()))
 	if e != nil {
 		return e
 	}
+	defer keyPin.Close()
 	cert, leaf, e := auth.Certificate(certPEM, keyPEM)
 	if e != nil {
 		return e
@@ -100,8 +103,11 @@ func nativeCommand(name, path string, out io.Writer) error {
 	if e != nil {
 		g.MetricsFailure = "SOURCE_UNAVAILABLE"
 	} else {
+		collector.ConfigureAdapters(metrics.AdapterOptions{DockerSocket: cfg.Adapters.DockerSocket, SecuritySources: cfg.Adapters.SecuritySources, Security: g.securityHooks()})
 		g.Metrics = metrics.New(g.RunID, collector.BootID(), collector)
 	}
+	g.startTelemetry()
+	g.startFiles(cfg, []*os.File{cfgPin, certPin, keyPin, dir})
 	results := make(chan error, len(listeners)+1)
 	go func() { results <- admin.Serve(local) }()
 	for _, l := range listeners {
@@ -227,6 +233,9 @@ func nativeLocalCommand(path, action, input string, out io.Writer) error {
 	if e != nil {
 		return e
 	}
+	if action == "download" || action == "upload" {
+		return localTransfer(cfg, action, body, os.Stdin, out)
+	}
 	var definition, route string
 	switch action {
 	case "query":
@@ -247,6 +256,30 @@ func nativeLocalCommand(path, action, input string, out io.Writer) error {
 	return localRequest(cfg, route, body, out)
 }
 func localRequest(cfg config.Config, route string, body []byte, out io.Writer) error {
+	return withLocalClient(cfg, 10*time.Second, func(client *http.Client) error {
+		req, _ := http.NewRequest("POST", "http://local/local/v1/"+route, bytes.NewReader(body))
+		req.Header.Set("Content-Type", "application/json")
+		res, e := client.Do(req)
+		if e != nil {
+			return storage.ErrSafety
+		}
+		defer res.Body.Close()
+		limit := int64(contracts.MaxJSONBytes)
+		if route == "query" {
+			var q struct{ Query string }
+			if json.Unmarshal(body, &q) == nil && q.Query == "history.get" {
+				limit = 4000000
+			}
+		}
+		b, e := io.ReadAll(io.LimitReader(res.Body, limit+1))
+		if e != nil || int64(len(b)) > limit || res.StatusCode != 200 && res.StatusCode != 202 || !json.Valid(b) {
+			return storage.ErrSafety
+		}
+		_, e = out.Write(append(b, '\n'))
+		return e
+	})
+}
+func withLocalClient(cfg config.Config, timeout time.Duration, run func(*http.Client) error) error {
 	expected, e := user.Lookup(cfg.RuntimeUser)
 	if e != nil {
 		return storage.ErrSafety
@@ -290,50 +323,54 @@ func localRequest(cfg config.Config, route string, body []byte, out io.Writer) e
 		return c, nil
 	}}
 	defer transport.CloseIdleConnections()
-	client := &http.Client{Transport: transport, Timeout: 10 * time.Second, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}
-	req, _ := http.NewRequest("POST", "http://local/local/v1/"+route, bytes.NewReader(body))
-	req.Header.Set("Content-Type", "application/json")
-	res, e := client.Do(req)
-	if e != nil {
-		return storage.ErrSafety
-	}
-	defer res.Body.Close()
-	b, e := io.ReadAll(io.LimitReader(res.Body, contracts.MaxJSONBytes+1))
-	if e != nil || len(b) > contracts.MaxJSONBytes || res.StatusCode != 200 && res.StatusCode != 202 || !json.Valid(b) {
-		return storage.ErrSafety
-	}
-	_, e = out.Write(append(b, '\n'))
-	return e
+	client := &http.Client{Transport: transport, Timeout: timeout, CheckRedirect: func(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }}
+	return run(client)
 }
 
-func readNativeConfig(path string) (cfg config.Config, err error) {
+func readNativeConfig(path string) (config.Config, error) {
+	cfg, f, e := readNativeConfigPinned(path)
+	if f != nil {
+		f.Close()
+	}
+	return cfg, e
+}
+func readNativeConfigPinned(path string) (cfg config.Config, pin *os.File, err error) {
+	var held *os.File
+	defer func() {
+		if err != nil && held != nil {
+			held.Close()
+			pin = nil
+		}
+	}()
 	owner := uint32(os.Geteuid())
 	if os.Geteuid() == 0 {
 		info, e := os.Lstat(path)
 		if e != nil {
-			return cfg, storage.ErrSafety
+			return cfg, nil, storage.ErrSafety
 		}
 		st, ok := info.Sys().(*syscall.Stat_t)
 		if !ok {
-			return cfg, storage.ErrSafety
+			return cfg, nil, storage.ErrSafety
 		}
 		owner = st.Uid
 	}
-	b, e := auth.ReadTrustedForOwner(path, contracts.MaxJSONBytes, false, owner)
+	b, f, e := auth.ReadTrustedPinned(path, contracts.MaxJSONBytes, false, owner)
+	pin = f
+	held = f
 	if e != nil {
-		return cfg, e
+		return cfg, nil, e
 	}
 	cfg, e = config.Load(bytes.NewReader(b))
 	if e != nil {
-		return cfg, storage.ErrInvalid
+		return cfg, nil, storage.ErrInvalid
 	}
 	u, e := user.Lookup(cfg.RuntimeUser)
 	if e != nil {
-		return cfg, storage.ErrSafety
+		return cfg, nil, storage.ErrSafety
 	}
 	uid, e := strconv.ParseUint(u.Uid, 10, 32)
 	if e != nil || owner != 0 && owner != uint32(uid) {
-		return cfg, storage.ErrSafety
+		return cfg, nil, storage.ErrSafety
 	}
-	return cfg, nil
+	return cfg, pin, nil
 }

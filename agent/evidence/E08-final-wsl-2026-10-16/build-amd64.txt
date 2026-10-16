@@ -1,0 +1,996 @@
+go version go1.27.2 linux/amd64
+gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+serverdeck.local/agent
+github.com/NVIDIA/go-nvml v0.13.4-1
+github.com/coder/websocket v1.8.15
+github.com/google/uuid v1.6.0
+github.com/mattn/go-sqlite3 v1.14.52
+github.com/santhosh-tekuri/jsonschema/v5 v5.3.1
+github.com/stretchr/testify v1.12.1
+go.yaml.in/yaml/v3 v3.0.5
+dae36361bd97f9cb4e037890107f15d55ab53ffe0c794c2ef854349707924096  dist/linux-amd64/serverdeck-agent
+dist/linux-amd64/serverdeck-agent: go1.27.2
+	path	serverdeck.local/agent/cmd/serverdeck-agent
+	mod	serverdeck.local/agent	(devel)	
+	dep	github.com/NVIDIA/go-nvml	v0.13.4-1	h1:2E7RdOLBxHGSXq8sUw+c5Y0aWmFT7Cj+ZdjYulgUH18=
+	dep	github.com/coder/websocket	v1.8.15	h1:6B2JPeOGlpff2Uz6vOEH1Vzpi0iUz20A+lPVhPHtNUA=
+	dep	github.com/mattn/go-sqlite3	v1.14.52	h1:wVbm2Qnf4OXkqhBTSPuCRZDRnxfbVrrmiCEroVdog8U=
+	dep	github.com/santhosh-tekuri/jsonschema/v5	v5.3.1	h1:lZUw3E0/J3roVtGQ+SCrUrg3ON6NgVqpn3+iol9aGu4=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	CGO_ENABLED=1
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x419380
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          21864464 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         14
+  Size of section headers:           64 (bytes)
+  Number of section headers:         53
+  Section header string table index: 52
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  PHDR           0x0000000000000040 0x0000000000400040 0x0000000000400040
+                 0x0000000000000310 0x0000000000000310  R      0x8
+  INTERP         0x0000000000000350 0x0000000000400350 0x0000000000400350
+                 0x000000000000001c 0x000000000000001c  R      0x1
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+  LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+                 0x0000000000016d98 0x0000000000016d98  R      0x1000
+  LOAD           0x0000000000017000 0x0000000000417000 0x0000000000417000
+                 0x000000000066c165 0x000000000066c165  R E    0x1000
+  LOAD           0x0000000000684000 0x0000000000a84000 0x0000000000a84000
+                 0x00000000006f86e0 0x00000000006f86e0  R      0x1000
+  LOAD           0x0000000000d7d470 0x000000000117e470 0x000000000117e470
+                 0x0000000000067771 0x00000000020ac1c0  RW     0x1000
+  DYNAMIC        0x0000000000d7fe08 0x0000000001180e08 0x0000000001180e08
+                 0x00000000000001d0 0x00000000000001d0  RW     0x8
+  NOTE           0x0000000000000370 0x0000000000400370 0x0000000000400370
+                 0x0000000000000020 0x0000000000000020  R      0x8
+  NOTE           0x0000000000000390 0x0000000000400390 0x0000000000400390
+                 0x00000000000000a8 0x00000000000000a8  R      0x4
+  TLS            0x0000000000d7d470 0x000000000117e470 0x000000000117e470
+                 0x0000000000000000 0x0000000000000008  R      0x8
+  GNU_PROPERTY   0x0000000000000370 0x0000000000400370 0x0000000000400370
+                 0x0000000000000020 0x0000000000000020  R      0x8
+  GNU_EH_FRAME   0x0000000000d57940 0x0000000001157940 0x0000000001157940
+                 0x0000000000004bbc 0x0000000000004bbc  R      0x4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+  GNU_RELRO      0x0000000000d7d470 0x000000000117e470 0x000000000117e470
+                 0x0000000000002b90 0x0000000000002b90  R      0x1
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .interp 
+   02     .interp .note.gnu.property .note.gnu.build-id .note.ABI-tag .note.go.buildid .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt 
+   03     .init .plt .plt.got .text .fini 
+   04     .rodata .gopclntab .go.type .go.func .eh_frame_hdr .eh_frame 
+   05     .init_array .fini_array .data.rel.ro .dynamic .got .got.plt .data .go.buildinfo .go.fipsinfo .go.module .noptrdata .bss .noptrbss 
+   06     .dynamic 
+   07     .note.gnu.property 
+   08     .note.gnu.build-id .note.ABI-tag .note.go.buildid 
+   09     .tbss 
+   10     .note.gnu.property 
+   11     .eh_frame_hdr 
+   12     
+   13     .init_array .fini_array .data.rel.ro .dynamic .got 
+
+Dynamic section at offset 0xd7fe08 contains 24 entries:
+  Tag        Type                         Name/Value
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000000c (INIT)               0x417000
+ 0x000000000000000d (FINI)               0xa83158
+ 0x0000000000000019 (INIT_ARRAY)         0x117e470
+ 0x000000000000001b (INIT_ARRAYSZ)       8 (bytes)
+ 0x000000000000001a (FINI_ARRAY)         0x117e478
+ 0x000000000000001c (FINI_ARRAYSZ)       8 (bytes)
+ 0x000000006ffffef5 (GNU_HASH)           0x400438
+ 0x0000000000000005 (STRTAB)             0x40a580
+ 0x0000000000000006 (SYMTAB)             0x401e50
+ 0x000000000000000a (STRSZ)              34798 (bytes)
+ 0x000000000000000b (SYMENT)             24 (bytes)
+ 0x0000000000000015 (DEBUG)              0x0
+ 0x0000000000000003 (PLTGOT)             0x1181000
+ 0x0000000000000002 (PLTRELSZ)           12696 (bytes)
+ 0x0000000000000014 (PLTREL)             RELA
+ 0x0000000000000017 (JMPREL)             0x413c00
+ 0x0000000000000007 (RELA)               0x413978
+ 0x0000000000000008 (RELASZ)             648 (bytes)
+ 0x0000000000000009 (RELAENT)            24 (bytes)
+ 0x000000006ffffffe (VERNEED)            0x4138b8
+ 0x000000006fffffff (VERNEEDNUM)         1
+ 0x000000006ffffff0 (VERSYM)             0x412d6e
+ 0x0000000000000000 (NULL)               0x0
+
+Version symbols section '.gnu.version' contains 1442 entries:
+ Addr: 0x0000000000412d6e  Offset: 0x012d6e  Link: 7 (.dynsym)
+  000:   0 (*local*)       1 (*global*)      1 (*global*)      1 (*global*)   
+  004:   1 (*global*)      1 (*global*)      2 (GLIBC_2.34)    1 (*global*)   
+  008:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      2 (GLIBC_2.34) 
+  00c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  010:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  014:   4 (GLIBC_2.3.4)   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  018:   1 (*global*)      1 (*global*)      1 (*global*)      5 (GLIBC_2.6)  
+  01c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  020:   3 (GLIBC_2.2.5)   4 (GLIBC_2.3.4)   2 (GLIBC_2.34)    3 (GLIBC_2.2.5)
+  024:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  028:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  02c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  030:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  034:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  038:   1 (*global*)      6 (GLIBC_2.3.2)   3 (GLIBC_2.2.5)   1 (*global*)   
+  03c:   1 (*global*)      1 (*global*)      7 (GLIBC_2.4)     1 (*global*)   
+  040:   1 (*global*)      1 (*global*)      1 (*global*)      8 (GLIBC_2.32) 
+  044:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  048:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  04c:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  050:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  054:   1 (*global*)      9 (GLIBC_2.3)     1 (*global*)      1 (*global*)   
+  058:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  05c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  060:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  064:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  068:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  06c:   1 (*global*)      1 (*global*)      6 (GLIBC_2.3.2)   1 (*global*)   
+  070:   1 (*global*)      1 (*global*)      1 (*global*)      a (GLIBC_2.33) 
+  074:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  078:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  07c:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  080:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  084:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  088:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  08c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  090:   7 (GLIBC_2.4)     1 (*global*)      3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)
+  094:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  098:   1 (*global*)      a (GLIBC_2.33)    1 (*global*)      1 (*global*)   
+  09c:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  0a0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0a4:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  0a8:   1 (*global*)      2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  0ac:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)   
+  0b0:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  0b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0bc:   1 (*global*)      1 (*global*)      2 (GLIBC_2.34)    3 (GLIBC_2.2.5)
+  0c0:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  0c4:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  0c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0cc:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  0d0:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  0d4:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  0d8:   2 (GLIBC_2.34)    3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  0dc:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  0e0:   3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  0e4:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  0e8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0ec:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  0f0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0f4:   1 (*global*)      7 (GLIBC_2.4)     1 (*global*)      2 (GLIBC_2.34) 
+  0f8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0fc:   1 (*global*)      1 (*global*)      4 (GLIBC_2.3.4)   1 (*global*)   
+  100:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)
+  104:   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)      1 (*global*)   
+  108:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  10c:   1 (*global*)      3 (GLIBC_2.2.5)   b (GLIBC_2.14)    1 (*global*)   
+  110:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  114:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  118:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  11c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  120:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  124:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  128:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  12c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  130:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  134:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  138:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  13c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  140:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  144:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  148:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  14c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  150:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  154:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  158:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  15c:   1 (*global*)      1 (*global*)      8 (GLIBC_2.32)    3 (GLIBC_2.2.5)
+  160:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  164:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  168:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  16c:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  170:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  174:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  178:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  17c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  180:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  184:   2 (GLIBC_2.34)    3 (GLIBC_2.2.5)   c (GLIBC_2.28)    3 (GLIBC_2.2.5)
+  188:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  18c:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  190:   3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)
+  194:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  198:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  19c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1a0:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  1a4:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  1a8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1ac:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1b0:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  1b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1bc:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      5 (GLIBC_2.6)  
+  1c0:   1 (*global*)      2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  1c4:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  1c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1cc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1d0:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  1d4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1d8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1dc:   1 (*global*)      1 (*global*)      4 (GLIBC_2.3.4)   1 (*global*)   
+  1e0:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  1e4:   1 (*global*)      4 (GLIBC_2.3.4)   1 (*global*)      1 (*global*)   
+  1e8:   1 (*global*)      1 (*global*)      a (GLIBC_2.33)    1 (*global*)   
+  1ec:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1f0:   3 (GLIBC_2.2.5)   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  1f4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1f8:   3 (GLIBC_2.2.5)   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  1fc:   7 (GLIBC_2.4)     1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  200:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  204:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  208:   1 (*global*)      1 (*global*)      2 (GLIBC_2.34)    1 (*global*)   
+  20c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  210:   2 (GLIBC_2.34)    1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  214:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  218:   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)      1 (*global*)   
+  21c:   1 (*global*)      2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  220:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  224:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  228:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  22c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  230:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  234:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  238:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  23c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  240:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  244:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  248:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  24c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  250:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  254:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  258:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  25c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  260:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  264:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  268:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  26c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  270:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  274:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  278:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  27c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  280:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  284:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  288:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  28c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  290:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  294:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  298:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  29c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2a0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2a4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2a8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2ac:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2b0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2bc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2c0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2c4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2cc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2d0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2d4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2d8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2dc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2e0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2e4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2e8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2ec:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2f0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2f4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2f8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2fc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  300:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  304:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  308:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  30c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  310:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  314:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  318:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  31c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  320:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  324:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  328:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  32c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  330:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  334:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  338:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  33c:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  340:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  344:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  348:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  34c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  350:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  354:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  358:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  35c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  360:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  364:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  368:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  36c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  370:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  374:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  378:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  37c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  380:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  384:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  388:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  38c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  390:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  394:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  398:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  39c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3a0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3a4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3a8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3ac:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3b0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3bc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3c0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3c4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3cc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3d0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3d4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3d8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3dc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3e0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3e4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3e8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3ec:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3f0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3f4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3f8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3fc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  400:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  404:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  408:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  40c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  410:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  414:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  418:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  41c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  420:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  424:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  428:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  42c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  430:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  434:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  438:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  43c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  440:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  444:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  448:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  44c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  450:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  454:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  458:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  45c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  460:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  464:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  468:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  46c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  470:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  474:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  478:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  47c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  480:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  484:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  488:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  48c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  490:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  494:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  498:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  49c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4a0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4a4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4a8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4ac:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4b0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4bc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4c0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4c4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4cc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4d0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4d4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4d8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4dc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4e0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4e4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4e8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4ec:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4f0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4f4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4f8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4fc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  500:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  504:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  508:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  50c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  510:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  514:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  518:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  51c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  520:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  524:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  528:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  52c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  530:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  534:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  538:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  53c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  540:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  544:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  548:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  54c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  550:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  554:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  558:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  55c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  560:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  564:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  568:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  56c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  570:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  574:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  578:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  57c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  580:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  584:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  588:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  58c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  590:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  594:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  598:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  59c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  5a0:   1 (*global*)      1 (*global*)   
+
+Version needs section '.gnu.version_r' contains 1 entry:
+ Addr: 0x00000000004138b8  Offset: 0x0138b8  Link: 8 (.dynstr)
+  000000: Version: 1  File: libc.so.6  Cnt: 11
+  0x0010:   Name: GLIBC_2.28  Flags: none  Version: 12
+  0x0020:   Name: GLIBC_2.14  Flags: none  Version: 11
+  0x0030:   Name: GLIBC_2.33  Flags: none  Version: 10
+  0x0040:   Name: GLIBC_2.3  Flags: none  Version: 9
+  0x0050:   Name: GLIBC_2.32  Flags: none  Version: 8
+  0x0060:   Name: GLIBC_2.4  Flags: none  Version: 7
+  0x0070:   Name: GLIBC_2.3.2  Flags: none  Version: 6
+  0x0080:   Name: GLIBC_2.6  Flags: none  Version: 5
+  0x0090:   Name: GLIBC_2.3.4  Flags: none  Version: 4
+  0x00a0:   Name: GLIBC_2.2.5  Flags: none  Version: 3
+  0x00b0:   Name: GLIBC_2.34  Flags: none  Version: 2
+69043cc0bca817ca29dbc9961a5b976a8a9e77f9515f1c01fcafb2f89468b6be  dist/linux-amd64/serverdeckctl
+dist/linux-amd64/serverdeckctl: go1.27.2
+	path	serverdeck.local/agent/cmd/serverdeckctl
+	mod	serverdeck.local/agent	(devel)	
+	dep	github.com/NVIDIA/go-nvml	v0.13.4-1	h1:2E7RdOLBxHGSXq8sUw+c5Y0aWmFT7Cj+ZdjYulgUH18=
+	dep	github.com/coder/websocket	v1.8.15	h1:6B2JPeOGlpff2Uz6vOEH1Vzpi0iUz20A+lPVhPHtNUA=
+	dep	github.com/mattn/go-sqlite3	v1.14.52	h1:wVbm2Qnf4OXkqhBTSPuCRZDRnxfbVrrmiCEroVdog8U=
+	dep	github.com/santhosh-tekuri/jsonschema/v5	v5.3.1	h1:lZUw3E0/J3roVtGQ+SCrUrg3ON6NgVqpn3+iol9aGu4=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	CGO_ENABLED=1
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+  Version:                           0x1
+  Entry point address:               0x419380
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          21864464 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         14
+  Size of section headers:           64 (bytes)
+  Number of section headers:         53
+  Section header string table index: 52
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  PHDR           0x0000000000000040 0x0000000000400040 0x0000000000400040
+                 0x0000000000000310 0x0000000000000310  R      0x8
+  INTERP         0x0000000000000350 0x0000000000400350 0x0000000000400350
+                 0x000000000000001c 0x000000000000001c  R      0x1
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+  LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+                 0x0000000000016d98 0x0000000000016d98  R      0x1000
+  LOAD           0x0000000000017000 0x0000000000417000 0x0000000000417000
+                 0x000000000066c165 0x000000000066c165  R E    0x1000
+  LOAD           0x0000000000684000 0x0000000000a84000 0x0000000000a84000
+                 0x00000000006f86c0 0x00000000006f86c0  R      0x1000
+  LOAD           0x0000000000d7d470 0x000000000117e470 0x000000000117e470
+                 0x0000000000067771 0x00000000020ac1c0  RW     0x1000
+  DYNAMIC        0x0000000000d7fe08 0x0000000001180e08 0x0000000001180e08
+                 0x00000000000001d0 0x00000000000001d0  RW     0x8
+  NOTE           0x0000000000000370 0x0000000000400370 0x0000000000400370
+                 0x0000000000000020 0x0000000000000020  R      0x8
+  NOTE           0x0000000000000390 0x0000000000400390 0x0000000000400390
+                 0x00000000000000a8 0x00000000000000a8  R      0x4
+  TLS            0x0000000000d7d470 0x000000000117e470 0x000000000117e470
+                 0x0000000000000000 0x0000000000000008  R      0x8
+  GNU_PROPERTY   0x0000000000000370 0x0000000000400370 0x0000000000400370
+                 0x0000000000000020 0x0000000000000020  R      0x8
+  GNU_EH_FRAME   0x0000000000d57920 0x0000000001157920 0x0000000001157920
+                 0x0000000000004bbc 0x0000000000004bbc  R      0x4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+  GNU_RELRO      0x0000000000d7d470 0x000000000117e470 0x000000000117e470
+                 0x0000000000002b90 0x0000000000002b90  R      0x1
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .interp 
+   02     .interp .note.gnu.property .note.gnu.build-id .note.ABI-tag .note.go.buildid .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt 
+   03     .init .plt .plt.got .text .fini 
+   04     .rodata .gopclntab .go.type .go.func .eh_frame_hdr .eh_frame 
+   05     .init_array .fini_array .data.rel.ro .dynamic .got .got.plt .data .go.buildinfo .go.fipsinfo .go.module .noptrdata .bss .noptrbss 
+   06     .dynamic 
+   07     .note.gnu.property 
+   08     .note.gnu.build-id .note.ABI-tag .note.go.buildid 
+   09     .tbss 
+   10     .note.gnu.property 
+   11     .eh_frame_hdr 
+   12     
+   13     .init_array .fini_array .data.rel.ro .dynamic .got 
+
+Dynamic section at offset 0xd7fe08 contains 24 entries:
+  Tag        Type                         Name/Value
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x000000000000000c (INIT)               0x417000
+ 0x000000000000000d (FINI)               0xa83158
+ 0x0000000000000019 (INIT_ARRAY)         0x117e470
+ 0x000000000000001b (INIT_ARRAYSZ)       8 (bytes)
+ 0x000000000000001a (FINI_ARRAY)         0x117e478
+ 0x000000000000001c (FINI_ARRAYSZ)       8 (bytes)
+ 0x000000006ffffef5 (GNU_HASH)           0x400438
+ 0x0000000000000005 (STRTAB)             0x40a580
+ 0x0000000000000006 (SYMTAB)             0x401e50
+ 0x000000000000000a (STRSZ)              34798 (bytes)
+ 0x000000000000000b (SYMENT)             24 (bytes)
+ 0x0000000000000015 (DEBUG)              0x0
+ 0x0000000000000003 (PLTGOT)             0x1181000
+ 0x0000000000000002 (PLTRELSZ)           12696 (bytes)
+ 0x0000000000000014 (PLTREL)             RELA
+ 0x0000000000000017 (JMPREL)             0x413c00
+ 0x0000000000000007 (RELA)               0x413978
+ 0x0000000000000008 (RELASZ)             648 (bytes)
+ 0x0000000000000009 (RELAENT)            24 (bytes)
+ 0x000000006ffffffe (VERNEED)            0x4138b8
+ 0x000000006fffffff (VERNEEDNUM)         1
+ 0x000000006ffffff0 (VERSYM)             0x412d6e
+ 0x0000000000000000 (NULL)               0x0
+
+Version symbols section '.gnu.version' contains 1442 entries:
+ Addr: 0x0000000000412d6e  Offset: 0x012d6e  Link: 7 (.dynsym)
+  000:   0 (*local*)       1 (*global*)      1 (*global*)      1 (*global*)   
+  004:   1 (*global*)      1 (*global*)      2 (GLIBC_2.34)    1 (*global*)   
+  008:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      2 (GLIBC_2.34) 
+  00c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  010:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  014:   4 (GLIBC_2.3.4)   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  018:   1 (*global*)      1 (*global*)      1 (*global*)      5 (GLIBC_2.6)  
+  01c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  020:   3 (GLIBC_2.2.5)   4 (GLIBC_2.3.4)   2 (GLIBC_2.34)    3 (GLIBC_2.2.5)
+  024:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  028:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  02c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  030:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  034:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  038:   1 (*global*)      6 (GLIBC_2.3.2)   3 (GLIBC_2.2.5)   1 (*global*)   
+  03c:   1 (*global*)      1 (*global*)      7 (GLIBC_2.4)     1 (*global*)   
+  040:   1 (*global*)      1 (*global*)      1 (*global*)      8 (GLIBC_2.32) 
+  044:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  048:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  04c:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  050:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  054:   1 (*global*)      9 (GLIBC_2.3)     1 (*global*)      1 (*global*)   
+  058:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  05c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  060:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  064:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  068:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  06c:   1 (*global*)      1 (*global*)      6 (GLIBC_2.3.2)   1 (*global*)   
+  070:   1 (*global*)      1 (*global*)      1 (*global*)      a (GLIBC_2.33) 
+  074:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  078:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  07c:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  080:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  084:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  088:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  08c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  090:   7 (GLIBC_2.4)     1 (*global*)      3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)
+  094:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  098:   1 (*global*)      a (GLIBC_2.33)    1 (*global*)      1 (*global*)   
+  09c:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  0a0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0a4:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  0a8:   1 (*global*)      2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  0ac:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)   
+  0b0:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  0b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0bc:   1 (*global*)      1 (*global*)      2 (GLIBC_2.34)    3 (GLIBC_2.2.5)
+  0c0:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  0c4:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  0c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0cc:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  0d0:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  0d4:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  0d8:   2 (GLIBC_2.34)    3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  0dc:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  0e0:   3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  0e4:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  0e8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0ec:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  0f0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0f4:   1 (*global*)      7 (GLIBC_2.4)     1 (*global*)      2 (GLIBC_2.34) 
+  0f8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  0fc:   1 (*global*)      1 (*global*)      4 (GLIBC_2.3.4)   1 (*global*)   
+  100:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)
+  104:   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)      1 (*global*)   
+  108:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  10c:   1 (*global*)      3 (GLIBC_2.2.5)   b (GLIBC_2.14)    1 (*global*)   
+  110:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  114:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  118:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  11c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  120:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  124:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  128:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  12c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  130:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  134:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  138:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  13c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  140:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  144:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  148:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  14c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  150:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  154:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  158:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  15c:   1 (*global*)      1 (*global*)      8 (GLIBC_2.32)    3 (GLIBC_2.2.5)
+  160:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  164:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  168:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  16c:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  170:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  174:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  178:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  17c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  180:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  184:   2 (GLIBC_2.34)    3 (GLIBC_2.2.5)   c (GLIBC_2.28)    3 (GLIBC_2.2.5)
+  188:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  18c:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  190:   3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)
+  194:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  198:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  19c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1a0:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  1a4:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  1a8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1ac:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1b0:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  1b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1bc:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      5 (GLIBC_2.6)  
+  1c0:   1 (*global*)      2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  1c4:   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  1c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1cc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1d0:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      1 (*global*)   
+  1d4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1d8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1dc:   1 (*global*)      1 (*global*)      4 (GLIBC_2.3.4)   1 (*global*)   
+  1e0:   3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  1e4:   1 (*global*)      4 (GLIBC_2.3.4)   1 (*global*)      1 (*global*)   
+  1e8:   1 (*global*)      1 (*global*)      a (GLIBC_2.33)    1 (*global*)   
+  1ec:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1f0:   3 (GLIBC_2.2.5)   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  1f4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  1f8:   3 (GLIBC_2.2.5)   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  1fc:   7 (GLIBC_2.4)     1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  200:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  204:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  208:   1 (*global*)      1 (*global*)      2 (GLIBC_2.34)    1 (*global*)   
+  20c:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  210:   2 (GLIBC_2.34)    1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)   
+  214:   1 (*global*)      3 (GLIBC_2.2.5)   1 (*global*)      1 (*global*)   
+  218:   2 (GLIBC_2.34)    1 (*global*)      1 (*global*)      1 (*global*)   
+  21c:   1 (*global*)      2 (GLIBC_2.34)    1 (*global*)      1 (*global*)   
+  220:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  224:   3 (GLIBC_2.2.5)   3 (GLIBC_2.2.5)   1 (*global*)      3 (GLIBC_2.2.5)
+  228:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  22c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  230:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  234:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  238:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  23c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  240:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  244:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  248:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  24c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  250:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  254:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  258:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  25c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  260:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  264:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  268:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  26c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  270:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  274:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  278:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  27c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  280:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  284:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  288:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  28c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  290:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  294:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  298:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  29c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2a0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2a4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2a8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2ac:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2b0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2bc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2c0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2c4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2cc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2d0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2d4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2d8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2dc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2e0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2e4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2e8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2ec:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2f0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2f4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2f8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  2fc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  300:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  304:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  308:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  30c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  310:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  314:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  318:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  31c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  320:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  324:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  328:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  32c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  330:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  334:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  338:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  33c:   1 (*global*)      1 (*global*)      1 (*global*)      3 (GLIBC_2.2.5)
+  340:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  344:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  348:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  34c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  350:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  354:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  358:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  35c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  360:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  364:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  368:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  36c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  370:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  374:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  378:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  37c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  380:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  384:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  388:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  38c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  390:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  394:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  398:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  39c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3a0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3a4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3a8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3ac:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3b0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3bc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3c0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3c4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3cc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3d0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3d4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3d8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3dc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3e0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3e4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3e8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3ec:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3f0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3f4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3f8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  3fc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  400:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  404:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  408:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  40c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  410:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  414:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  418:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  41c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  420:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  424:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  428:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  42c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  430:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  434:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  438:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  43c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  440:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  444:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  448:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  44c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  450:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  454:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  458:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  45c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  460:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  464:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  468:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  46c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  470:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  474:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  478:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  47c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  480:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  484:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  488:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  48c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  490:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  494:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  498:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  49c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4a0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4a4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4a8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4ac:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4b0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4b4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4b8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4bc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4c0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4c4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4c8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4cc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4d0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4d4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4d8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4dc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4e0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4e4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4e8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4ec:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4f0:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4f4:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4f8:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  4fc:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  500:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  504:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  508:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  50c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  510:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  514:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  518:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  51c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  520:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  524:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  528:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  52c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  530:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  534:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  538:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  53c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  540:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  544:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  548:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  54c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  550:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  554:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  558:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  55c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  560:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  564:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  568:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  56c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  570:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  574:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  578:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  57c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  580:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  584:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  588:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  58c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  590:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  594:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  598:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  59c:   1 (*global*)      1 (*global*)      1 (*global*)      1 (*global*)   
+  5a0:   1 (*global*)      1 (*global*)   
+
+Version needs section '.gnu.version_r' contains 1 entry:
+ Addr: 0x00000000004138b8  Offset: 0x0138b8  Link: 8 (.dynstr)
+  000000: Version: 1  File: libc.so.6  Cnt: 11
+  0x0010:   Name: GLIBC_2.28  Flags: none  Version: 12
+  0x0020:   Name: GLIBC_2.14  Flags: none  Version: 11
+  0x0030:   Name: GLIBC_2.33  Flags: none  Version: 10
+  0x0040:   Name: GLIBC_2.3  Flags: none  Version: 9
+  0x0050:   Name: GLIBC_2.32  Flags: none  Version: 8
+  0x0060:   Name: GLIBC_2.4  Flags: none  Version: 7
+  0x0070:   Name: GLIBC_2.3.2  Flags: none  Version: 6
+  0x0080:   Name: GLIBC_2.6  Flags: none  Version: 5
+  0x0090:   Name: GLIBC_2.3.4  Flags: none  Version: 4
+  0x00a0:   Name: GLIBC_2.2.5  Flags: none  Version: 3
+  0x00b0:   Name: GLIBC_2.34  Flags: none  Version: 2

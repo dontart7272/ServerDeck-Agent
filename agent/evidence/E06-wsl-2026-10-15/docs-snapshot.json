@@ -1,0 +1,144 @@
+{
+  "files": [
+    {
+      "path": "agent/API-SECURITY-AUDIT-2026-10-13.md",
+      "sha256": "ea553b16ee9c232bfbaeaf4587cf5e1c175d1f43c515d00f0e456bb50e1ba867"
+    },
+    {
+      "path": "agent/AUTH-TRANSPORT.md",
+      "sha256": "8428a9bbd9a7c7f159c567045543fdd169ec55a83bd0d395aadebe11a37bcfb5"
+    },
+    {
+      "path": "agent/BUILD.md",
+      "sha256": "fd3d0aa092260f9e4ae06ba042b4af61c6ddc7d907e92f34d21cabe4ba6f45aa"
+    },
+    {
+      "path": "agent/HISTORY.md",
+      "sha256": "5d2a0535c53638899c445fda172e305e053b34d864d3eafa5eaaa8bb0ef147d5"
+    },
+    {
+      "path": "agent/INTEGRATIONS.md",
+      "sha256": "262f7a871f91b110ee3c99b53995906cc6ed2ee4d0f5ed3a3de178ac2d4ef1b8"
+    },
+    {
+      "path": "agent/licenses/NVML-header-NVIDIA-notice.md",
+      "sha256": "19b3e29a5e0cac14e9f50f97866eef5da2eed21ce8f3ce8bd5c87b40f14caf20"
+    },
+    {
+      "path": "agent/METRICS.md",
+      "sha256": "ceeb2bb14ccdb941b80d6c3d9d13f42ac796ad18641e6d40102931a4d0f60978"
+    },
+    {
+      "path": "agent/README.md",
+      "sha256": "f1b110b884effdfe6062a05eb0fbb32d916ea69b3560198dd2d227cfc68d09ef"
+    },
+    {
+      "path": "agent/SECURITY-AUDIT-2026-10-13.md",
+      "sha256": "0e7577d1796380b7ce3c202c9b07b02c0e08f66f14cf8feffc496e9020bfde3a"
+    },
+    {
+      "path": "agent/STORAGE.md",
+      "sha256": "f497992bf1e4823229da69a44631a2d0be65b3f4df8947e0e5933516bac474ac"
+    },
+    {
+      "path": "agent/THIRD_PARTY_NOTICES.md",
+      "sha256": "1085ce64a2d47100cf42abb6d8e28d637240f3612a2c8c98537ad6a2dcda2ffa"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "c03037f7aacedc05595014c82283ee97cf1f00fa9c77bb757a8087468e9363f2"
+    },
+    {
+      "path": "Документация ServerDeck/1. Краткое описание продукта.md",
+      "sha256": "f4f77ab21025debe657c0c674bcc15b080a0887b8bcdf4d4211d650abc6a9e99"
+    },
+    {
+      "path": "Документация ServerDeck/3. Функциональные требования.md",
+      "sha256": "7edbe994e07f96e225aee16644ebee671ae4763ee6ab4f037b6dc3e2c07c2b5e"
+    },
+    {
+      "path": "Документация ServerDeck/4. Требования безопасности.md",
+      "sha256": "4deff7b35a4576406dab298f99ef6466bc92a15cf250510d6acbf69256bcb8ad"
+    },
+    {
+      "path": "Документация ServerDeck/5. Пользовательские сценарии.md",
+      "sha256": "42e98ea89a1e0625f046dc96bd903386433e345452171517de07ebb56e936a47"
+    },
+    {
+      "path": "Документация ServerDeck/6. Карта экранов и навигация.md",
+      "sha256": "b09d633e468a2e9dc0d0f2aa09326275e0a6e2d10410d99d4225e9b8bd895ede"
+    },
+    {
+      "path": "Документация ServerDeck/7. Инструкции для AI-агента.md.md",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/0. Контекст и потребности клиента.md",
+      "sha256": "1c1239f6732bc6ffb825af522478c56c09adf3b60ccaba289e4f316ea824ee4c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/1. Краткое описание.md",
+      "sha256": "504e696d7d8edd571791e5e3aa644e717f3995a8f1ddf5a3683d9f1bacdbc416"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/10. Противоречия и готовность.md",
+      "sha256": "af6b6e2650a494505a8f8ba6fdf07fc6602494a575f9316580e5e7f6bea2aba2"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/11. Журнал проверки требований.md",
+      "sha256": "ecefa71ec1393ac8f0d3a5d5027d24637c5c5fe48b1cfa4d7d9d8efbeb01622f"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/12. Согласование с клиентом.md",
+      "sha256": "c8c4b2d8db41d495b7a3b43c39547a50074bc12f699235e5ca3bcfecb8dc22af"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/2. Функциональные требования.md",
+      "sha256": "05317c462afba06ee17503517e7946be5048dc363f9a8bb181ce7deb43b8fd3c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/3. API и форматы данных.md.md",
+      "sha256": "cf581f16fe00003e9934904a93b6afb72e92a6f5bc2dfc52ad00152d937fdb33"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/4. Требования безопасности.md",
+      "sha256": "2f224a3f6609e911c1f9932d7259109fea0437e3333b5a5e39a52f076be3725a"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/5. Модульная система.md.md",
+      "sha256": "c538907866ff002c43ea2b6cc6b294f34f1770fc09b2b54a057cdb0a801f52f8"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/6. Инструкции для AI-агента.md.md",
+      "sha256": "df24e83c088953c34e91fbad7ceba3095273ccd0f4607f8a1de4674eba49c32d"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/7. Пример конфигурации.md.md",
+      "sha256": "5744afcf0dda85ccc3d72b220585196d8fdf55ba899b7d4da48cda0e1701c83c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/8. Архитектура и обслуживание.md",
+      "sha256": "7ed75e8d5b53337dc3e9184fcf76d1d3154e41268c19d46895984cf42b585a48"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/9. План реализации.md",
+      "sha256": "c9ce8f89cc61f97820cb5876f0c8232df9b732182b551e5a2e0da0fd29a2ae3f"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/README.md",
+      "sha256": "945197ad37e98348aa89a8988f558f6cfffa3deeb9fe0e40971818719cfdc6fb"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/Предложения по оставшимся вопросам.md",
+      "sha256": "8ae054726d1fc3d909759fe83743cebf33804dc457dc8b378191d76d72d3b19d"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/Рабочие заметки и решения.md",
+      "sha256": "d4aaffd3522db031e0f87ab0c8216c44bcc71b3a37030e8c9413911bad780bc5"
+    },
+    {
+      "path": "Документация ServerDeck/Материалы проектирования/Предыдущая редакция описания экранов и UX-сценариев.md",
+      "sha256": "f2427331a1817ea1cfdbbe590132f88f8c6b770cafcc8fa79b08b744f9ae5f31"
+    }
+  ]
+}

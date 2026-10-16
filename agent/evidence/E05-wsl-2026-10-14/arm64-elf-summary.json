@@ -1,0 +1,30 @@
+[
+  {
+    "path": "dist/linux-arm64/serverdeck-agent",
+    "sha256": "a9339b58d3ddc63474af0d2a6e13e45eae8530e658dfbf650dfc67ecbb4ab85c",
+    "machine": "AArch64",
+    "class": "ELF64",
+    "interpreter": "/lib/ld-linux-aarch64.so.1",
+    "needed": [
+      "libc.so.6",
+      "ld-linux-aarch64.so.1"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  },
+  {
+    "path": "dist/linux-arm64/serverdeckctl",
+    "sha256": "34e28c71e7a2c1dee8c511f4ef5abb54a9fa9919556569ff34756b845e6c7b2c",
+    "machine": "AArch64",
+    "class": "ELF64",
+    "interpreter": "/lib/ld-linux-aarch64.so.1",
+    "needed": [
+      "libc.so.6",
+      "ld-linux-aarch64.so.1"
+    ],
+    "max_glibc": "2.34",
+    "cgo": true,
+    "execution": "not performed by ELF inspector"
+  }
+]

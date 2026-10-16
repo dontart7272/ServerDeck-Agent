@@ -1,0 +1,574 @@
+{
+  "origin": "/mnt/d/Projects/ServerDeck",
+  "copy": "/home/dontart7272/serverdeck-e05-aggregation-2026-10-14/source.ig0ZrT",
+  "files": [
+    {
+      "path": "agent/API-SECURITY-AUDIT-2026-10-13.md",
+      "sha256": "ea553b16ee9c232bfbaeaf4587cf5e1c175d1f43c515d00f0e456bb50e1ba867"
+    },
+    {
+      "path": "agent/AUTH-TRANSPORT.md",
+      "sha256": "cf99b22ed5048129715a491f414b5addb4a94b36bd9077de713bf6e7fe6b7bb9"
+    },
+    {
+      "path": "agent/BUILD.md",
+      "sha256": "fdc2c888b6f091f4a678a314bd32dc6085f7cf12927d2802d9b701e1c897f0bd"
+    },
+    {
+      "path": "agent/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "agent/METRICS.md",
+      "sha256": "ceeb2bb14ccdb941b80d6c3d9d13f42ac796ad18641e6d40102931a4d0f60978"
+    },
+    {
+      "path": "agent/NOTICE",
+      "sha256": "12f3b60567f6382c52132085de0f487adcd72199c3fe28f2d02c00a410bc08fd"
+    },
+    {
+      "path": "agent/README.md",
+      "sha256": "b2d7e44fa703ff6ebe27acce5610dc0723c5343ad9cdc97dc8788fbe5ac8b532"
+    },
+    {
+      "path": "agent/SECURITY-AUDIT-2026-10-13.md",
+      "sha256": "0e7577d1796380b7ce3c202c9b07b02c0e08f66f14cf8feffc496e9020bfde3a"
+    },
+    {
+      "path": "agent/STORAGE.md",
+      "sha256": "82882a65da7d5c7bffbe256a3fcdfa791567d1bc0519973b808e660e48942d93"
+    },
+    {
+      "path": "agent/THIRD_PARTY_NOTICES.md",
+      "sha256": "5ccfebd0952f5f2ae189c6d2964d9edfc8c40b152934a4a85e88bf2b368c400b"
+    },
+    {
+      "path": "agent/cmd/serverdeck-agent/main.go",
+      "sha256": "7f4052e4f97ec59ee73d41ca4a8cca652b84ef22c9bdc885eef96893e78cf43a"
+    },
+    {
+      "path": "agent/cmd/serverdeckctl/main.go",
+      "sha256": "7a42ff91a38827377abfd48b325d3b9016bc50e8b6803fa1a0f620ff76344172"
+    },
+    {
+      "path": "agent/go.mod",
+      "sha256": "d163ab7fa3c8c7871f6907f4f40cc5b6a957bac747986ac83ecaee7d49a2255a"
+    },
+    {
+      "path": "agent/go.sum",
+      "sha256": "01d74a0dbf44ae2f50bb349af02a84d0fd73edd6b69e462c20172432f077facf"
+    },
+    {
+      "path": "agent/internal/app/cancel.go",
+      "sha256": "c2794ab33f0a1316ecc9fa8983afa70f17a8fc54f487c24feb8bbfb36fd6f366"
+    },
+    {
+      "path": "agent/internal/app/cli.go",
+      "sha256": "ac9763b8f76a3fa4d94b9357c7e93e96ab6122ea82c080f3ebe3e785cac7e7c4"
+    },
+    {
+      "path": "agent/internal/app/cli_test.go",
+      "sha256": "1c794d9ef143b587c12f097c3913b895fa9d76aa9d9c462f9de02e467d91f393"
+    },
+    {
+      "path": "agent/internal/app/gateway.go",
+      "sha256": "21a940845d924c730107bc4ebc7211927109fea5c9946d6fd4d27b29a952df86"
+    },
+    {
+      "path": "agent/internal/app/gateway_linux_test.go",
+      "sha256": "9641f9f5744ee3268732b79cb0149d985683882028499de0211f1eecfe8bd482"
+    },
+    {
+      "path": "agent/internal/app/http.go",
+      "sha256": "8552790a4e79f6ad6d9e3cc507b8b0ac43ac3073efc22a88c6cf550ccac5b4e9"
+    },
+    {
+      "path": "agent/internal/app/limiter.go",
+      "sha256": "6900c278825b810f868b1d70c0288d95f4c6f00b4df72bb01017a29673da78d7"
+    },
+    {
+      "path": "agent/internal/app/local.go",
+      "sha256": "9a8cc267ef339710c86f8adb49800a7411ed60613f21bd7e2ea049d2df61aea9"
+    },
+    {
+      "path": "agent/internal/app/metrics.go",
+      "sha256": "5f168053ae641b3f9ee0e68b4ed16d5b2053bd448940182bf70f2f9c0a873672"
+    },
+    {
+      "path": "agent/internal/app/metrics_linux_test.go",
+      "sha256": "ed9bc123f4a843a54460b84bf84ccb2a80a5a71c1666bf2562dca584f21f6450"
+    },
+    {
+      "path": "agent/internal/app/native_linux.go",
+      "sha256": "6a36528fa92be587b2cc0be2de5b7b48f7ebfca9152762f277a03ec41ca7a195"
+    },
+    {
+      "path": "agent/internal/app/native_smoke_linux_test.go",
+      "sha256": "928bef9581c6bb06354e4dbc69f0182472aa7764cb0d9312ce465280e41e9387"
+    },
+    {
+      "path": "agent/internal/app/native_windows.go",
+      "sha256": "b84dff74042b8d2468645d13d567d584a0824c0a32111992e8ffe9e4d89bcfd0"
+    },
+    {
+      "path": "agent/internal/app/peer_root_linux_test.go",
+      "sha256": "ab5e7ae567840b5ca04ae3fa40ff7fde00c1d8dc9515c65ff13f0b4a06ce9fdb"
+    },
+    {
+      "path": "agent/internal/app/query.go",
+      "sha256": "3f1d4a7e5bdeaebb69ee4f638012a50e37bc495001157f381df9052f84ff195a"
+    },
+    {
+      "path": "agent/internal/app/sqlite.go",
+      "sha256": "f4fe86bf24c1df6a48fbad0dc38d1355a1f73d59e8e19a79f6c41be7bd07dd4b"
+    },
+    {
+      "path": "agent/internal/app/state.go",
+      "sha256": "217a879e2fb781a2b7c7616bac6143480c46df6c3b5668d159de50a5f1b72e20"
+    },
+    {
+      "path": "agent/internal/app/transport_linux_test.go",
+      "sha256": "51cb8d9634de34362fdd4497a51dde30e4e3118397458a03ab5c3922c12654bb"
+    },
+    {
+      "path": "agent/internal/app/websocket.go",
+      "sha256": "77a9fe75a4c049333aa5f099f94219a29a8f532fd9769a648c34979385c24306"
+    },
+    {
+      "path": "agent/internal/auth/auth.go",
+      "sha256": "15a47c6a047813ff9abeb7fcd4f8b6d58b52d3c2c0aeb9d815e48562622b99f1"
+    },
+    {
+      "path": "agent/internal/auth/auth_linux_test.go",
+      "sha256": "600c36fce79ea8789533456c3941c69cffb6857becffb98be829fc1a2d27c447"
+    },
+    {
+      "path": "agent/internal/auth/files_linux.go",
+      "sha256": "cec263354cf01b9a679f7bd857f98fdba72c5f5cf406c3418ad3509b884bf30e"
+    },
+    {
+      "path": "agent/internal/auth/files_windows.go",
+      "sha256": "0f28adf636319b11aff16f74a412f684ff67a9967236420f1b2b48946d7ff1be"
+    },
+    {
+      "path": "agent/internal/auth/tls.go",
+      "sha256": "edf0bbd95bd80dc3d9f9b4cf68fe20034043cc639c63346cecfdea11cfa9b76c"
+    },
+    {
+      "path": "agent/internal/config/config.go",
+      "sha256": "f4c475c51202756b6f353f4c6086db422ca195bb9ad8fc50cae4208dc20d1964"
+    },
+    {
+      "path": "agent/internal/config/config_test.go",
+      "sha256": "a2790a397b5c4d6b8935a533a4ebfcb3ea6aee161c99b007d1a7b470dbf7c3e4"
+    },
+    {
+      "path": "agent/internal/contracts/api_security_test.go",
+      "sha256": "1d7ccf396a9e531b8f2a89f636cfa26d46f15f5bed626f7adc8db90bf86a7e44"
+    },
+    {
+      "path": "agent/internal/contracts/catalog_test.go",
+      "sha256": "3a1956d54aaeba6be019ea34c716728be85df5fff60604c992620b60d942ec7a"
+    },
+    {
+      "path": "agent/internal/contracts/declarations.go",
+      "sha256": "fd29ee896826d80ef3cc06d546f73f1844f89a0d87fb627e6fe8bffa6a222ec9"
+    },
+    {
+      "path": "agent/internal/contracts/declarations_test.go",
+      "sha256": "fdd49d3e50b2deab60b5098c2d7881bf45feebd26fdbb36b5df44979774a4e81"
+    },
+    {
+      "path": "agent/internal/contracts/encode.go",
+      "sha256": "31c6c2fa81a3ae07f4d73db2347dfc587cf5ba4a61d1f4435fecb710a8f88c18"
+    },
+    {
+      "path": "agent/internal/contracts/ipc.go",
+      "sha256": "d8115e3d36a87b13f5a3794370467ad1a09ef114777da5e8a8b9ca0039967119"
+    },
+    {
+      "path": "agent/internal/contracts/json.go",
+      "sha256": "eed523dc2a40046b390794ead3dcdac03d3478d2b6a2f77eff18cbc1dc379055"
+    },
+    {
+      "path": "agent/internal/contracts/json_test.go",
+      "sha256": "9699d659e34b6bd66a9ce390faa0bc4c4aa96f83387dc031aea4f8a2a3099ac8"
+    },
+    {
+      "path": "agent/internal/contracts/runtime.go",
+      "sha256": "a4de1c8f5d136eec1139d7c8fde113e2b5bc9246c1d3e45aba6410aa32cc1b0b"
+    },
+    {
+      "path": "agent/internal/contracts/schema.go",
+      "sha256": "92be8e914eb39b030e3994005bbd6e9337245b99351b8efb111ca528089f4c23"
+    },
+    {
+      "path": "agent/internal/contracts/schema_test.go",
+      "sha256": "3af9d426d39b7ec4e135d6ec6d448cf81d0eec38a69af3603346bf8eabb476b8"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/api.schema.json",
+      "sha256": "ce3ea2fa4474138a126f9d786eb45ea6597f4ed290dd8abfde98f902d391c3bf"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/config.schema.json",
+      "sha256": "84ccdaa91897e92e6d5b710aad4145b3df3d42ed9e63f2dacddd6e4289b5b90f"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/ipc.schema.json",
+      "sha256": "21f8c18980b0b5b9018668fcc9c936057a43c3db999241ebaedaec6518116d70"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/module.schema.json",
+      "sha256": "085151c8fa4b9cf15ce3a0745e94a88a540c1eddd24fd98fdfcbb1a71dd342f7"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/release.schema.json",
+      "sha256": "bd461f75043d8764e8017ba71d064840a8ac9aa42d03bbcd7720a08720dceb9f"
+    },
+    {
+      "path": "agent/internal/contracts/schemas/ui.schema.json",
+      "sha256": "363812bc6e543954a17c68c33bfed1baaf9d35a435c9ac3edcdfc8ac338aa031"
+    },
+    {
+      "path": "agent/internal/contracts/semantic.go",
+      "sha256": "25a330922b7a0f2f0529735df7113488f7a9c5d39ca108fea25b6ea962868a79"
+    },
+    {
+      "path": "agent/internal/contracts/types.go",
+      "sha256": "e38d4f02a7997cd21964cc0155b18d291411936eac42e5214f56c462bf8aff62"
+    },
+    {
+      "path": "agent/internal/contracts/wire_generated.go",
+      "sha256": "9a66aaa3f3e2efd4a635637bee3b15f96c09694416f21d88948b4f033d77223b"
+    },
+    {
+      "path": "agent/internal/contracts/wss.go",
+      "sha256": "3a7adc4669a5fde0305d64efc5ddf9ff36edec67cc033295546925b0d262487d"
+    },
+    {
+      "path": "agent/internal/history/aggregate.go",
+      "sha256": "f7b2ef04575674fce1711750428d4e05c2a0e21859ac029b52829126872beb5a"
+    },
+    {
+      "path": "agent/internal/history/aggregate_test.go",
+      "sha256": "37aafc11e98f09d6fdc063af57b58e408403713e5c5586df39e7d4e674908f73"
+    },
+    {
+      "path": "agent/internal/metrics/engine.go",
+      "sha256": "c6bcf962aa80875a1898d754f0d72411ec59afdfed913aca1a2148b1b0bd5ece"
+    },
+    {
+      "path": "agent/internal/metrics/engine_test.go",
+      "sha256": "77f416ae365840c893bf20e5b96f5c91af7d3a0ac982297545289206cebc3fa4"
+    },
+    {
+      "path": "agent/internal/metrics/linux.go",
+      "sha256": "7baaf544ac1cd67f9f0e7af82582cc67176c7eada91afd5e60040b7ac7af6a81"
+    },
+    {
+      "path": "agent/internal/metrics/linux_test.go",
+      "sha256": "2fa3e76f3be9e12b4de03099e4cba07e376b297991fb97f770369f596b43f8b5"
+    },
+    {
+      "path": "agent/internal/metrics/native_other.go",
+      "sha256": "1185565ff3b63b60f65dcd3ff92628528395d24885865dacbbbe59fbeda64228"
+    },
+    {
+      "path": "agent/internal/metrics/types.go",
+      "sha256": "dce446f6b68dae223ccc7beaffa02445bee32ec3515f906b77920b10c3873508"
+    },
+    {
+      "path": "agent/internal/operations/config.go",
+      "sha256": "4c956f0d0773c1600490f1bc762b9929ae91e346b9403c78cfec1351645588d1"
+    },
+    {
+      "path": "agent/internal/operations/full_linux_test.go",
+      "sha256": "a589df0816433decb7f230767ab86bd5ef8528bfa723212ea8c8f83bb9f2752c"
+    },
+    {
+      "path": "agent/internal/operations/maintenance.go",
+      "sha256": "8183d081f407dc10897e3725f865382f37058212ece9d0346d429e89b550bbfd"
+    },
+    {
+      "path": "agent/internal/operations/service.go",
+      "sha256": "b187cf534886f77eceac3a6e1152e6a0c14aaedf1dfc9f4707335cd990597d35"
+    },
+    {
+      "path": "agent/internal/operations/service_linux_test.go",
+      "sha256": "66da14405ae231ede513c25d7d86a4afa1205bffdbab3d366f29a99b29f6e71b"
+    },
+    {
+      "path": "agent/internal/storage/auth.go",
+      "sha256": "b61cbc647b80e8dce8b5249117bc4bae33806498b9c3ad691fab498666b6d6ad"
+    },
+    {
+      "path": "agent/internal/storage/auth_linux_test.go",
+      "sha256": "c3a58a8ca9228f56fad155ad455809f4b6703a71dad755cde034f0548f614e8a"
+    },
+    {
+      "path": "agent/internal/storage/backup.go",
+      "sha256": "9020d674ba772f6196b40b6fd9fb7a7ae7d584e769fec721f70cf053f94fdd03"
+    },
+    {
+      "path": "agent/internal/storage/cancellation.go",
+      "sha256": "94171c4e7f478c75b8fb56356b9414acc944438b0a711f6ed405e9cf156b960b"
+    },
+    {
+      "path": "agent/internal/storage/migrations/001.sql",
+      "sha256": "41ef9791af93d8b272a0e91689c92f90c81345913294104af96d341c7ff8e3e4"
+    },
+    {
+      "path": "agent/internal/storage/migrations/002.sql",
+      "sha256": "2fe15f2eeb4fbc30914b5fb82f70013526263a74a25d527c659b723a968ef909"
+    },
+    {
+      "path": "agent/internal/storage/operations.go",
+      "sha256": "f19a1f06cbc1e92d685945e82e27099b497e91aa7ab9d5b1cb6f84feefc4f22b"
+    },
+    {
+      "path": "agent/internal/storage/platform_linux.go",
+      "sha256": "f7a703e92ec953177221b2aae41924455f8021c1ce98d1121dabf6f2d8930ae9"
+    },
+    {
+      "path": "agent/internal/storage/platform_windows.go",
+      "sha256": "359f12a23495c4231be47ef86558c6f708310bf4f31dfe6a7e155ba1b20fe6ad"
+    },
+    {
+      "path": "agent/internal/storage/resolve.go",
+      "sha256": "250fe9081d3f0f2b09a6c6011996899c38192943a428ffee07799a597a962aeb"
+    },
+    {
+      "path": "agent/internal/storage/store.go",
+      "sha256": "5800f82f2dc6925ecd8ceb04ec2d975e174c107bf3b1a5548c3cecb4e716396b"
+    },
+    {
+      "path": "agent/internal/storage/store_linux_test.go",
+      "sha256": "7d19cb0777fd92a9d7b19c60b24bc6f7dbab475f360c747c9e1f26f1d24687bc"
+    },
+    {
+      "path": "agent/internal/storage/transport.go",
+      "sha256": "d4ce6670c96b861039394941b4651fc17e7cf570cd4a5421d3c73996632a49d4"
+    },
+    {
+      "path": "agent/internal/storage/types.go",
+      "sha256": "c2dbe94a9bf0698b5f4158ca6279d6b0463ac471bc112279a5779a8f6ccef311"
+    },
+    {
+      "path": "agent/licenses/Go-BSD-3-Clause.txt",
+      "sha256": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad"
+    },
+    {
+      "path": "agent/licenses/SQLite-public-domain.txt",
+      "sha256": "6a9460b4a23147c3d3161f14536e026b51ee692287b5e3bb1ccceceafedd41e2"
+    },
+    {
+      "path": "agent/licenses/cybersecurity-skills-LICENSE",
+      "sha256": "8649920ede0c2241f034a49d72542da08723cdaa3ab21d1dd60b34488b9b2a2d"
+    },
+    {
+      "path": "agent/licenses/go-sqlite3-MIT.txt",
+      "sha256": "afa48e5e64dc610298d80b010ae7a3450f61a79500a9f1d1697ff6dcbbfa1f72"
+    },
+    {
+      "path": "agent/licenses/jsonschema-Apache-2.0.txt",
+      "sha256": "c8858a5a76440bbca484e134cf7df46385d090dd18b2c58e650f939258802e5b"
+    },
+    {
+      "path": "agent/licenses/websocket-ISC.txt",
+      "sha256": "cc0975a5f6305145bdd7b41ce9479632fdac3870e6ac4281f28017f18c767c4e"
+    },
+    {
+      "path": "agent/toolchains.json",
+      "sha256": "e9a55d09c237f7973b792e5ff40be10cb7863bcdfdb58cfb5b34d9125cbfd151"
+    },
+    {
+      "path": "agent/tools/bootstrap-go.ps1",
+      "sha256": "1915d0e0667ec8c938d1ee144a800646398ffa84be33d76d3586a4fbb5165366"
+    },
+    {
+      "path": "agent/tools/build-linux.sh",
+      "sha256": "c15eac1af41e48e6402f134699cf93754ea080a02fba1921e9695294c7c8ba22"
+    },
+    {
+      "path": "agent/tools/capture-linux-toolchain.py",
+      "sha256": "e415ca0744313194365d3c3786369b572b1b823f13d2964520cc93a8db37b22b"
+    },
+    {
+      "path": "agent/tools/e02-full-filesystem.sh",
+      "sha256": "10b2e1fe5f51e6fdc9dc0ebe5c2acf8031198c3c0fb610f45134581c20e65198"
+    },
+    {
+      "path": "agent/tools/e03-root-tests.sh",
+      "sha256": "736d51a885dca1f68d7b58e0e2c16ea8eadd9b9508fce3543c87dce70f7ceff7"
+    },
+    {
+      "path": "agent/tools/e04-root-tests.sh",
+      "sha256": "4794a6e783c02f6a920e4d49448e46166c0566788a2cbe35d02a6cc81707026b"
+    },
+    {
+      "path": "agent/tools/generate-types.py",
+      "sha256": "cb5b8b23ce5cac143c88fa02ed3ffe4817ed7d7d59f477815cf56884ecc5308a"
+    },
+    {
+      "path": "agent/tools/inspect-linux.py",
+      "sha256": "00040e6045a4623bff016d2d7b89cda55338a7cbdcc50be406c7f9400ad700e4"
+    },
+    {
+      "path": "agent/tools/smoke-linux.sh",
+      "sha256": "b071bf1ca5a276d31d00ffc15a50fb38cd517861b2d7692d3f3c53a99d3037be"
+    },
+    {
+      "path": "agent/tools/state-smoke-linux.sh",
+      "sha256": "aecbdbf9bba34bcac28e9c60e65397dd4ed20afe746f911e24c549aea88c3890"
+    },
+    {
+      "path": "agent/tools/sync-contracts.ps1",
+      "sha256": "dcfc344c7510d2ec3b3c066da4053c324af18e2d761d4af82dc2456f5902dae4"
+    },
+    {
+      "path": "agent/tools/verify-linux-toolchain.py",
+      "sha256": "0120aefc213932f154c8d8e20394bf65f6b1e60916d3329c0025757e6ce7cd8d"
+    },
+    {
+      "path": "agent/tools/verify.ps1",
+      "sha256": "b9b84cea1ba165e3d0590a8e173cbb37b8c28b9855a51b92a5b18def8fb6309f"
+    },
+    {
+      "path": "agent/tools/wsl-e02-export.sh",
+      "sha256": "aa862f60651d204dcc2da59ffb2816cd8ba791b552ea42537d290685743f0695"
+    },
+    {
+      "path": "agent/tools/wsl-e02.sh",
+      "sha256": "8e707f5c24bb3a234644f71362c6b249fe1d5566e43e8b2687a4b2d1830ee33e"
+    },
+    {
+      "path": "agent/tools/wsl-e03-export.sh",
+      "sha256": "dba7de856671613313aaa2e3fd9a322d9dcfe8ffda46c1414b11a4c018c21c2f"
+    },
+    {
+      "path": "agent/tools/wsl-e03.sh",
+      "sha256": "a591d3bbe53416ab0a641b98725b56963c2670a68a3f19aef579e82f085011d1"
+    },
+    {
+      "path": "agent/tools/wsl-e04-export.sh",
+      "sha256": "165e698578692fe43551449cb8ca036f3baa6ee7adaa82898edbea918d14ce95"
+    },
+    {
+      "path": "agent/tools/wsl-e04.sh",
+      "sha256": "f26439d51a5a2d92f5fe7f6a013258fc369be8d71c271c8c2b62165f80c523aa"
+    },
+    {
+      "path": "agent/tools/wsl-e05-aggregation.sh",
+      "sha256": "c76bc7db977d263ad4be5968992d1388e80dd725021d9906a4b891d1d2a083bd"
+    },
+    {
+      "path": "agent/tools/wsl-export-evidence.sh",
+      "sha256": "3230b62df3b5b1072186cd865dfa6f7957deeff0214e1273a0be9aa03a42542f"
+    },
+    {
+      "path": "agent/tools/wsl-finish-checks.sh",
+      "sha256": "cbb891d1de8ab723561ae7e736710b783cdbe2c9c92a801e78880cf01dc5ee60"
+    },
+    {
+      "path": "agent/tools/wsl-install-deps.sh",
+      "sha256": "ccc2dfd7ee0630aaba43c9aa7fa729e2c61b892525d79e7f258407308bef4b74"
+    },
+    {
+      "path": "agent/tools/wsl-inventory.sh",
+      "sha256": "2330c79134c0d96d9131e35d90bcd560242619fb862cedb5ccf934a4fb05a002"
+    },
+    {
+      "path": "agent/tools/wsl-prepare.sh",
+      "sha256": "a2b22123f7e1aad7ed575c9197ff41f33f6aac5c5a7c43766283f14a98a80a54"
+    },
+    {
+      "path": "agent/tools/wsl-run-checks.sh",
+      "sha256": "34cade5ac21df23298148030b5effea63613a0092a418437236fdd75c81b5348"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/README.md",
+      "sha256": "945197ad37e98348aa89a8988f558f6cfffa3deeb9fe0e40971818719cfdc6fb"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/api.schema.json",
+      "sha256": "ce3ea2fa4474138a126f9d786eb45ea6597f4ed290dd8abfde98f902d391c3bf"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/config.schema.json",
+      "sha256": "84ccdaa91897e92e6d5b710aad4145b3df3d42ed9e63f2dacddd6e4289b5b90f"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/catalog.json",
+      "sha256": "40390c54feec9cfab66d2921736033e69923e63c7fe4e2d339a1ca0ab830dd11"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/config.json",
+      "sha256": "cd959c6a16c80f9db0abedf94d7e36d857756c81e9b429f6423f3be51904765c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/error.json",
+      "sha256": "a447c038459ad5242d100743c460755b31d2752a24ae7034a97b228dd7eb012c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/ipc-response.json",
+      "sha256": "8514123f5ac0b080c4889d2f23ee3f32fffc407d277baca028698673ef0d6d93"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/ipc.json",
+      "sha256": "0d9190f2771f7574d24b687a900a752571013cf676809eb580e15da7e29a9334"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/module.json",
+      "sha256": "6b86f8e6bc9d9998c296d99597f6932fc0c07ee7d2128bce6ee846306ea7daf0"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/operation-state.json",
+      "sha256": "ad87feffd6293c5936f848314e5f05f55f9208d0b59c5346ba420197bf9ee55c"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/operation.json",
+      "sha256": "97e411254bc7897dc3018dd780987c04fecc0bce18750342a6278bc7c39583b0"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/query.json",
+      "sha256": "c062efa3a62748d41f4b00078f00129631e4d34192019adb6dfb8d2cbb2f9390"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/release.json",
+      "sha256": "dad61b6fee9005dfee8f0793854650fa67709cede7b8daca8f12b35d361c3863"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/snapshot-response.json",
+      "sha256": "eeae445aae3ed4188ecbb61ced6fce1d43837cfa0f3d3feec854b439539d0b5a"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/ui.json",
+      "sha256": "a29ff62caff35a9cf32757efea239386146f4f1dced0289804a8f581748433af"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/wss-client.json",
+      "sha256": "3e75393212a15158fbeaec89a3f955af7f0095b8b980cf34d618f112de9db6af"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/examples/wss-server.json",
+      "sha256": "33bd6de5176990be3277def1f5ecb03d3f64402dbe828764c643bf5ba93086d3"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/ipc.schema.json",
+      "sha256": "21f8c18980b0b5b9018668fcc9c936057a43c3db999241ebaedaec6518116d70"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/module.schema.json",
+      "sha256": "085151c8fa4b9cf15ce3a0745e94a88a540c1eddd24fd98fdfcbb1a71dd342f7"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/release.schema.json",
+      "sha256": "bd461f75043d8764e8017ba71d064840a8ac9aa42d03bbcd7720a08720dceb9f"
+    },
+    {
+      "path": "Документация ServerDeck/Документация ServerDeck Agent/contracts/ui.schema.json",
+      "sha256": "363812bc6e543954a17c68c33bfed1baaf9d35a435c9ac3edcdfc8ac338aa031"
+    }
+  ]
+}

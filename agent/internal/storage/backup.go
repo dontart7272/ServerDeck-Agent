@@ -34,6 +34,7 @@ type Floor struct {
 	Policy       Policy             `json:"policy"`
 	AgentID      string             `json:"agent_id,omitempty"`
 	Active       []activeCredential `json:"active_credentials,omitempty"`
+	Inventory    *Inventory         `json:"inventory,omitempty"`
 }
 type activeCredential struct {
 	ID   string `json:"device_id"`
@@ -132,7 +133,7 @@ func floorFromDB(ctx context.Context, db *sql.DB) (f Floor, e error) {
 	if db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&version) != nil {
 		return f, ErrSafety
 	}
-	if version == 2 {
+	if version >= 2 {
 		f.Version = 2
 		if db.QueryRowContext(ctx, "SELECT agent_id FROM auth_meta WHERE singleton=1").Scan(&f.AgentID) != nil || !ValidID(f.AgentID) {
 			return f, ErrSafety
@@ -153,6 +154,17 @@ func floorFromDB(ctx context.Context, db *sql.DB) (f Floor, e error) {
 		if active.Err() != nil || len(f.Active) > 32 {
 			return f, ErrSafety
 		}
+	}
+	if version >= 4 {
+		i, e := inventoryFromDB(ctx, db)
+		if e != nil {
+			return f, e
+		}
+		f.Version = 3
+		if version >= 5 {
+			f.Version = 5
+		}
+		f.Inventory = &i
 	}
 	return f, nil
 }
@@ -226,14 +238,28 @@ func (s *Store) verifyFloor(ctx context.Context) error {
 		return ErrSafety
 	}
 	var floor Floor
-	if s.unseal(b, &floor) != nil || (floor.Version != 1 && floor.Version != 2) {
+	if s.unseal(b, &floor) != nil || (floor.Version != 1 && floor.Version != 2 && floor.Version != 3 && floor.Version != 4 && floor.Version != 5) {
 		return ErrSafety
 	}
 	current, e := floorFromDB(ctx, s.db)
 	if e != nil || current.Installation != floor.Installation || current.Generation < floor.Generation {
 		return ErrSafety
 	}
+	if floor.Version >= 3 && !inventoryContains(current.Inventory, floor.Inventory) {
+		return ErrSafety
+	}
 	if current.Generation == floor.Generation {
+		if floor.Version == 4 {
+			current.Version = 4
+		}
+		if floor.Version == 3 && current.Inventory != nil {
+			current.Version = 3
+			current.Inventory.Attestation = nil
+		}
+		if floor.Version < 3 {
+			current.Inventory = nil
+			current.Version = 2
+		}
 		if floor.Version == 1 {
 			if len(current.Active) != 0 {
 				return ErrSafety
@@ -342,12 +368,13 @@ func (s *Store) Backup(ctx context.Context, operationID, path string) error {
 	if e = s.compatibility(ctx); e != nil {
 		return e
 	}
-	floor, e := s.exportFloor(ctx)
-	if e != nil {
-		return e
-	}
+	var floor Floor
 	if _, e = os.Lstat(path); !os.IsNotExist(e) {
 		return ErrSafety
+	}
+	floor, e = s.reserveOwned(ctx, operationID, "backup", path)
+	if e != nil {
+		return e
 	}
 	dir, e := privateDir(path, true)
 	if e != nil {
@@ -417,6 +444,9 @@ func (s *Store) Restore(ctx context.Context, operationID, backupPath, target str
 	if e = s.compatibility(ctx); e != nil {
 		return ErrSafety
 	}
+	if e = s.verifyFloor(ctx); e != nil {
+		return e
+	}
 	floor, e := s.exportFloor(ctx)
 	if e != nil {
 		return ErrSafety
@@ -431,7 +461,7 @@ func (s *Store) Restore(ctx context.Context, operationID, backupPath, target str
 		return e
 	}
 	var m backupManifest
-	if s.unseal(b, &m) != nil || m.Version != 1 || (m.Schema != 1 && m.Schema != 2) || !m.Consistent || m.Installation != floor.Installation || m.Generation > floor.Generation {
+	if s.unseal(b, &m) != nil || m.Version != 1 || (m.Schema != 1 && m.Schema != 2 && m.Schema != 3 && m.Schema != 4 && m.Schema != 5) || !m.Consistent || m.Installation != floor.Installation || m.Generation > floor.Generation {
 		return ErrSafety
 	}
 	hash, n, e := digestFile(backup, "critical.db", s.limits.PhysicalBytes)
@@ -451,8 +481,17 @@ func (s *Store) Restore(ctx context.Context, operationID, backupPath, target str
 	if e != nil || old.Installation != floor.Installation || old.Generation != m.Generation {
 		return ErrSafety
 	}
+	// A divergent backup branch must not lose an owned footprint by overlaying
+	// current tables. Refuse before effects rather than trusting hints to merge.
+	if old.Inventory != nil && !inventoryContains(floor.Inventory, old.Inventory) {
+		return ErrSafety
+	}
 	if _, e = os.Lstat(target); !os.IsNotExist(e) {
 		return ErrSafety
+	}
+	floor, e = s.reserveOwned(ctx, operationID, "restore", target)
+	if e != nil {
+		return e
 	}
 	dir, e := privateDir(target, true)
 	if e != nil {
@@ -478,7 +517,16 @@ func (s *Store) Restore(ctx context.Context, operationID, backupPath, target str
 	if e = copyDatabase(ctx, src, dst); e != nil {
 		return ErrStorage
 	}
-	if e = migrateAuthDB(ctx, dst); e != nil {
+	if e = migrateRulesAfterAuth(ctx, dst); e != nil {
+		return e
+	}
+	if e = migrateInventoryDB(ctx, dst); e != nil {
+		return e
+	}
+	if e = migrateFilesDB(ctx, dst); e != nil {
+		return e
+	}
+	if e = rotateRuleEpochDB(ctx, dst); e != nil {
 		return e
 	}
 	var checkpointBusy, checkpointLog, checkpointDone int
@@ -514,13 +562,14 @@ func (s *Store) Restore(ctx context.Context, operationID, backupPath, target str
 	defer tx.Rollback()
 	for _, q := range []string{
 		"DELETE FROM object_locks", "DELETE FROM operation_changes", "DELETE FROM operations", "DELETE FROM audit",
+		"DELETE FROM file_inventory_attestation", "DELETE FROM file_journal", "DELETE FROM owned_artifacts", "DELETE FROM inventory_meta",
 		"DELETE FROM storage_meta", "DELETE FROM sqlite_sequence WHERE name IN ('audit','operation_changes')", "DELETE FROM devices", "DELETE FROM auth_meta",
 	} {
 		if _, e = tx.ExecContext(ctx, q); e != nil {
 			return ErrStorage
 		}
 	}
-	for _, table := range []string{"operations", "object_locks", "operation_changes", "audit", "storage_meta", "sqlite_sequence", "devices", "auth_meta"} {
+	for _, table := range []string{"operations", "object_locks", "operation_changes", "audit", "storage_meta", "sqlite_sequence", "devices", "auth_meta", "owned_artifacts", "inventory_meta", "file_inventory_attestation", "file_journal"} {
 		if e = copyAuthorityTable(ctx, s.db, tx, table); e != nil {
 			return ErrStorage
 		}
@@ -589,7 +638,7 @@ func (s *Store) Restore(ctx context.Context, operationID, backupPath, target str
 func copyAuthorityTable(ctx context.Context, source *sql.DB, target *sql.Tx, table string) error {
 	// Table names are a closed compiled allowlist, never caller-controlled SQL.
 	switch table {
-	case "operations", "object_locks", "operation_changes", "audit", "storage_meta", "sqlite_sequence", "devices", "auth_meta":
+	case "operations", "object_locks", "operation_changes", "audit", "storage_meta", "sqlite_sequence", "devices", "auth_meta", "owned_artifacts", "inventory_meta", "file_inventory_attestation", "file_journal":
 	default:
 		return ErrSafety
 	}

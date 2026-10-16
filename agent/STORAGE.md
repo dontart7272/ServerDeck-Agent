@@ -35,7 +35,7 @@ WAL hard 8000000 bytes обеспечивается консервативным
 
 ## Backup, floor и восстановление
 
-Штатные backup/restore требуют durable running operation соответствующего действия и maintenance barrier: новых операций/планов нет, активные эффекты завершены. Backup API копирует согласованный critical.db, включает committed WAL; он не копирует одну живую `.db` без WAL и не обещает атомарность нескольких БД. Manifest пишется последним: фактическая schema1 либо schema2, installation_id, security_generation, digest/length/consistent и HMAC. Директория назначения должна отсутствовать; незавершённую копию повтор не перезаписывает.
+Штатные backup/restore требуют durable running operation соответствующего действия и maintenance barrier: новых операций/планов нет, активные эффекты завершены. Backup API копирует согласованный critical.db, включает committed WAL; он не копирует одну живую `.db` без WAL и не обещает атомарность нескольких БД. Manifest пишется последним: фактическая schema1/2/3 (текущая3 послеE05), installation_id, security_generation, digest/length/consistent и HMAC. Директория назначения должна отсутствовать; незавершённую копию повтор не перезаписывает.
 
 Текущий floor хранится отдельно от возвращаемого snapshot, защищён ключом текущего состояния. E02 floor v1 содержит installation/generation, revoked device IDs, deny_actions/max_changes. Это направленный механизм для проверки границы E03/E11, не полный формат TUF/authorization policy. Export сверяется с живой critical generation и содержимым; отсутствие/повреждение актуальной authority останавливает restore. При запуске старый critical.db под более новым floor или утрата обязательного floor запрещены.
 
@@ -46,3 +46,15 @@ Floor-fixtures допускают до32 отозванных IDs и128 deny_act
 `state-resolve ... applied|none --confirm` — явное наблюдение локального владельца, не автоматическое доказательство успеха. Service пишет audit gap с фактическим local UID и ADMIN_RESOLUTION и только затем освобождает durable lock/назначает dedup_until в той же транзакции. Никакой эффект не повторяется. Нельзя использовать `none` как догадку по потерянному ответу.
 
 Официальные основания проверены 13 октября 2026: [SQLite WAL](https://www.sqlite.org/wal.html), [PRAGMA](https://www.sqlite.org/pragma.html), [backup API](https://www.sqlite.org/backup.html), [закреплённый драйвер](https://github.com/mattn/go-sqlite3/tree/v1.14.52). FULL предполагает исправный fsync/носитель; process-crash и ENOSPC тесты не моделируют отключение питания или всю матрицу ФС.
+
+
+E05 supplement: critical migration3 adds versioned rules; existing auth migration2/security-floor invariants retained. Protected history/events/problems/rules reads and rules/config changes reuse this transport and common audited operations. Auxiliary telemetry databases are separate transactions. Physical schemas/quotas/recovery limits: [HISTORY](HISTORY.md), actual checks: [E05 evidence](evidence/E05-wsl-2026-10-14/README.md). Historical E02/E03 evidence hashes remain snapshots of those stages.
+
+## E08: critical schema4 и security floor3
+
+[Owned inventory](E08-INVENTORY-DESIGN.md) дополняет E02/E03. Receipt backup/restore фиксируется в текущей authority и sealed floor до первого destination effect, unknown receipts не ротируются с operations. Current inventory переносится в restore; rollback/потеря обязательной записи запрещены. Baseline всегда unknown; path hints не являются identity proof. Production файловые чтения этим ещё не разрешены. Старый writer отказывает schema4; новый читает backup schemas1–4. Limits:32 records,1024 bytes/hint,32000 bytes serialized inventory в floor≤65536. `state-inventory` — локальный offline status, не bypass/complete.
+
+
+## E08 migration005 —15 октября2026
+
+Critical schema5 / security floor5 добавляет `file_inventory_attestation` (bounded16000 bytes) и `file_journal` (2048 bounded records, document8192 bytes). Миграции001–004 сохранены. Attestation привязана к generation и boot/dev/inode/type; `VerifiedInventory` требует точного соответствия текущего и опубликованного authenticated floor. `storage.inventory.confirm` — explicit offline audited operation. Текущие attestation/journal копируются вместе с текущей authority при restore. Неизвестные/незавершённые file records не вытесняются. Recovery, cleanup и актуальные границы — [FILES.md](FILES.md). Floor5 также содержит explicit artifact bindings, несовместимые со старым writer. State failed/expired сохраняется до аудируемой очистки; unknown не вытесняется. Retention после рестарта требует полного интервала uptime.

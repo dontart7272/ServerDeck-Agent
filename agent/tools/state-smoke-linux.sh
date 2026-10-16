@@ -20,6 +20,14 @@ ctl=dist/linux-amd64/serverdeckctl
 "$ctl" state-operation "$work/state" 22222222-2222-4222-8222-222222222222
 "$ctl" state-restore "$work/state" "$work/backup" "$work/restored" 44444444-4444-4444-8444-444444444444 --confirm
 "$ctl" state-status "$work/restored"
+"$ctl" state-inventory "$work/restored" > "$work/inventory.json"
+python3 - "$work/inventory.json" <<'PY'
+import json,pathlib,sys
+i=json.loads(pathlib.Path(sys.argv[1]).read_text())
+assert i["baseline"]=="unknown" and i["generation"]==3 and len(i["artifacts"])==2
+assert {a["kind"] for a in i["artifacts"]}=={"backup","restore"}
+print("PASS: E08 CLI inventory preserves both unknown receipts after restore")
+PY
 # Current operation state overlays the old snapshot. The in-flight restore
 # itself is now unknown in the target; observe its completed marker explicitly.
 test -f "$work/restored/restore-complete.json"

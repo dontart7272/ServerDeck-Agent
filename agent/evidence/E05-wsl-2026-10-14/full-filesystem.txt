@@ -1,0 +1,3 @@
+=== RUN   TestTelemetryPhysicalFullFilesystem
+--- PASS: TestTelemetryPhysicalFullFilesystem (0.39s)
+PASS

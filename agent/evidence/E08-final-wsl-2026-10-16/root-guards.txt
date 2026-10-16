@@ -1,0 +1,5 @@
+=== RUN   TestE08PrivateMethodsCannotPublishOrPurgeOwnObject
+--- PASS: TestE08PrivateMethodsCannotPublishOrPurgeOwnObject (0.01s)
+=== RUN   TestE08SharedRootProtectsOwnObjectsAndAncestors
+--- PASS: TestE08SharedRootProtectsOwnObjectsAndAncestors (0.00s)
+PASS

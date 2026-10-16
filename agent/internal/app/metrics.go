@@ -50,14 +50,18 @@ func (g *Gateway) metricQuery(ctx context.Context, name string, raw []byte) (any
 				return nil, e
 			}
 		}
-		return g.Metrics.Snapshot(p.View, p.Blocks, p.Resources), nil
+		return g.processSnapshot(ctx, g.Metrics.Snapshot(p.View, p.Blocks, p.Resources)), nil
 	case "processes.get":
 		if owner != "" {
 			if e := g.Metrics.Lease(owner); e != nil {
 				return nil, e
 			}
 		}
-		return g.Metrics.Process(p.ProcessRef)
+		process, err := g.Metrics.Process(p.ProcessRef)
+		if err != nil {
+			return nil, err
+		}
+		return g.processActions(ctx, process), nil
 	case "processes.list":
 		if owner == "" {
 			return nil, storage.ErrUnauthorized
@@ -82,7 +86,7 @@ func (g *Gateway) metricQuery(ctx context.Context, name string, raw []byte) (any
 		}
 		wire := make([]any, 0, len(items))
 		for _, v := range items {
-			wire = append(wire, v)
+			wire = append(wire, g.processActions(ctx, v))
 		}
 		var next any
 		if more {
@@ -109,7 +113,7 @@ func hasBlock(blocks []string, name string) bool {
 func metricBlocks(blocks []string) error {
 	for _, name := range blocks {
 		switch name {
-		case "system", "cpu", "memory", "network", "filesystems", "processes":
+		case "system", "cpu", "memory", "network", "filesystems", "processes", "gpu", "docker", "security":
 		default:
 			return metrics.ErrUnavailable
 		}

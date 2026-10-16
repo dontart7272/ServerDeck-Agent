@@ -1,0 +1,20 @@
+ping from iputils 20211215
+iputils-ping	3:20211215-1ubuntu0.1
+iputils-ping:
+  Installed: 3:20211215-1ubuntu0.1
+  Candidate: 3:20211215-1ubuntu0.1
+  Version table:
+ *** 3:20211215-1ubuntu0.1 500
+        500 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages
+        100 /var/lib/dpkg/status
+     3:20211215-1 500
+        500 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages
+/usr/bin/ping cap_net_raw=ep
+923fef3ac39e2cea2c6b40b1f5c4a5925786a8d742a2e8fe4ffb0fc4c4c8ad13  /usr/bin/ping
+	linux-vdso.so.1 (0x00007ffefd0b8000)
+	libcap.so.2 => /lib/x86_64-linux-gnu/libcap.so.2 (0x00007c9f4b87d000)
+	libidn2.so.0 => /lib/x86_64-linux-gnu/libidn2.so.0 (0x00007c9f4b85c000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007c9f4b600000)
+	libunistring.so.2 => /lib/x86_64-linux-gnu/libunistring.so.2 (0x00007c9f4b456000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007c9f4b8a5000)

@@ -868,6 +868,116 @@ type APIOperationStorageRestore struct {
 	DedupUntil *Timestamp `json:"dedup_until,omitempty"`
 }
 
+type APIOperationStorageInventoryConfirm struct {
+	OperationId string `json:"operation_id"`
+	Revision    string `json:"revision"`
+	Initiator   struct {
+		Kind string `json:"kind"`
+		Id   string `json:"id"`
+	} `json:"initiator"`
+	Action       string    `json:"action"`
+	ObjectRef    string    `json:"object_ref"`
+	State        string    `json:"state"`
+	Phase        string    `json:"phase"`
+	CreatedAt    Timestamp `json:"created_at"`
+	UpdatedAt    Timestamp `json:"updated_at"`
+	EffectStatus string    `json:"effect_status"`
+	AuditStatus  string    `json:"audit_status"`
+	Cancellable  bool      `json:"cancellable"`
+	Progress     *struct {
+		Completed U64    `json:"completed"`
+		Total     *U64   `json:"total"`
+		Unit      string `json:"unit"`
+	} `json:"progress,omitempty"`
+	Result *struct {
+		InventoryAttested bool `json:"inventory_attested"`
+	} `json:"result,omitempty"`
+	Error      *APIError  `json:"error,omitempty"`
+	DedupUntil *Timestamp `json:"dedup_until,omitempty"`
+}
+
+type APIOperationSystemFilesCleanup struct {
+	OperationId string `json:"operation_id"`
+	Revision    string `json:"revision"`
+	Initiator   struct {
+		Kind string `json:"kind"`
+		Id   string `json:"id"`
+	} `json:"initiator"`
+	Action       string    `json:"action"`
+	ObjectRef    string    `json:"object_ref"`
+	State        string    `json:"state"`
+	Phase        string    `json:"phase"`
+	CreatedAt    Timestamp `json:"created_at"`
+	UpdatedAt    Timestamp `json:"updated_at"`
+	EffectStatus string    `json:"effect_status"`
+	AuditStatus  string    `json:"audit_status"`
+	Cancellable  bool      `json:"cancellable"`
+	Progress     *struct {
+		Completed U64    `json:"completed"`
+		Total     *U64   `json:"total"`
+		Unit      string `json:"unit"`
+	} `json:"progress,omitempty"`
+	Result *struct {
+		Cleaned bool `json:"cleaned"`
+	} `json:"result,omitempty"`
+	Error      *APIError  `json:"error,omitempty"`
+	DedupUntil *Timestamp `json:"dedup_until,omitempty"`
+}
+
+type APIOperationSystemFilesRotate struct {
+	OperationId string `json:"operation_id"`
+	Revision    string `json:"revision"`
+	Initiator   struct {
+		Kind string `json:"kind"`
+		Id   string `json:"id"`
+	} `json:"initiator"`
+	Action       string    `json:"action"`
+	ObjectRef    string    `json:"object_ref"`
+	State        string    `json:"state"`
+	Phase        string    `json:"phase"`
+	CreatedAt    Timestamp `json:"created_at"`
+	UpdatedAt    Timestamp `json:"updated_at"`
+	EffectStatus string    `json:"effect_status"`
+	AuditStatus  string    `json:"audit_status"`
+	Cancellable  bool      `json:"cancellable"`
+	Progress     *struct {
+		Completed U64    `json:"completed"`
+		Total     *U64   `json:"total"`
+		Unit      string `json:"unit"`
+	} `json:"progress,omitempty"`
+	Result *struct {
+		Rotated bool `json:"rotated"`
+	} `json:"result,omitempty"`
+	Error      *APIError  `json:"error,omitempty"`
+	DedupUntil *Timestamp `json:"dedup_until,omitempty"`
+}
+
+type APIOperationFilesReconcile struct {
+	OperationId string `json:"operation_id"`
+	Revision    string `json:"revision"`
+	Initiator   struct {
+		Kind string `json:"kind"`
+		Id   string `json:"id"`
+	} `json:"initiator"`
+	Action       string    `json:"action"`
+	ObjectRef    string    `json:"object_ref"`
+	State        string    `json:"state"`
+	Phase        string    `json:"phase"`
+	CreatedAt    Timestamp `json:"created_at"`
+	UpdatedAt    Timestamp `json:"updated_at"`
+	EffectStatus string    `json:"effect_status"`
+	AuditStatus  string    `json:"audit_status"`
+	Cancellable  bool      `json:"cancellable"`
+	Progress     *struct {
+		Completed U64    `json:"completed"`
+		Total     *U64   `json:"total"`
+		Unit      string `json:"unit"`
+	} `json:"progress,omitempty"`
+	Result     *json.RawMessage `json:"result,omitempty"`
+	Error      *APIError        `json:"error,omitempty"`
+	DedupUntil *Timestamp       `json:"dedup_until,omitempty"`
+}
+
 type APIOperationModulesRegister struct {
 	OperationId string `json:"operation_id"`
 	Revision    string `json:"revision"`
@@ -906,6 +1016,17 @@ type APIError struct {
 		LatestCursor   *string `json:"latest_cursor,omitempty"`
 		RetryAfterMs   *int64  `json:"retry_after_ms,omitempty"`
 		EffectStatus   *string `json:"effect_status,omitempty"`
+		ActiveProblems *[]struct {
+			ProblemId  string    `json:"problem_id"`
+			RuleId     string    `json:"rule_id"`
+			ResourceId string    `json:"resource_id"`
+			State      string    `json:"state"`
+			Since      Timestamp `json:"since"`
+			ObservedAt Timestamp `json:"observed_at"`
+			Severity   string    `json:"severity"`
+			Code       string    `json:"code"`
+		} `json:"active_problems,omitempty"`
+		ActiveProblemsMore *bool `json:"active_problems_more,omitempty"`
 	} `json:"details,omitempty"`
 }
 
@@ -1019,16 +1140,17 @@ type APISeriesPage struct {
 		StepMs   int64       `json:"step_ms"`
 		Coverage APICoverage `json:"coverage"`
 		Points   []struct {
-			BucketId    string    `json:"bucket_id"`
-			Revision    string    `json:"revision"`
-			SegmentId   string    `json:"segment_id"`
-			From        Timestamp `json:"from"`
-			To          Timestamp `json:"to"`
-			StepMs      int64     `json:"step_ms"`
-			CoveredMs   int64     `json:"covered_ms"`
-			SampleCount int64     `json:"sample_count"`
-			Complete    bool      `json:"complete"`
-			Statistics  struct {
+			BucketId         string    `json:"bucket_id"`
+			Revision         string    `json:"revision"`
+			SegmentId        string    `json:"segment_id"`
+			From             Timestamp `json:"from"`
+			To               Timestamp `json:"to"`
+			StepMs           int64     `json:"step_ms"`
+			CoveredMs        int64     `json:"covered_ms"`
+			CounterCoveredMs *int64    `json:"counter_covered_ms,omitempty"`
+			SampleCount      int64     `json:"sample_count"`
+			Complete         bool      `json:"complete"`
+			Statistics       struct {
 				Mean         *float64         `json:"mean,omitempty"`
 				Min          *float64         `json:"min,omitempty"`
 				Max          *float64         `json:"max,omitempty"`
@@ -1157,6 +1279,18 @@ type APIQueryRequestHistoryGet struct {
 		To        Timestamp `json:"to"`
 		MaxPoints int64     `json:"max_points"`
 		Cursor    *string   `json:"cursor,omitempty"`
+	} `json:"params"`
+}
+
+type APIQueryRequestHistorySeries struct {
+	SchemaVersion string `json:"schema_version"`
+	RequestId     string `json:"request_id"`
+	Query         string `json:"query"`
+	Params        struct {
+		MetricKey  *string `json:"metric_key,omitempty"`
+		LogicalKey *string `json:"logical_key,omitempty"`
+		Cursor     *string `json:"cursor,omitempty"`
+		Limit      *int64  `json:"limit,omitempty"`
 	} `json:"params"`
 }
 
@@ -1398,6 +1532,28 @@ type APIQueryResponseHistoryGet struct {
 	ServedAt      Timestamp     `json:"served_at"`
 	Query         string        `json:"query"`
 	Data          APISeriesPage `json:"data"`
+}
+
+type APIQueryResponseHistorySeries struct {
+	SchemaVersion string    `json:"schema_version"`
+	RequestId     string    `json:"request_id"`
+	AgentId       string    `json:"agent_id"`
+	ServedAt      Timestamp `json:"served_at"`
+	Query         string    `json:"query"`
+	Data          struct {
+		Items []struct {
+			SeriesId   string `json:"series_id"`
+			ResourceId string `json:"resource_id"`
+			LogicalKey string `json:"logical_key"`
+			Key        string `json:"key"`
+			Unit       string `json:"unit"`
+			Schema     string `json:"schema"`
+			Source     string `json:"source"`
+		} `json:"items"`
+		NextCursor *string     `json:"next_cursor"`
+		Coverage   APICoverage `json:"coverage"`
+		Revision   string      `json:"revision"`
+	} `json:"data"`
 }
 
 type APIQueryResponseEventsList struct {
@@ -1733,6 +1889,36 @@ type APIQueryResponseOperationsList struct {
 		Coverage   APICoverage    `json:"coverage"`
 		Revision   string         `json:"revision"`
 	} `json:"data"`
+}
+
+type APITransferReceipt struct {
+	SchemaVersion string `json:"schema_version"`
+	TransferId    string `json:"transfer_id"`
+	ReceivedBytes int64  `json:"received_bytes"`
+	Sha256        string `json:"sha256"`
+	Ready         bool   `json:"ready"`
+}
+
+type APILocalTransferInput struct {
+	TransferId string `json:"transfer_id"`
+	SizeBytes  int64  `json:"size_bytes"`
+	Sha256     string `json:"sha256"`
+}
+
+type APIFileReconcileInput struct {
+	RecordId        string  `json:"record_id"`
+	ExpectedVersion string  `json:"expected_version"`
+	State           string  `json:"state"`
+	ObservedProof   *string `json:"observed_proof,omitempty"`
+}
+
+type APIInventoryConfirmationInput struct {
+	KnownRegions       []string `json:"known_regions"`
+	AbsentOperationIds []string `json:"absent_operation_ids"`
+	ArtifactBindings   *[]struct {
+		ArtifactId string `json:"artifact_id"`
+		RegionPath string `json:"region_path"`
+	} `json:"artifact_bindings,omitempty"`
 }
 
 type APIPrepareRequest = json.RawMessage
@@ -2483,22 +2669,13 @@ type APIWssChangesOperations struct {
 }
 
 type APIWssChangesProblems struct {
-	SchemaVersion  string    `json:"schema_version"`
-	SubscriptionId string    `json:"subscription_id"`
-	ServerTime     Timestamp `json:"server_time"`
-	Type           string    `json:"type"`
-	Topic          string    `json:"topic"`
-	Data           []struct {
-		ProblemId  string    `json:"problem_id"`
-		RuleId     string    `json:"rule_id"`
-		ResourceId string    `json:"resource_id"`
-		State      string    `json:"state"`
-		Since      Timestamp `json:"since"`
-		ObservedAt Timestamp `json:"observed_at"`
-		Severity   string    `json:"severity"`
-		Code       string    `json:"code"`
-	} `json:"data"`
-	Cursor string `json:"cursor"`
+	SchemaVersion  string            `json:"schema_version"`
+	SubscriptionId string            `json:"subscription_id"`
+	ServerTime     Timestamp         `json:"server_time"`
+	Type           string            `json:"type"`
+	Topic          string            `json:"topic"`
+	Data           []json.RawMessage `json:"data"`
+	Cursor         string            `json:"cursor"`
 }
 
 type APIWssChangesStorage struct {
@@ -3423,6 +3600,116 @@ type IPCOperationStorageRestore struct {
 	DedupUntil *Timestamp `json:"dedup_until,omitempty"`
 }
 
+type IPCOperationStorageInventoryConfirm struct {
+	OperationId string `json:"operation_id"`
+	Revision    string `json:"revision"`
+	Initiator   struct {
+		Kind string `json:"kind"`
+		Id   string `json:"id"`
+	} `json:"initiator"`
+	Action       string    `json:"action"`
+	ObjectRef    string    `json:"object_ref"`
+	State        string    `json:"state"`
+	Phase        string    `json:"phase"`
+	CreatedAt    Timestamp `json:"created_at"`
+	UpdatedAt    Timestamp `json:"updated_at"`
+	EffectStatus string    `json:"effect_status"`
+	AuditStatus  string    `json:"audit_status"`
+	Cancellable  bool      `json:"cancellable"`
+	Progress     *struct {
+		Completed U64    `json:"completed"`
+		Total     *U64   `json:"total"`
+		Unit      string `json:"unit"`
+	} `json:"progress,omitempty"`
+	Result *struct {
+		InventoryAttested bool `json:"inventory_attested"`
+	} `json:"result,omitempty"`
+	Error      *IPCError  `json:"error,omitempty"`
+	DedupUntil *Timestamp `json:"dedup_until,omitempty"`
+}
+
+type IPCOperationSystemFilesCleanup struct {
+	OperationId string `json:"operation_id"`
+	Revision    string `json:"revision"`
+	Initiator   struct {
+		Kind string `json:"kind"`
+		Id   string `json:"id"`
+	} `json:"initiator"`
+	Action       string    `json:"action"`
+	ObjectRef    string    `json:"object_ref"`
+	State        string    `json:"state"`
+	Phase        string    `json:"phase"`
+	CreatedAt    Timestamp `json:"created_at"`
+	UpdatedAt    Timestamp `json:"updated_at"`
+	EffectStatus string    `json:"effect_status"`
+	AuditStatus  string    `json:"audit_status"`
+	Cancellable  bool      `json:"cancellable"`
+	Progress     *struct {
+		Completed U64    `json:"completed"`
+		Total     *U64   `json:"total"`
+		Unit      string `json:"unit"`
+	} `json:"progress,omitempty"`
+	Result *struct {
+		Cleaned bool `json:"cleaned"`
+	} `json:"result,omitempty"`
+	Error      *IPCError  `json:"error,omitempty"`
+	DedupUntil *Timestamp `json:"dedup_until,omitempty"`
+}
+
+type IPCOperationSystemFilesRotate struct {
+	OperationId string `json:"operation_id"`
+	Revision    string `json:"revision"`
+	Initiator   struct {
+		Kind string `json:"kind"`
+		Id   string `json:"id"`
+	} `json:"initiator"`
+	Action       string    `json:"action"`
+	ObjectRef    string    `json:"object_ref"`
+	State        string    `json:"state"`
+	Phase        string    `json:"phase"`
+	CreatedAt    Timestamp `json:"created_at"`
+	UpdatedAt    Timestamp `json:"updated_at"`
+	EffectStatus string    `json:"effect_status"`
+	AuditStatus  string    `json:"audit_status"`
+	Cancellable  bool      `json:"cancellable"`
+	Progress     *struct {
+		Completed U64    `json:"completed"`
+		Total     *U64   `json:"total"`
+		Unit      string `json:"unit"`
+	} `json:"progress,omitempty"`
+	Result *struct {
+		Rotated bool `json:"rotated"`
+	} `json:"result,omitempty"`
+	Error      *IPCError  `json:"error,omitempty"`
+	DedupUntil *Timestamp `json:"dedup_until,omitempty"`
+}
+
+type IPCOperationFilesReconcile struct {
+	OperationId string `json:"operation_id"`
+	Revision    string `json:"revision"`
+	Initiator   struct {
+		Kind string `json:"kind"`
+		Id   string `json:"id"`
+	} `json:"initiator"`
+	Action       string    `json:"action"`
+	ObjectRef    string    `json:"object_ref"`
+	State        string    `json:"state"`
+	Phase        string    `json:"phase"`
+	CreatedAt    Timestamp `json:"created_at"`
+	UpdatedAt    Timestamp `json:"updated_at"`
+	EffectStatus string    `json:"effect_status"`
+	AuditStatus  string    `json:"audit_status"`
+	Cancellable  bool      `json:"cancellable"`
+	Progress     *struct {
+		Completed U64    `json:"completed"`
+		Total     *U64   `json:"total"`
+		Unit      string `json:"unit"`
+	} `json:"progress,omitempty"`
+	Result     *json.RawMessage `json:"result,omitempty"`
+	Error      *IPCError        `json:"error,omitempty"`
+	DedupUntil *Timestamp       `json:"dedup_until,omitempty"`
+}
+
 type IPCOperationModulesRegister struct {
 	OperationId string `json:"operation_id"`
 	Revision    string `json:"revision"`
@@ -3461,6 +3748,17 @@ type IPCError struct {
 		LatestCursor   *string `json:"latest_cursor,omitempty"`
 		RetryAfterMs   *int64  `json:"retry_after_ms,omitempty"`
 		EffectStatus   *string `json:"effect_status,omitempty"`
+		ActiveProblems *[]struct {
+			ProblemId  string    `json:"problem_id"`
+			RuleId     string    `json:"rule_id"`
+			ResourceId string    `json:"resource_id"`
+			State      string    `json:"state"`
+			Since      Timestamp `json:"since"`
+			ObservedAt Timestamp `json:"observed_at"`
+			Severity   string    `json:"severity"`
+			Code       string    `json:"code"`
+		} `json:"active_problems,omitempty"`
+		ActiveProblemsMore *bool `json:"active_problems_more,omitempty"`
 	} `json:"details,omitempty"`
 }
 
@@ -3574,16 +3872,17 @@ type IPCSeriesPage struct {
 		StepMs   int64       `json:"step_ms"`
 		Coverage IPCCoverage `json:"coverage"`
 		Points   []struct {
-			BucketId    string    `json:"bucket_id"`
-			Revision    string    `json:"revision"`
-			SegmentId   string    `json:"segment_id"`
-			From        Timestamp `json:"from"`
-			To          Timestamp `json:"to"`
-			StepMs      int64     `json:"step_ms"`
-			CoveredMs   int64     `json:"covered_ms"`
-			SampleCount int64     `json:"sample_count"`
-			Complete    bool      `json:"complete"`
-			Statistics  struct {
+			BucketId         string    `json:"bucket_id"`
+			Revision         string    `json:"revision"`
+			SegmentId        string    `json:"segment_id"`
+			From             Timestamp `json:"from"`
+			To               Timestamp `json:"to"`
+			StepMs           int64     `json:"step_ms"`
+			CoveredMs        int64     `json:"covered_ms"`
+			CounterCoveredMs *int64    `json:"counter_covered_ms,omitempty"`
+			SampleCount      int64     `json:"sample_count"`
+			Complete         bool      `json:"complete"`
+			Statistics       struct {
 				Mean         *float64         `json:"mean,omitempty"`
 				Min          *float64         `json:"min,omitempty"`
 				Max          *float64         `json:"max,omitempty"`
@@ -3712,6 +4011,18 @@ type IPCQueryRequestHistoryGet struct {
 		To        Timestamp `json:"to"`
 		MaxPoints int64     `json:"max_points"`
 		Cursor    *string   `json:"cursor,omitempty"`
+	} `json:"params"`
+}
+
+type IPCQueryRequestHistorySeries struct {
+	SchemaVersion string `json:"schema_version"`
+	RequestId     string `json:"request_id"`
+	Query         string `json:"query"`
+	Params        struct {
+		MetricKey  *string `json:"metric_key,omitempty"`
+		LogicalKey *string `json:"logical_key,omitempty"`
+		Cursor     *string `json:"cursor,omitempty"`
+		Limit      *int64  `json:"limit,omitempty"`
 	} `json:"params"`
 }
 
@@ -3953,6 +4264,28 @@ type IPCQueryResponseHistoryGet struct {
 	ServedAt      Timestamp     `json:"served_at"`
 	Query         string        `json:"query"`
 	Data          IPCSeriesPage `json:"data"`
+}
+
+type IPCQueryResponseHistorySeries struct {
+	SchemaVersion string    `json:"schema_version"`
+	RequestId     string    `json:"request_id"`
+	AgentId       string    `json:"agent_id"`
+	ServedAt      Timestamp `json:"served_at"`
+	Query         string    `json:"query"`
+	Data          struct {
+		Items []struct {
+			SeriesId   string `json:"series_id"`
+			ResourceId string `json:"resource_id"`
+			LogicalKey string `json:"logical_key"`
+			Key        string `json:"key"`
+			Unit       string `json:"unit"`
+			Schema     string `json:"schema"`
+			Source     string `json:"source"`
+		} `json:"items"`
+		NextCursor *string     `json:"next_cursor"`
+		Coverage   IPCCoverage `json:"coverage"`
+		Revision   string      `json:"revision"`
+	} `json:"data"`
 }
 
 type IPCQueryResponseEventsList struct {
@@ -4288,6 +4621,36 @@ type IPCQueryResponseOperationsList struct {
 		Coverage   IPCCoverage    `json:"coverage"`
 		Revision   string         `json:"revision"`
 	} `json:"data"`
+}
+
+type IPCTransferReceipt struct {
+	SchemaVersion string `json:"schema_version"`
+	TransferId    string `json:"transfer_id"`
+	ReceivedBytes int64  `json:"received_bytes"`
+	Sha256        string `json:"sha256"`
+	Ready         bool   `json:"ready"`
+}
+
+type IPCLocalTransferInput struct {
+	TransferId string `json:"transfer_id"`
+	SizeBytes  int64  `json:"size_bytes"`
+	Sha256     string `json:"sha256"`
+}
+
+type IPCFileReconcileInput struct {
+	RecordId        string  `json:"record_id"`
+	ExpectedVersion string  `json:"expected_version"`
+	State           string  `json:"state"`
+	ObservedProof   *string `json:"observed_proof,omitempty"`
+}
+
+type IPCInventoryConfirmationInput struct {
+	KnownRegions       []string `json:"known_regions"`
+	AbsentOperationIds []string `json:"absent_operation_ids"`
+	ArtifactBindings   *[]struct {
+		ArtifactId string `json:"artifact_id"`
+		RegionPath string `json:"region_path"`
+	} `json:"artifact_bindings,omitempty"`
 }
 
 type IPCPrepareRequest = json.RawMessage
@@ -5038,22 +5401,13 @@ type IPCWssChangesOperations struct {
 }
 
 type IPCWssChangesProblems struct {
-	SchemaVersion  string    `json:"schema_version"`
-	SubscriptionId string    `json:"subscription_id"`
-	ServerTime     Timestamp `json:"server_time"`
-	Type           string    `json:"type"`
-	Topic          string    `json:"topic"`
-	Data           []struct {
-		ProblemId  string    `json:"problem_id"`
-		RuleId     string    `json:"rule_id"`
-		ResourceId string    `json:"resource_id"`
-		State      string    `json:"state"`
-		Since      Timestamp `json:"since"`
-		ObservedAt Timestamp `json:"observed_at"`
-		Severity   string    `json:"severity"`
-		Code       string    `json:"code"`
-	} `json:"data"`
-	Cursor string `json:"cursor"`
+	SchemaVersion  string            `json:"schema_version"`
+	SubscriptionId string            `json:"subscription_id"`
+	ServerTime     Timestamp         `json:"server_time"`
+	Type           string            `json:"type"`
+	Topic          string            `json:"topic"`
+	Data           []json.RawMessage `json:"data"`
+	Cursor         string            `json:"cursor"`
 }
 
 type IPCWssChangesStorage struct {

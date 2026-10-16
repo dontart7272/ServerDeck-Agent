@@ -40,11 +40,13 @@ func LocalPeer(uid uint32) Initiator {
 	}
 	return Initiator{id: "local:" + strconv.FormatUint(uint64(uid), 10)}
 }
-func PairingInitiator() Initiator { return Initiator{id: "system:pairing"} }
-func (a Initiator) ID() string    { return a.id }
+func PairingInitiator() Initiator         { return Initiator{id: "system:pairing"} }
+func FileMaintenanceInitiator() Initiator { return Initiator{id: "system:files"} }
+func (a Initiator) ID() string            { return a.id }
 
 type Request struct {
 	ID, Action, Expected, Plan string
+	Actor                      string
 	Params                     []byte
 	Credential                 *storage.Credential
 }
@@ -131,6 +133,10 @@ func (s *Service) fingerprint(a Initiator, r Request) ([]byte, error) {
 }
 func (s *Service) reject(ctx context.Context, a Initiator, r Request, e error) error {
 	code := "INVALID_REQUEST"
+	switch e.Error() {
+	case "PROTECTED_OBJECT", "OBJECT_CHANGED", "NOT_FOUND", "PERMISSION_DENIED":
+		code = e.Error()
+	}
 	for _, x := range []error{storage.ErrVersion, storage.ErrConflict, storage.ErrBusy, ErrPlan, ErrAction, storage.ErrSafety} {
 		if errors.Is(e, x) {
 			code = x.Error()
@@ -142,6 +148,8 @@ func (s *Service) reject(ctx context.Context, a Initiator, r Request, e error) e
 	return e
 }
 func (s *Service) Prepare(ctx context.Context, a Initiator, r Request) (Plan, error) {
+	r.Actor = a.ID()
+	r.Credential = a.credential
 	if e := s.authorized(ctx, a, r); e != nil {
 		return Plan{}, e
 	}
@@ -218,6 +226,8 @@ func (s *Service) Get(ctx context.Context, id string) (storage.Operation, error)
 	return s.store.Lookup(ctx, id)
 }
 func (s *Service) Execute(ctx context.Context, a Initiator, r Request) (storage.Operation, error) {
+	r.Actor = a.ID()
+	r.Credential = a.credential
 	if e := s.authorized(ctx, a, r); e != nil {
 		return storage.Operation{}, e
 	}
@@ -299,7 +309,7 @@ func (s *Service) Execute(ctx context.Context, a Initiator, r Request) (storage.
 	// Only an explicit Cancel may win the transition into the effect phase.
 	{
 		if e = h.Check(context.Background(), r); e != nil {
-			out = Outcome{State: "rejected", Effect: "none", Code: "VERSION_CONFLICT", Result: []byte("null")}
+			out = Outcome{State: "rejected", Effect: "none", Code: checkedErrorCode(e), Result: []byte("null")}
 		} else if !x.phase.CompareAndSwap(0, 2) {
 			out = Outcome{State: "cancelled", Effect: "none", Code: "CANCELLED", Result: []byte("null")}
 		} else if e = s.store.MarkRunningAuthorized(context.Background(), r.ID, a.credential); e != nil {
@@ -519,4 +529,12 @@ func (s *Service) Maintenance(fn func() error) error {
 	s.mu.Unlock()
 	defer func() { s.mu.Lock(); s.maintenance = false; s.mu.Unlock() }()
 	return fn()
+}
+
+func checkedErrorCode(e error) string {
+	switch e.Error() {
+	case "PERMISSION_DENIED", "PROTECTED_OBJECT", "OBJECT_CHANGED", "NOT_FOUND", "SAFETY_UNAVAILABLE", "VERSION_CONFLICT", "STORAGE_UNAVAILABLE", "AUDIT_UNAVAILABLE", "SOURCE_UNAVAILABLE", "INVALID_REQUEST", "LIMIT_EXCEEDED", "QUOTA_EXCEEDED", "BUSY", "RATE_LIMITED":
+		return e.Error()
+	}
+	return "SAFETY_UNAVAILABLE"
 }

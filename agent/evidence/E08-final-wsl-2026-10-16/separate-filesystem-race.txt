@@ -1,0 +1,9 @@
+=== RUN   TestE08NativeFullAndReadOnlyPreserveOriginal
+--- PASS: TestE08NativeFullAndReadOnlyPreserveOriginal (0.92s)
+=== RUN   TestE08NativeSeparateFilesystem
+    files_linux_test.go:541: PASS actual native protection rejects own FS and permits separately mounted temporary data FS
+--- PASS: TestE08NativeSeparateFilesystem (3.47s)
+=== RUN   TestE08UnregisteredRestoredStateNeverExposesKey
+    files_linux_test.go:811: PASS actual backup/restore created a separate own-key tree; live read refused without complete inventory; key bytes were never returned or logged
+--- PASS: TestE08UnregisteredRestoredStateNeverExposesKey (0.30s)
+PASS

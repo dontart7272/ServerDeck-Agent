@@ -1,0 +1,23 @@
+uid=0(root) gid=0(root) groups=0(root)
+Linux LABS-KOMPANIETS 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+0d0d64cfffbdff29930342156fd03c6173828fbf421d40cc6eaf7cc74ddd9d32  /home/dontart7272/serverdeck-e07-final-2026-10-15/processcontrol.test
+0d0d64cfffbdff29930342156fd03c6173828fbf421d40cc6eaf7cc74ddd9d32  /tmp/serverdeck-e07.YDe8Gx/processcontrol.test
+=== RUN   TestPidfdSignalsIdentityProtectionAndNoFallback
+--- PASS: TestPidfdSignalsIdentityProtectionAndNoFallback (0.00s)
+=== RUN   TestPinnedDeadProcessCannotSignalNewChild
+--- PASS: TestPinnedDeadProcessCannotSignalNewChild (0.00s)
+=== RUN   TestTERMDoesNotEscalateKILLIsSeparate
+--- PASS: TestTERMDoesNotEscalateKILLIsSeparate (1.01s)
+=== RUN   TestPID1AgentStillProtectsItsChildren
+--- PASS: TestPID1AgentStillProtectsItsChildren (0.00s)
+PASS
+=== RUN   TestIsolatedForeignUID
+    controller_linux_test.go:237: === RUN   TestForeignUIDHelper
+        --- PASS: TestForeignUIDHelper (0.00s)
+        PASS
+        
+--- PASS: TestIsolatedForeignUID (0.01s)
+PASS
+=== RUN   TestIsolatedPingPermissionDenied
+--- PASS: TestIsolatedPingPermissionDenied (0.00s)
+PASS

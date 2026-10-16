@@ -36,7 +36,13 @@ type Metric struct {
 	Source       string               `json:"source"`
 	Reason       *string              `json:"reason"`
 }
+
+// MonotonicElapsed is process-local observation time, not a wall-clock duration.
+// It is intentionally absent from JSON and must not be restored across runs.
+func (m Metric) MonotonicElapsed() time.Duration { return m.measuredMono }
+
 type Block struct {
+	nestedTimes  map[string]time.Duration
 	ID           string               `json:"block_id"`
 	Mode         string               `json:"collection_mode"`
 	ObservedAt   *contracts.Timestamp `json:"observed_at"`
@@ -100,6 +106,28 @@ func measure(b *Block, key, resource, unit string, value any, availability, reas
 	b.Metrics = append(b.Metrics, m)
 }
 func record(b *Block, v any) {
+	if b.nestedTimes == nil {
+		b.nestedTimes = map[string]time.Duration{}
+	}
+	var capture func(any)
+	capture = func(value any) {
+		switch n := value.(type) {
+		case []Metric:
+			for _, m := range n {
+				b.nestedTimes[m.ResourceID+"/"+m.Key] = m.measuredMono
+			}
+		case map[string]any:
+			for _, child := range n {
+				capture(child)
+			}
+		case []any:
+			for _, child := range n {
+				capture(child)
+			}
+		}
+	}
+	capture(v)
+
 	data, e := json.Marshal(v)
 	if e == nil {
 		b.Records = append(b.Records, data)

@@ -154,7 +154,7 @@ func Open(ctx context.Context, path, installation string, seed []byte, create bo
 		if e = s.migrate(ctx, installation, seed); e != nil {
 			return nil, e
 		}
-	} else if version != 1 && version != 2 {
+	} else if version != 1 && version != 2 && version != 3 && version != 4 && version != 5 {
 		return nil, ErrSchema
 	}
 	if e = s.compatibility(ctx); e != nil {
@@ -183,7 +183,13 @@ func Open(ctx context.Context, path, installation string, seed []byte, create bo
 	if e = s.db.QueryRowContext(ctx, "PRAGMA page_size").Scan(&page); e != nil || page != 4096 {
 		return nil, ErrSchema
 	}
-	if e = s.migrateAuth(ctx); e != nil {
+	if e = migrateRulesAfterAuth(ctx, s.db); e != nil {
+		return nil, e
+	}
+	if e = migrateInventoryDB(ctx, s.db); e != nil {
+		return nil, e
+	}
+	if e = migrateFilesDB(ctx, s.db); e != nil {
 		return nil, e
 	}
 	if e = s.compatibility(ctx); e != nil {
@@ -285,7 +291,7 @@ func (s *Store) compatibility(ctx context.Context) error {
 	if s.db.QueryRowContext(ctx, "PRAGMA application_id").Scan(&app) != nil || app != applicationID {
 		return ErrSchema
 	}
-	if s.db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&v) != nil || (v != 1 && v != 2) {
+	if s.db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&v) != nil || (v != 1 && v != 2 && v != 3 && v != 4 && v != 5) {
 		return ErrSchema
 	}
 	if s.db.QueryRowContext(ctx, "SELECT count(*),coalesce(max(checksum),'') FROM schema_migrations WHERE version=1").Scan(&count, &checksum) != nil {
@@ -308,7 +314,7 @@ func (s *Store) compatibility(ctx context.Context) error {
 	if _, e = expected.ExecContext(ctx, migration); e != nil {
 		return ErrSchema
 	}
-	if v == 2 {
+	if v >= 2 {
 		hash := sha256.Sum256([]byte(authMigration))
 		if s.db.QueryRowContext(ctx, "SELECT checksum FROM schema_migrations WHERE version=2").Scan(&checksum) != nil || checksum != hex.EncodeToString(hash[:]) {
 			return ErrSchema
@@ -321,6 +327,36 @@ func (s *Store) compatibility(ctx context.Context) error {
 		var x string
 		e := db.QueryRowContext(ctx, `SELECT group_concat(type||':'||name||':'||coalesce(sql,''),char(10)) FROM (SELECT type,name,sql FROM sqlite_schema WHERE name NOT LIKE 'sqlite_%' ORDER BY type,name)`).Scan(&x)
 		return x, e
+	}
+	if v >= 3 {
+		hash := sha256.Sum256([]byte(rulesMigration))
+		if s.db.QueryRowContext(ctx, "SELECT checksum FROM schema_migrations WHERE version=3").Scan(&checksum) != nil || checksum != hex.EncodeToString(hash[:]) {
+			return ErrSchema
+		}
+		if _, e = expected.ExecContext(ctx, rulesMigration); e != nil {
+			return ErrSchema
+		}
+	}
+	if v >= 4 {
+		h := sha256.Sum256([]byte(inventoryMigration))
+		if s.db.QueryRowContext(ctx, "SELECT checksum FROM schema_migrations WHERE version=4").Scan(&checksum) != nil || checksum != hex.EncodeToString(h[:]) {
+			return ErrSchema
+		}
+		if _, e = expected.ExecContext(ctx, inventoryMigration); e != nil {
+			return ErrSchema
+		}
+		if _, e = inventoryFromDB(ctx, s.db); e != nil {
+			return e
+		}
+	}
+	if v >= 5 {
+		h := sha256.Sum256([]byte(filesMigration))
+		if s.db.QueryRowContext(ctx, "SELECT checksum FROM schema_migrations WHERE version=5").Scan(&checksum) != nil || checksum != hex.EncodeToString(h[:]) {
+			return ErrSchema
+		}
+		if _, e = expected.ExecContext(ctx, filesMigration); e != nil {
+			return ErrSchema
+		}
 	}
 	a, e := schema(s.db)
 	if e != nil {
@@ -575,6 +611,23 @@ func (s *Store) Settings(ctx context.Context) ([]byte, int64, error) {
 		return s.db.QueryRowContext(ctx, "SELECT document,revision FROM settings WHERE singleton=1").Scan(&b, &rev)
 	})
 	return b, rev, e
+}
+
+// Cleanup observes durable truth; it does not bypass the audit retention clock.
+func (s *Store) AuditRetentionPending(ctx context.Context, before int64) (bool, error) {
+	var pending bool
+	err := s.read(ctx, func(ctx context.Context) error {
+		return s.db.QueryRowContext(ctx, "SELECT EXISTS(SELECT 1 FROM audit WHERE at<?)", before).Scan(&pending)
+	})
+	return pending, err
+}
+
+func (s *Store) RetentionClockTrusted(ctx context.Context) bool {
+	trusted := false
+	if s.read(ctx, func(context.Context) error { trusted = s.trustworthyClock(time.Now()); return nil }) != nil {
+		return false
+	}
+	return trusted
 }
 func (s *Store) ApplySettings(ctx context.Context, operationID string, expected int64, b []byte) error {
 	if len(b) > 65536 || validateRuntime(b) != nil {

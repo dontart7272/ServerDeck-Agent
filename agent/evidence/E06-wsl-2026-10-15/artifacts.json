@@ -1,0 +1,76 @@
+{
+  "files": [
+    {
+      "path": "adapters-environment.txt",
+      "sha256": "a71d7e125763080f545ba02779d25a8818cf4ad2843c0986e2294d03dfb03b35"
+    },
+    {
+      "path": "binaries.sha256",
+      "sha256": "1f10aec2390cacbbcd775cdc69f64a9736e93aa42314079a63a2169da2d06179"
+    },
+    {
+      "path": "build-inputs.json",
+      "sha256": "8d65de2415f736e179836ef10fe07fd1593a1129e04a3b5231d8d3f654812915"
+    },
+    {
+      "path": "diff-check.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs-check.txt",
+      "sha256": "b0d822c8ab05d20595372a698d4581dd29b982f0fb94e8d6997412f823b0f8ea"
+    },
+    {
+      "path": "docs-snapshot.json",
+      "sha256": "26428618140aea95cc8949defb5333c0987db8b3e3e5403b9db0eeeafff7666d"
+    },
+    {
+      "path": "elf.txt",
+      "sha256": "ac1843856e9275255ef1f5f1373ff4c6b57f38d10f56e0d8eebd0a3794d89222"
+    },
+    {
+      "path": "extra-commands.sh",
+      "sha256": "532cfee5a4ad4af2065d1dcdd3f28a3206027169d58729ed1a57ba18a92965d1"
+    },
+    {
+      "path": "linux-checks.txt",
+      "sha256": "cfbaa19cf9fba3ac030dcfda34b213ee36b095e8242a616945cadadba3336894"
+    },
+    {
+      "path": "modules.json",
+      "sha256": "30e318b2dc8bfd2c85989573152b2b7bf6071387402e27eecb1e69ebe64d6d82"
+    },
+    {
+      "path": "nvml-provenance.json",
+      "sha256": "7f20ef5938c1f982cf00c43dd0c6281e8044496514c2c8b2ed177a074b381034"
+    },
+    {
+      "path": "pre-final-checks.txt",
+      "sha256": "cc5c5794c56ac336c3f3acd2e4fe9197042479d32fe32f22546654f82b46beea"
+    },
+    {
+      "path": "pre-final-source-copy.json",
+      "sha256": "f38615b2d95d71066dfd9891b9bba5c0c9030cfcf1b38454a9da607ca4df5ccf"
+    },
+    {
+      "path": "README.md",
+      "sha256": "0e7c13ba3e17643b11b32fa11132269d7c19f925b4eb74a995e8440f4b2780e9"
+    },
+    {
+      "path": "runtime-packages.txt",
+      "sha256": "74d275abb79f4f2052252be9a741a3b49891371a0ed6eefb0825c2bab7f2c90a"
+    },
+    {
+      "path": "seal.py",
+      "sha256": "fe4d509a68f1c7221eb391f5f0a472e05ec610e557b0a4208f976bd8de28907d"
+    },
+    {
+      "path": "source-copy.json",
+      "sha256": "06981df4d9ee2950f0c28a6d3768f3914960541502ad31b8f0db19345935b28d"
+    },
+    {
+      "path": "wsl-distributions.txt",
+      "sha256": "f31a6a354d47c7c3bea972d442dc62855f7bc6553282a6fec888c5b72a7aff28"
+    }
+  ]
+}

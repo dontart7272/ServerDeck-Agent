@@ -54,7 +54,7 @@ func TestAuthMigrationPreservesV1ChecksumAndDisablesLegacyPlaceholders(t *testin
 	s.db.QueryRow("PRAGMA user_version").Scan(&version)
 	s.db.QueryRow("SELECT checksum FROM schema_migrations WHERE version=1").Scan(&checksum)
 	original := sha256.Sum256([]byte(migration))
-	if version != 2 || checksum != hex.EncodeToString(original[:]) {
+	if version != 5 || checksum != hex.EncodeToString(original[:]) {
 		t.Fatal("migration changed v1 history")
 	}
 	if _, e = s.Authenticate(ctx, hash); !errors.Is(e, ErrUnauthorized) {
@@ -126,7 +126,7 @@ func TestRealV1BackupRestoresThroughV2Migration(t *testing.T) {
 	}
 	running(t, legacy, testOperation, "storage.backup", "storage.maintenance")
 	backup := filepath.Join(base, "v1-backup")
-	if e = legacy.Backup(ctx, testOperation, backup); e != nil {
+	if e = createLegacyBackupFixture(ctx, legacy, backup); e != nil {
 		t.Fatal(e)
 	}
 	if e = legacy.Finish(ctx, testOperation, "succeeded", "applied", "", []byte(`{"complete":true}`)); e != nil {
@@ -159,7 +159,7 @@ func TestRealV1BackupRestoresThroughV2Migration(t *testing.T) {
 	}
 	var version int
 	restored.db.QueryRow("PRAGMA user_version").Scan(&version)
-	if version != 2 {
+	if version != 5 {
 		t.Fatal("legacy backup not migrated")
 	}
 }
@@ -173,4 +173,47 @@ func TestOpenRejectsBootstrapInstallationMismatch(t *testing.T) {
 		}
 		t.Fatal("wrong installation accepted")
 	}
+}
+
+// Exercise an actual schema1 backup rather than asking the current writer to
+// bypass its mandatory inventory migration.
+func createLegacyBackupFixture(ctx context.Context, s *Store, path string) error {
+	f, e := s.exportFloor(ctx)
+	if e != nil {
+		return e
+	}
+	dir, e := privateDir(path, true)
+	if e != nil {
+		return e
+	}
+	defer dir.Close()
+	file, _, e := privateFile(dir, "critical.db", true)
+	if e != nil {
+		return e
+	}
+	file.Close()
+	dst, e := openDB(descriptorPath(dir)+"/critical.db", false)
+	if e != nil {
+		return e
+	}
+	if e = copyDatabase(ctx, s.db, dst); e != nil {
+		dst.Close()
+		return e
+	}
+	if _, e = dst.ExecContext(ctx, "PRAGMA journal_mode=DELETE"); e != nil {
+		dst.Close()
+		return e
+	}
+	if e = dst.Close(); e != nil {
+		return e
+	}
+	hash, n, e := digestFile(dir, "critical.db", s.limits.PhysicalBytes)
+	if e != nil {
+		return e
+	}
+	b, e := s.seal(backupManifest{Version: 1, Installation: f.Installation, Schema: 1, Generation: f.Generation, SHA256: hash, Bytes: n, Consistent: true})
+	if e != nil {
+		return e
+	}
+	return syncWrite(dir, "manifest.json", b)
 }

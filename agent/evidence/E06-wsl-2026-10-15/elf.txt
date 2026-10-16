@@ -1,0 +1,62 @@
+
+BINARY dist/linux-amd64/serverdeck-agent
+dist/linux-amd64/serverdeck-agent: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=6b780cf5f653c92a27879355d5fafc7eab4b9a28, for GNU/Linux 3.2.0, with debug_info, not stripped
+  Class:                             ELF64
+  Type:                              EXEC (Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+GLIBC_2.2.5
+GLIBC_2.3.2
+GLIBC_2.3.4
+GLIBC_2.4
+GLIBC_2.14
+GLIBC_2.28
+GLIBC_2.32
+GLIBC_2.33
+GLIBC_2.34
+
+BINARY dist/linux-amd64/serverdeckctl
+dist/linux-amd64/serverdeckctl: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=dde272bd03db1554175ded97e4a08c6c91dbca2a, for GNU/Linux 3.2.0, with debug_info, not stripped
+  Class:                             ELF64
+  Type:                              EXEC (Executable file)
+  Machine:                           Advanced Micro Devices X86-64
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+GLIBC_2.2.5
+GLIBC_2.3.2
+GLIBC_2.3.4
+GLIBC_2.4
+GLIBC_2.14
+GLIBC_2.28
+GLIBC_2.32
+GLIBC_2.33
+GLIBC_2.34
+
+BINARY dist/linux-arm64/serverdeck-agent
+dist/linux-arm64/serverdeck-agent: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, BuildID[sha1]=c3575e0801a3728d1a204559187ad6fea33b5e43, for GNU/Linux 3.7.0, with debug_info, not stripped
+  Class:                             ELF64
+  Type:                              EXEC (Executable file)
+  Machine:                           AArch64
+      [Requesting program interpreter: /lib/ld-linux-aarch64.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [ld-linux-aarch64.so.1]
+GLIBC_2.17
+GLIBC_2.28
+GLIBC_2.32
+GLIBC_2.33
+GLIBC_2.34
+
+BINARY dist/linux-arm64/serverdeckctl
+dist/linux-arm64/serverdeckctl: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-aarch64.so.1, BuildID[sha1]=0df4cad711f44f93d34f54691d23aab79ca510f2, for GNU/Linux 3.7.0, with debug_info, not stripped
+  Class:                             ELF64
+  Type:                              EXEC (Executable file)
+  Machine:                           AArch64
+      [Requesting program interpreter: /lib/ld-linux-aarch64.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [ld-linux-aarch64.so.1]
+GLIBC_2.17
+GLIBC_2.28
+GLIBC_2.32
+GLIBC_2.33
+GLIBC_2.34

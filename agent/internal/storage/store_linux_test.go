@@ -63,7 +63,7 @@ func running(t *testing.T, s *Store, id, action, key string) {
 func TestDurabilityMigrationPermissions(t *testing.T) {
 	s, path := testStore(t, DefaultLimits())
 	ctx := context.Background()
-	for p, want := range map[string]int{"PRAGMA synchronous": 2, "PRAGMA foreign_keys": 1, "PRAGMA page_size": 4096, "PRAGMA user_version": 2} {
+	for p, want := range map[string]int{"PRAGMA synchronous": 2, "PRAGMA foreign_keys": 1, "PRAGMA page_size": 4096, "PRAGMA user_version": 5} {
 		var got int
 		if s.db.QueryRow(p).Scan(&got) != nil || got != want {
 			t.Fatalf("%s=%d", p, got)
@@ -99,7 +99,7 @@ func TestMigrationAndCorruptionFailClosed(t *testing.T) {
 			s, path := testStore(t, DefaultLimits())
 			switch kind {
 			case "future":
-				s.db.Exec("PRAGMA user_version=3")
+				s.db.Exec("PRAGMA user_version=6")
 			case "checksum":
 				s.db.Exec("UPDATE schema_migrations SET checksum='bad'")
 			case "extra_table":
@@ -277,6 +277,11 @@ func TestBackupRestoreSecurityFloor(t *testing.T) {
 	if _, e := s.db.Exec("INSERT INTO devices(id,token_hash,revoked) VALUES(?,?,0)", testDevice, bytes.Repeat([]byte{7}, 32)); e != nil {
 		t.Fatal(e)
 	}
+	// The directed credential fixture must advance authority just like E03's
+	// real credential transaction; unchanged-generation tampering is rejected.
+	if _, e := s.db.Exec("UPDATE identity SET security_generation=security_generation+1"); e != nil {
+		t.Fatal(e)
+	}
 	backup := filepath.Join(filepath.Dir(path), "backup")
 	running(t, s, testOperation, "storage.backup", "storage.maintenance")
 	if e := s.Backup(ctx, testOperation, backup); e != nil {
@@ -284,7 +289,7 @@ func TestBackupRestoreSecurityFloor(t *testing.T) {
 	}
 	s.Finish(ctx, testOperation, "succeeded", "applied", "", []byte("null"))
 	// Directed E03/E11 fixture: no real token/auth endpoint or policy API exists.
-	if _, e := s.db.Exec("UPDATE devices SET revoked=1,token_hash=NULL;UPDATE identity SET security_generation=2;UPDATE security_policy SET document=?", []byte(`{"deny_actions":["files.trash"],"max_changes":2}`)); e != nil {
+	if _, e := s.db.Exec("UPDATE devices SET revoked=1,token_hash=NULL;UPDATE identity SET security_generation=security_generation+1;UPDATE security_policy SET document=?", []byte(`{"deny_actions":["files.trash"],"max_changes":2}`)); e != nil {
 		t.Fatal(e)
 	}
 	id := "44444444-4444-4444-8444-444444444444"
@@ -304,7 +309,7 @@ func TestBackupRestoreSecurityFloor(t *testing.T) {
 		t.Fatal("revoked access resurrected")
 	}
 	f, e := floorFromDB(ctx, restored.db)
-	if e != nil || f.Generation != 2 || f.Policy.MaxChanges != 2 || len(f.Policy.DenyActions) != 1 {
+	if e != nil || f.Generation != 5 || f.Policy.MaxChanges != 2 || len(f.Policy.DenyActions) != 1 {
 		t.Fatal("policy floor weakened")
 	}
 	o, e := restored.Lookup(ctx, testOperation)
@@ -403,7 +408,7 @@ func TestRawRollbackAndLostFloorRefused(t *testing.T) {
 			if e := s.Backup(ctx, testOperation, backup); e != nil {
 				t.Fatal(e)
 			}
-			if _, e := s.db.Exec("UPDATE identity SET security_generation=2"); e != nil {
+			if _, e := s.db.Exec("UPDATE identity SET security_generation=security_generation+1"); e != nil {
 				t.Fatal(e)
 			}
 			if _, e := s.exportFloor(ctx); e != nil {

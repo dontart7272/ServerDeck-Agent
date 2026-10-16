@@ -182,10 +182,10 @@ snapshot = obj({"snapshot_id": ID, "agent_run_id": ID, "boot_id": OS_UUID, "segm
         "records": arr({"anyOf": records + [ref("Process")]}, 4096),
         "availability": enum("available", "absent", "unsupported", "permission_denied", "source_error"), "reason": nullable(s(128))}), 64)})
 point = obj({"bucket_id": VER, "revision": VER, "segment_id": ID, "from": TIME, "to": TIME,
-    "step_ms": n(1, 86400000), "covered_ms": n(0, 86400000), "sample_count": n(0, 10000000), "complete": BOOL,
+    "step_ms": n(1, 86400000), "covered_ms": n(0, 86400000), "counter_covered_ms": n(0, 86460000), "sample_count": n(0, 10000000), "complete": BOOL,
     "statistics": obj({"mean": nullable(NUM), "min": nullable(NUM), "max": nullable(NUM), "last": nullable(NUM),
         "sum": nullable({"anyOf": [NUM, U64]}), "observed_true": nullable(BOOL)},
-        ("mean", "min", "max", "last", "sum", "observed_true")), "gap_reason": nullable(s(128))})
+        ("mean", "min", "max", "last", "sum", "observed_true")), "gap_reason": nullable(s(128))}, ("counter_covered_ms",))
 series = obj({"series_id": VER, "unit": UNIT, "schema": VER, "step_ms": n(1, 86400000), "coverage": ref("Coverage"), "points": arr(point, 2000)})
 hist = obj({"items": arr(series, 32), "next_cursor": nullable(s(2048, 1)), "coverage": ref("Coverage"), "revision": VER})
 icmp = obj({"target": nullable(s(253, 1)), "target_version": VER, "background_enabled": BOOL,
@@ -194,8 +194,8 @@ icmp = obj({"target": nullable(s(253, 1)), "target_version": VER, "background_en
 errcodes = "INVALID_REQUEST INVALID_PATH UNSUPPORTED_QUERY UNSUPPORTED_ACTION UNAUTHORIZED PAIRING_REJECTED PERMISSION_DENIED POLICY_DENIED PROTECTED_OBJECT NOT_FOUND OPERATION_NOT_FOUND VERSION_CONFLICT OBJECT_CHANGED IDEMPOTENCY_CONFLICT DEPENDENCY_CONFLICT CURSOR_GAP BUSY PLAN_EXPIRED CURSOR_EXPIRED TRANSFER_EXPIRED LIMIT_EXCEEDED INCOMPATIBLE_VERSION INVALID_MANIFEST UNSUPPORTED_ENCODING SAFETY_UNAVAILABLE RATE_LIMITED AUDIT_UNAVAILABLE STORAGE_UNAVAILABLE SOURCE_UNAVAILABLE MAINTENANCE MODULE_UNAVAILABLE NO_SPACE QUOTA_EXCEEDED INTERNAL_ERROR".split()
 error = obj({"code": enum(*errcodes), "message": s(512), "retryable": BOOL, "operation_id": ID,
     "details": obj({"field": s(128), "current_version": VER, "earliest_cursor": s(2048), "latest_cursor": s(2048),
-        "retry_after_ms": n(0, 3600000), "effect_status": enum("none", "applied", "partial", "unknown")},
-        ("field", "current_version", "earliest_cursor", "latest_cursor", "retry_after_ms", "effect_status"))}, ("operation_id", "details"))
+        "retry_after_ms": n(0, 3600000), "effect_status": enum("none", "applied", "partial", "unknown"), "active_problems": arr(problem, 100), "active_problems_more": BOOL},
+        ("field", "current_version", "earliest_cursor", "latest_cursor", "retry_after_ms", "effect_status", "active_problems", "active_problems_more"))}, ("operation_id", "details"))
 defs = dict(JsonValue=JSONVAL, Metric=metric, Process=process, File=file, Coverage=coverage, Operation=op,
     Error=error, Runtime=runtime, ConfigChanges=changes, Rule=rule, Snapshot=snapshot, SeriesPage=hist,
     Info=info, ModuleState=modstate, Ticket=ticket)
@@ -214,6 +214,7 @@ queries = {
     "agent.info": (params(), ref("Info")),
     "snapshot.get": (params({"view": enum("summary", "detail"), "blocks": arr(s(128, 1), 64), "resource_ids": arr(VER, 256)}, ("blocks", "resource_ids")), ref("Snapshot")),
     "history.get": (params({"series_ids": arr(VER, 32, 1), "from": TIME, "to": TIME, "max_points": n(1, 2000), "cursor": s(2048, 1)}, ("cursor",)), ref("SeriesPage")),
+    "history.series": (params({"metric_key": s(128, 1), "logical_key": s(512, 1)}, ("metric_key", "logical_key"), True), page(obj({"series_id": VER, "resource_id": VER, "logical_key": s(512, 1), "key": s(128, 1), "unit": UNIT, "schema": VER, "source": s(128, 1)}))),
     "events.list": (params({"from": TIME, "to": TIME, "resource_id": VER, "severity": enum("info", "warning", "critical")}, ("from", "to", "resource_id", "severity"), True), page(event)),
     "problems.list": (params(paged=True), page(problem)),
     "audit.list": (params({"from": TIME, "to": TIME, "operation_id": ID}, ("from", "to", "operation_id"), True), page(audit)),
@@ -293,6 +294,10 @@ results = {
     "pairing.issue": obj({"pairing_id": ID, "expires_at": TIME}),
     "storage.backup": obj({"complete": BOOL}),
     "storage.restore": obj({"complete": BOOL}),
+    "storage.inventory.confirm": obj({"inventory_attested": BOOL}),
+    "system.files.cleanup": obj({"cleaned": BOOL}),
+    "system.files.rotate": obj({"rotated": BOOL}),
+    "files.reconcile": {"oneOf": [obj({"reconciled": BOOL}), obj({"discarded": BOOL})]},
     "modules.register": ref("ModuleState")}
 op_variants = []
 for action, result in results.items():
@@ -301,6 +306,10 @@ for action, result in results.items():
     variant["properties"]["result"] = nullable(result)
     op_variants.append(variant)
 defs["Operation"] = {"oneOf": op_variants}
+defs["TransferReceipt"] = obj({"schema_version": {"const": "1.0"}, "transfer_id": ID, "received_bytes": n(0, 1000000000), "sha256": s(64,64,pattern="^[0-9a-f]{64}$"), "ready": {"const": True}})
+defs["LocalTransferInput"] = obj({"transfer_id": ID, "size_bytes": n(0,1000000000), "sha256": s(64,64,pattern="^[0-9a-f]{64}$")})
+defs["FileReconcileInput"] = obj({"record_id": ID,"expected_version":s(64,64,pattern="^[0-9a-f]{64}$"),"state":enum("trashed","purged","published","restored","discard"),"observed_proof":s(64,64,pattern="^[0-9a-f]{64}$")},("observed_proof",))
+defs["InventoryConfirmationInput"] = obj({"known_regions":arr(s(1024,1,pattern="^/"),32),"absent_operation_ids":arr(ID,0),"artifact_bindings":arr(obj({"artifact_id":ID,"region_path":s(1024,1,pattern="^/")}),32)},("artifact_bindings",))
 for name, prepared in [("PrepareRequest", False), ("OperationRequest", True)]:
     variants = []
     for action, p in actions.items():
@@ -332,7 +341,8 @@ ws_common = {"schema_version": {"const": "1.0"}, "subscription_id": s(64, 1), "s
 defs["WssClientMessage"] = {"oneOf": [obj(envelope({"type": {"const": "subscribe"}, "subscriptions": arr(ref("WssSubscription"), 16, 1)})),
     obj({"schema_version": {"const": "1.0"}, "type": {"const": "ack"}, "subscription_id": s(64, 1), "cursor": s(2048, 1)})]}
 changes_variants = []
-for topic, item in [("events", event), ("operations", ref("Operation")), ("problems", problem), ("storage", storage)]:
+problem_change = {"oneOf": [problem, obj({"problem_id": ID, "removed": {"const": True}, "observed_at": TIME})]}
+for topic, item in [("events", event), ("operations", ref("Operation")), ("problems", problem_change), ("storage", storage)]:
     name = "WssChanges" + topic.title()
     defs[name] = obj({**ws_common, "type": {"const": "changes"}, "topic": {"const": topic},
         "data": arr(item, 100), "cursor": s(2048, 1)})
@@ -344,7 +354,7 @@ defs["WssServerMessage"] = {"oneOf": [obj({**ws_common, "type": {"const": "snaps
     obj({**ws_common, "type": {"const": "subscribed"}, "cursor": nullable(s(2048, 1))}),
     obj({"schema_version": {"const": "1.0"}, "type": {"const": "heartbeat"}, "server_time": TIME})]}
 defs["WssMessage"] = {"oneOf": [ref("WssClientMessage"), ref("WssServerMessage")]}
-write("api", defs, {"anyOf": [ref(k) for k in ["PairRequest", "PairResult", "QueryRequest", "QueryResponse", "PrepareRequest", "PrepareResult", "OperationRequest", "Operation", "ErrorEnvelope", "WssMessage"]]})
+write("api", defs, {"anyOf": [ref(k) for k in ["PairRequest", "PairResult", "QueryRequest", "QueryResponse", "PrepareRequest", "PrepareResult", "OperationRequest", "Operation", "ErrorEnvelope", "WssMessage", "TransferReceipt"]]})
 
 read_decl = obj({"id": s(128, 1), "schema_version": SEMVER, "params_schema": SCHEMA, "result_schema": SCHEMA, "timeout_ms": n(1, 10000)})
 action_decl = obj({"id": s(128, 1), "schema_version": SEMVER, "params_schema": SCHEMA, "result_schema": SCHEMA,
@@ -475,5 +485,19 @@ example("release", {"release_id": TEST_ID, "version": "1.0.0", "os": "linux", "a
     "rollback_release_ids": [], "files": [{"path": "serverdeck-agent", "size_bytes": "1", "sha256": "0" * 64}]})
 
 # A transparent catalog links endpoint definitions to documentation/tooling.
+for revision, complete, covered, mean in [("1", False, 7000, 12.0), ("2", True, 15000, 18.0)]:
+    example("history-response" + ("-updated" if complete else ""), {
+        "schema_version": "1.0", "request_id": TEST_ID, "agent_id": TEST_ID2,
+        "served_at": "2026-10-12T00:00:20Z", "query": "history.get",
+        "data": {"items": [{"series_id": "system.cpu.busy.v1", "unit": "percent", "schema": "1", "step_ms": 15000,
+            "coverage": {"from": "2026-10-12T00:00:00Z", "to": "2026-10-12T00:00:15Z", "complete": complete, "gaps": []},
+            "points": [{"bucket_id": "fixture-cpu-15s-0", "revision": revision, "segment_id": TEST_ID,
+                "from": "2026-10-12T00:00:00Z", "to": "2026-10-12T00:00:15Z", "step_ms": 15000,
+                "covered_ms": covered, "sample_count": 7 if complete else 3, "complete": complete,
+                "statistics": {"mean": mean}, "gap_reason": None if complete else "WARMING_UP"}]}],
+            "next_cursor": None, "coverage": {"from": "2026-10-12T00:00:00Z", "to": "2026-10-12T00:00:15Z", "complete": complete, "gaps": []}, "revision": revision}})
+example("wss-problem-removed", {"schema_version": "1.0", "subscription_id": "problems", "server_time": "2026-10-12T00:00:20Z", "type": "changes", "topic": "problems", "data": [{"problem_id": TEST_ID, "removed": True, "observed_at": "2026-10-12T00:00:20Z"}], "cursor": "signed_fixture_cursor"})
 example("catalog", {"queries": sorted(queries), "actions": sorted(actions), "ipc_methods": sorted(rpc_methods)})
 print(f"Generated {len(list(BASE.glob('*.schema.json')))} schemas and {len(list((BASE / 'examples').glob('*.json')))} documentation examples/catalog files; no application implementation.")
+
+example("transfer-receipt", {"schema_version":"1.0","transfer_id":TEST_ID,"received_bytes":0,"sha256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","ready":True})

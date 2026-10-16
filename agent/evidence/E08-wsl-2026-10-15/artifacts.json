@@ -1,0 +1,88 @@
+{
+  "files": [
+    {
+      "path": "binaries.sha256",
+      "sha256": "03e7c81da947c124e793306eaba911baebde2bfec6c7a198f8d741e031e136a3"
+    },
+    {
+      "path": "build-amd64.txt",
+      "sha256": "6e85a21a369adc1abbeac6dfe74aca388e9f2a5177e74ef463550b487bfa2539"
+    },
+    {
+      "path": "build-arm64.txt",
+      "sha256": "333d25d40ad1ce56aca9884e70d131a3dfac54e481461e9bf4822aa8579f005e"
+    },
+    {
+      "path": "build-inputs.json",
+      "sha256": "69bfbb836a4d0b54bb393c0939f76d244fa4aa88322677c114f36fb311ad39ae"
+    },
+    {
+      "path": "docs-check.txt",
+      "sha256": "cf7fdb8d32bd341cf7293007fd0b5a6170cfe5c4c7d57ce6c22ecf3ffea8703a"
+    },
+    {
+      "path": "docs-snapshot.json",
+      "sha256": "8442e0e1c1c728a4b582658b6f17d3223b1cce38e5135a7fa85ca3ca783e1882"
+    },
+    {
+      "path": "elf-amd64.json",
+      "sha256": "e368fc9f73caa71132b387f4645537cdcb15550c3c398c9cc9bf8f7543383473"
+    },
+    {
+      "path": "elf-arm64.json",
+      "sha256": "f3eaf414cef91760dd57a0a2a76a2237fb1cf61b83c61c6e8b931cc92aeb5eca"
+    },
+    {
+      "path": "iputils-copyright.txt",
+      "sha256": "4ce239ce157bf55305737d8c32f5938baee5d2793069195a6875e6c5eaedbc9d"
+    },
+    {
+      "path": "linux-checks.txt",
+      "sha256": "88ea83cbde74067a185df5a1f5b7250cef1468da2f89a2094318daae8b894dab"
+    },
+    {
+      "path": "ping-provenance.txt",
+      "sha256": "36f8720501b7147eb1900ec2b5b0241e6a8dcdc8ad576252e6f6c8297615747f"
+    },
+    {
+      "path": "pre-final-activation.txt",
+      "sha256": "bd9afbc18e890d1352b64bc69e35fd18ac6ce6489cf9c10c4298ea99a71d13df"
+    },
+    {
+      "path": "pre-final-divergent-backup.txt",
+      "sha256": "5081515e1bd796c6f5e9630027cd2c0984d79eead8f99d2b7f76b855dd5f25c5"
+    },
+    {
+      "path": "pre-final-fixture-generation.txt",
+      "sha256": "577ec8f63a1b741be7dfa62f47dc6a568bea31533aa79040b00d9d553edef52b"
+    },
+    {
+      "path": "pre-final-floor-verification.txt",
+      "sha256": "2a1a95a21a1bd2ddf65d0a2cfb931335a84b2fdc5f088e99f462b1a124b029c7"
+    },
+    {
+      "path": "pre-final-wal-admission.txt",
+      "sha256": "1462c2df987718eed856cda1a0a981410bb641962fc313f7a0c7b13ad5792f65"
+    },
+    {
+      "path": "preflight-vet.txt",
+      "sha256": "b72b4e4e8cab950bb30d6b6718cbd4c04d1e0bce2682b386c2b269947d9bec5d"
+    },
+    {
+      "path": "README.md",
+      "sha256": "90fcf6704ff4fa4073d26d6f1dd8223339360fb4d5427794869c42b401c71d5f"
+    },
+    {
+      "path": "seal.py",
+      "sha256": "33bce4d6bff742614feb8fe68ee9a2cd12cd1da537b54d7babae25504898e0f3"
+    },
+    {
+      "path": "separate-filesystem.txt",
+      "sha256": "faf4dd73200442e6b7c020160b40a484e665c4dae6783a2f5bc4611a7da6f450"
+    },
+    {
+      "path": "source-copy.json",
+      "sha256": "520dfcdd40104321be33b3f4d5e3e7bca78de23476787230f5a68298f68f16a5"
+    }
+  ]
+}

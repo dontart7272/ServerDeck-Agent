@@ -15,8 +15,12 @@ import (
 
 	"serverdeck.local/agent/internal/auth"
 	"serverdeck.local/agent/internal/contracts"
+	"serverdeck.local/agent/internal/diagnostics"
+	"serverdeck.local/agent/internal/events"
+	"serverdeck.local/agent/internal/history"
 	"serverdeck.local/agent/internal/metrics"
 	"serverdeck.local/agent/internal/operations"
+	"serverdeck.local/agent/internal/processcontrol"
 	"serverdeck.local/agent/internal/storage"
 )
 
@@ -26,11 +30,24 @@ type pendingPair struct {
 	id, name string
 }
 type Gateway struct {
+	Files                       *fileService
+	fileInit                    sync.Once
+	fileCancel                  context.CancelFunc
+	fileDone                    chan struct{}
+	Control                     *processcontrol.Controller
+	Diagnostics                 *diagnostics.Manager
+	diagnosticsCancel           context.CancelFunc
+	diagnosticsDone             chan struct{}
 	Store                       *storage.Store
 	Auth                        *auth.Manager
 	Operations                  *operations.Service
 	Metrics                     *metrics.Engine
 	MetricsFailure              string
+	History                     *history.Engine
+	Events                      *events.Engine
+	historyDB, eventsDB         *storage.Telemetry
+	telemetryCancel             context.CancelFunc
+	telemetryDone               chan struct{}
 	AgentID, RunID, RuntimeUser string
 	Certificate                 *x509.Certificate
 	mu                          sync.Mutex
@@ -53,14 +70,41 @@ func NewGateway(s *storage.Store, cert *x509.Certificate, user string) (*Gateway
 	if e != nil {
 		return nil, e
 	}
-	g := &Gateway{Store: s, Auth: auth.New(s), AgentID: id, RunID: run, RuntimeUser: user, Certificate: cert, pairs: map[string]pendingPair{}, pairIDs: map[string]bool{}, issues: map[string]auth.Code{}, limiter: newLimiter(), wsDevices: map[string]int{}, connections: map[net.Conn]*connectionInfo{}}
-	g.Operations, e = operations.NewAuthorized(s, map[string]operations.Handler{"pairing.issue": issueHandler{g}, "devices.pair": pairHandler{g}, "devices.revoke": revokeHandler{g}, "operations.cancel": cancelHandler{g}}, g.authorize)
+	g := &Gateway{Control: processcontrol.New(), Diagnostics: diagnostics.New(), Store: s, Auth: auth.New(s), AgentID: id, RunID: run, RuntimeUser: user, Certificate: cert, pairs: map[string]pendingPair{}, pairIDs: map[string]bool{}, issues: map[string]auth.Code{}, limiter: newLimiter(), wsDevices: map[string]int{}, connections: map[net.Conn]*connectionInfo{}}
+	g.openTelemetry()
+	g.Operations, e = operations.NewAuthorized(s, map[string]operations.Handler{"system.trash.expire": fileTrashHandler{g, "system.trash.expire"}, "system.files.cleanup": fileCleanupHandler{g}, "system.files.rotate": fileRotateHandler{g}, "files.create": fileMutationHandler{g, false}, "files.write.begin": fileTransferHandler{g, "files.write.begin"}, "files.upload.begin": fileTransferHandler{g, "files.upload.begin"}, "files.transfer.commit": fileTransferHandler{g, "files.transfer.commit"}, "files.rename": fileMutationHandler{g, true}, "files.move": fileMoveHandler{g}, "files.trash": fileTrashHandler{g, "files.trash"}, "trash.restore": fileTrashHandler{g, "trash.restore"}, "trash.purge": fileTrashHandler{g, "trash.purge"}, "process.term": processHandler{g, false}, "process.kill": processHandler{g, true}, "diagnostics.icmp.run": icmpHandler{g}, "pairing.issue": issueHandler{g}, "devices.pair": pairHandler{g}, "devices.revoke": revokeHandler{g}, "operations.cancel": cancelHandler{g}, "config.set": telemetryConfigHandler{g}, "rules.put": ruleHandler{g, false}, "rules.delete": ruleHandler{g, true}}, g.authorize)
 	if e != nil {
+		g.Close()
 		return nil, e
 	}
+	g.startDiagnostics()
 	return g, nil
 }
 func (g *Gateway) Close() {
+	if g.fileCancel != nil {
+		g.fileCancel()
+		<-g.fileDone
+	}
+	if g.Files != nil {
+		g.Files.Close()
+	}
+	if g.diagnosticsCancel != nil {
+		g.diagnosticsCancel()
+		g.Diagnostics.Close()
+		<-g.diagnosticsDone
+	} else if g.Diagnostics != nil {
+		g.Diagnostics.Close()
+	}
+	if g.telemetryCancel != nil {
+		g.telemetryCancel()
+		<-g.telemetryDone
+	}
+	if g.historyDB != nil {
+		g.historyDB.Close()
+	}
+	if g.eventsDB != nil {
+		g.eventsDB.Close()
+	}
 	if g.Metrics != nil {
 		g.Metrics.Close()
 	}
@@ -85,6 +129,8 @@ func (g *Gateway) authorize(ctx context.Context, a operations.Initiator, r opera
 		if a.ID() != operations.Local().ID() && a.ID() != "local:0" {
 			return storage.ErrUnauthorized
 		}
+	} else if a.ID() == "system:files" && (r.Action == "system.trash.expire" || r.Action == "system.files.cleanup" || r.Action == "system.files.rotate") {
+		// This initiator is constructed only by the compiled maintenance worker.
 	} else if a.ID() == "system:pairing" && r.Action == "devices.pair" {
 		g.mu.Lock()
 		_, ok := g.pairs[r.ID]

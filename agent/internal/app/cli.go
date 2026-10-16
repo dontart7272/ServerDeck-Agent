@@ -34,7 +34,7 @@ func Run(name string, args []string, out, errOut io.Writer) int {
 		}
 	}
 	if len(args) == 1 && args[0] == "version" {
-		fmt.Fprintf(out, "%s development E04 api=1 schema=1.0 ipc=1 %s %s/%s\n", name, runtime.Version(), runtime.GOOS, runtime.GOARCH)
+		fmt.Fprintf(out, "%s development E08 api=1 schema=1.0 ipc=1 %s %s/%s\n", name, runtime.Version(), runtime.GOOS, runtime.GOARCH)
 		return 0
 	}
 	if len(args) == 1 && args[0] == "sqlite-info" {
@@ -78,6 +78,6 @@ func Run(name string, args []string, out, errOut io.Writer) int {
 		fmt.Fprintln(out, "OK: contract shape; authorization, signatures and effects NOT verified")
 		return 0
 	}
-	fmt.Fprintf(errOut, "Usage: %s version | sqlite-info | validate-config FILE | check-contract FAMILY DEFINITION_OR_DASH FILE\nserverdeck-agent serve --config FILE\nserverdeckctl pairing-issue --config FILE\nserverdeckctl: state-init STATE CONFIG | state-status STATE | state-operation STATE ID | state-backup STATE DEST ID --confirm | state-restore STATE BACKUP DEST ID --confirm | state-resolve STATE ID applied|none --confirm\n", name)
+	fmt.Fprintf(errOut, "Usage: %s version | sqlite-info | validate-config FILE | check-contract FAMILY DEFINITION_OR_DASH FILE\nserverdeck-agent serve --config FILE\nserverdeckctl pairing-issue --config FILE\nserverdeckctl local --config FILE query|prepare|execute INPUT_JSON | download|upload TRANSFER_JSON (upload reads stdin; download writes stdout)\nserverdeckctl: state-files STATE | state-file-reconcile STATE CONFIG INPUT_JSON ID --confirm | state-inventory-confirm STATE INPUT_JSON ID --confirm | state-init STATE CONFIG | state-status STATE | state-inventory STATE | state-operation STATE ID | state-backup STATE DEST ID --confirm | state-restore STATE BACKUP DEST ID --confirm | state-resolve STATE ID applied|none --confirm\n", name)
 	return 2
 }

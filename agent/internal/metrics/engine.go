@@ -65,8 +65,8 @@ func New(run, boot string, c Collector) *Engine {
 }
 func newEngine(run, boot string, c Collector, clock func() Stamp) *Engine {
 	ctx, cancel := context.WithCancel(context.Background())
-	e := &Engine{run: run, boot: boot, segment: id(), revision: id(), collector: c, results: make(chan result, 6), cancel: cancel, done: make(chan struct{}), clock: clock, sources: map[string]*source{}, leases: map[string]time.Duration{}, views: map[string][]processView{}}
-	for _, name := range []string{"system", "cpu", "memory", "network", "filesystems", "processes"} {
+	e := &Engine{run: run, boot: boot, segment: id(), revision: id(), collector: c, results: make(chan result, 9), cancel: cancel, done: make(chan struct{}), clock: clock, sources: map[string]*source{}, leases: map[string]time.Duration{}, views: map[string][]processView{}}
+	for _, name := range sourceNames(c) {
 		src := &source{jobs: make(chan job, 1), block: Block{ID: name, Mode: "periodic", Interval: interval(name, false), Metrics: []Metric{}, Records: []json.RawMessage{}, Availability: "source_error", Reason: ptr("WARMING_UP")}}
 		e.sources[name] = src
 		go func(name string, src *source) {
@@ -103,6 +103,8 @@ func interval(name string, active bool) int64 {
 	switch name {
 	case "system":
 		return 60000
+	case "docker", "security":
+		return 15000
 	case "filesystems":
 		return 15000
 	case "processes":
@@ -279,7 +281,7 @@ func (e *Engine) Snapshot(view string, blocks, resources []string) Snapshot {
 	defer e.mu.Unlock()
 	now := e.clock()
 	out := Snapshot{e.revision, e.run, e.boot, e.segment, contracts.Timestamp(now.Wall.UTC()), []Block{}, false}
-	for _, name := range []string{"system", "cpu", "memory", "network", "filesystems", "processes"} {
+	for _, name := range sourceNames(e.collector) {
 		if len(blocks) > 0 && !contains(blocks, name) {
 			continue
 		}
@@ -296,6 +298,13 @@ func (e *Engine) Snapshot(view string, blocks, resources []string) Snapshot {
 		b.Records = make([]json.RawMessage, len(s.block.Records))
 		for i, r := range s.block.Records {
 			b.Records[i] = append(json.RawMessage{}, r...)
+		}
+		if name == "gpu" || name == "docker" {
+			for i, raw := range b.Records {
+				rendered, partial := renderNested(raw, b, now)
+				b.Records[i] = rendered
+				out.Partial = out.Partial || partial
+			}
 		}
 		for i := range b.Metrics {
 			m := &b.Metrics[i]
@@ -500,9 +509,16 @@ func (e *Engine) Sources() []any {
 	e.mu.Lock()
 	defer e.mu.Unlock()
 	out := []any{}
-	for _, name := range []string{"system", "cpu", "memory", "network", "filesystems", "processes"} {
+	for _, name := range sourceNames(e.collector) {
 		b := e.sources[name].block
 		out = append(out, map[string]any{"id": "linux." + name, "available": b.Availability == "available", "reason": b.Reason, "version": "1"})
+	}
+	if source := e.sources["security"]; source != nil {
+		for _, m := range source.block.Metrics {
+			if m.Key == "source_available" {
+				out = append(out, map[string]any{"id": m.ResourceID, "available": m.Availability == "available" && m.Freshness == "fresh", "reason": m.Reason, "version": "1"})
+			}
+		}
 	}
 	return out
 }
@@ -550,4 +566,13 @@ func (e *Engine) renderProcesses(items []contracts.APIProcess, mono time.Duratio
 		}
 	}
 	return out
+}
+
+// Optional built-in adapters preserve the six-source contract for fixture collectors.
+func sourceNames(c Collector) []string {
+	names := []string{"system", "cpu", "memory", "network", "filesystems", "processes"}
+	if _, ok := c.(interface{ IntegrationSources() }); ok {
+		names = append(names, "gpu", "docker", "security")
+	}
+	return names
 }

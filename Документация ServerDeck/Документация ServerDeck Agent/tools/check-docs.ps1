@@ -11,6 +11,8 @@ $files += Get-Item -LiteralPath (Join-Path $workspace 'agent/README.md')
 $files += Get-Item -LiteralPath (Join-Path $workspace 'agent/STORAGE.md')
 $files += Get-Item -LiteralPath (Join-Path $workspace 'agent/AUTH-TRANSPORT.md')
 $files += Get-Item -LiteralPath (Join-Path $workspace 'agent/METRICS.md')
+$files += Get-Item -LiteralPath (Join-Path $workspace 'agent/HISTORY.md')
+$files += Get-Item -LiteralPath (Join-Path $workspace 'agent/evidence/E05-aggregation-2026-10-14/README.md')
 $files += Get-Item -LiteralPath (Join-Path $workspace 'agent/evidence/E04-wsl-2026-10-13/README.md')
 $files += Get-Item -LiteralPath (Join-Path $workspace 'agent/evidence/E04-wsl-2026-10-13/SECURITY-REVIEW.md')
 $files += Get-Item -LiteralPath (Join-Path $workspace 'agent/evidence/E03-wsl-2026-10-13/README.md')
@@ -97,6 +99,10 @@ foreach ($file in $schemaFiles) {
 $exampleMap = @{ config='config'; query='api'; operation='api'; module='module'; ipc='ipc'; ui='ui'; release='release'; 'ipc-response'='ipc'; error='api'; 'operation-state'='api'; 'snapshot-response'='api' }
 $exampleMap['wss-client'] = 'api'
 $exampleMap['wss-server'] = 'api'
+$exampleMap['transfer-receipt'] = 'api'
+$exampleMap['history-response'] = 'api'
+$exampleMap['history-response-updated'] = 'api'
+$exampleMap['wss-problem-removed'] = 'api'
 $valid = 0
 $invalid = 0
 foreach ($key in $exampleMap.Keys) {

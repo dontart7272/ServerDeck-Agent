@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"serverdeck.local/agent/internal/contracts"
+	"serverdeck.local/agent/internal/fileaccess"
 	"serverdeck.local/agent/internal/storage"
 )
 
@@ -65,7 +66,12 @@ func (h maintenanceHandler) Effect(ctx context.Context, r Request) Outcome {
 	return Outcome{State: "succeeded", Effect: "applied", Result: []byte(`{"complete":true}`)}
 }
 func Offline(s *storage.Store) *Service {
-	return New(s, map[string]Handler{"storage.backup": maintenanceHandler{store: s}, "storage.restore": maintenanceHandler{store: s, restore: true}})
+	return New(s, map[string]Handler{"files.reconcile": fileReconcileHandler{s: s}, "storage.inventory.confirm": inventoryHandler{s}, "storage.backup": maintenanceHandler{store: s}, "storage.restore": maintenanceHandler{store: s, restore: true}})
+}
+func OfflineWithFileProtection(s *storage.Store, g *fileaccess.Guard) *Service {
+	svc := Offline(s)
+	svc.handlers["files.reconcile"] = fileReconcileHandler{s: s, protection: g}
+	return svc
 }
 func MaintenanceParams(destination, backup string) []byte {
 	b, _ := json.Marshal(maintenanceParams{destination, backup})

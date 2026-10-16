@@ -1,0 +1,1 @@
+PASS: compiled CLI state-files -> CONFIG-bound audited reconciliation -> replay; missing original operation is not invented

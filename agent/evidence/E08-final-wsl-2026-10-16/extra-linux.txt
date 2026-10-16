@@ -1,0 +1,11 @@
++ go test -race -c -o /home/dontart7272/serverdeck-e08-final-2026-10-16/app-race.test ./internal/app
++ go test -race -c -o /home/dontart7272/serverdeck-e08-final-2026-10-16/fileaccess-race.test ./internal/fileaccess
++ python3 - /home/dontart7272/serverdeck-e08-final-2026-10-16
+OK: contract shape; authorization, signatures and effects NOT verified
+OK: contract shape; authorization, signatures and effects NOT verified
+OK: contract shape; authorization, signatures and effects NOT verified
+OK: contract shape; authorization, signatures and effects NOT verified
+OK: contract shape; authorization, signatures and effects NOT verified
+OK: contract shape; authorization, signatures and effects NOT verified
+PASS: internal read-view contracts accepted; internal actions rejected by both public request codecs
+PASS: receipt version/byte/hash/readiness negative bounds

@@ -1,0 +1,304 @@
+go version go1.27.2 linux/amd64
+aarch64-linux-gnu-gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+serverdeck.local/agent
+github.com/coder/websocket v1.8.15
+github.com/mattn/go-sqlite3 v1.14.52
+github.com/santhosh-tekuri/jsonschema/v5 v5.3.1
+a9339b58d3ddc63474af0d2a6e13e45eae8530e658dfbf650dfc67ecbb4ab85c  dist/linux-arm64/serverdeck-agent
+dist/linux-arm64/serverdeck-agent: go1.27.2
+	path	serverdeck.local/agent/cmd/serverdeck-agent
+	mod	serverdeck.local/agent	(devel)	
+	dep	github.com/coder/websocket	v1.8.15	h1:6B2JPeOGlpff2Uz6vOEH1Vzpi0iUz20A+lPVhPHtNUA=
+	dep	github.com/mattn/go-sqlite3	v1.14.52	h1:wVbm2Qnf4OXkqhBTSPuCRZDRnxfbVrrmiCEroVdog8U=
+	dep	github.com/santhosh-tekuri/jsonschema/v5	v5.3.1	h1:lZUw3E0/J3roVtGQ+SCrUrg3ON6NgVqpn3+iol9aGu4=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	CGO_ENABLED=1
+	build	GOARCH=arm64
+	build	GOOS=linux
+	build	GOARM64=v8.0
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           AArch64
+  Version:                           0x1
+  Entry point address:               0x402a80
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          17383040 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         10
+  Size of section headers:           64 (bytes)
+  Number of section headers:         51
+  Section header string table index: 50
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  PHDR           0x0000000000000040 0x0000000000400040 0x0000000000400040
+                 0x0000000000000230 0x0000000000000230  R      0x8
+  INTERP         0x0000000000000270 0x0000000000400270 0x0000000000400270
+                 0x000000000000001b 0x000000000000001b  R      0x1
+      [Requesting program interpreter: /lib/ld-linux-aarch64.so.1]
+  LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+                 0x0000000000a7a974 0x0000000000a7a974  R E    0x10000
+  LOAD           0x0000000000a7b618 0x0000000000e8b618 0x0000000000e8b618
+                 0x0000000000065529 0x00000000020af948  RW     0x10000
+  DYNAMIC        0x0000000000a7dd50 0x0000000000e8dd50 0x0000000000e8dd50
+                 0x00000000000001e0 0x00000000000001e0  RW     0x8
+  NOTE           0x000000000000028c 0x000000000040028c 0x000000000040028c
+                 0x00000000000000a8 0x00000000000000a8  R      0x4
+  TLS            0x0000000000a7b618 0x0000000000e8b618 0x0000000000e8b618
+                 0x0000000000000000 0x0000000000000010  R      0x8
+  GNU_EH_FRAME   0x0000000000a59ed8 0x0000000000e59ed8 0x0000000000e59ed8
+                 0x0000000000003cac 0x0000000000003cac  R      0x4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+  GNU_RELRO      0x0000000000a7b618 0x0000000000e8b618 0x0000000000e8b618
+                 0x00000000000029e8 0x00000000000029e8  R      0x1
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .interp 
+   02     .interp .note.gnu.build-id .note.ABI-tag .note.go.buildid .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt .init .plt .text .fini .rodata .gopclntab .go.type .go.func .eh_frame_hdr .eh_frame 
+   03     .init_array .fini_array .data.rel.ro .dynamic .got .got.plt .data .go.buildinfo .go.fipsinfo .go.module .noptrdata .bss .noptrbss 
+   04     .dynamic 
+   05     .note.gnu.build-id .note.ABI-tag .note.go.buildid 
+   06     .tbss 
+   07     .eh_frame_hdr 
+   08     
+   09     .init_array .fini_array .data.rel.ro .dynamic .got 
+
+Dynamic section at offset 0xa7dd50 contains 25 entries:
+  Tag        Type                         Name/Value
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [ld-linux-aarch64.so.1]
+ 0x000000000000000c (INIT)               0x4022f8
+ 0x000000000000000d (FINI)               0x8c9010
+ 0x0000000000000019 (INIT_ARRAY)         0xe8b618
+ 0x000000000000001b (INIT_ARRAYSZ)       8 (bytes)
+ 0x000000000000001a (FINI_ARRAY)         0xe8b620
+ 0x000000000000001c (FINI_ARRAYSZ)       8 (bytes)
+ 0x000000006ffffef5 (GNU_HASH)           0x400338
+ 0x0000000000000005 (STRTAB)             0x401050
+ 0x0000000000000006 (SYMTAB)             0x400438
+ 0x000000000000000a (STRSZ)              1553 (bytes)
+ 0x000000000000000b (SYMENT)             24 (bytes)
+ 0x0000000000000015 (DEBUG)              0x0
+ 0x0000000000000003 (PLTGOT)             0xe8dfe8
+ 0x0000000000000002 (PLTRELSZ)           2736 (bytes)
+ 0x0000000000000014 (PLTREL)             RELA
+ 0x0000000000000017 (JMPREL)             0x401848
+ 0x0000000000000007 (RELA)               0x4017e8
+ 0x0000000000000008 (RELASZ)             96 (bytes)
+ 0x0000000000000009 (RELAENT)            24 (bytes)
+ 0x000000006ffffffe (VERNEED)            0x401768
+ 0x000000006fffffff (VERNEEDNUM)         2
+ 0x000000006ffffff0 (VERSYM)             0x401662
+ 0x0000000000000000 (NULL)               0x0
+
+Version symbols section '.gnu.version' contains 129 entries:
+ Addr: 0x0000000000401662  Offset: 0x001662  Link: 6 (.dynsym)
+  000:   0 (*local*)       2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  004:   2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17)    3 (GLIBC_2.34) 
+  008:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  00c:   4 (GLIBC_2.32)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  010:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  014:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  018:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  01c:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  020:   2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  024:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  028:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  02c:   3 (GLIBC_2.34)    1 (*global*)      6 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  030:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  034:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  038:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  03c:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    4 (GLIBC_2.32) 
+  040:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  044:   2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  048:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  04c:   2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  050:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34) 
+  054:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  058:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  05c:   3 (GLIBC_2.34)    3 (GLIBC_2.34)    3 (GLIBC_2.34)    1 (*global*)   
+  060:   1 (*global*)      1 (*global*)      5 (GLIBC_2.33)    2 (GLIBC_2.17) 
+  064:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  068:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  06c:   5 (GLIBC_2.33)    1 (*global*)      1 (*global*)      2 (GLIBC_2.17) 
+  070:   1 (*global*)      2 (GLIBC_2.17)    2 (GLIBC_2.17)    1 (*global*)   
+  074:   2 (GLIBC_2.17)    1 (*global*)      1 (*global*)      1 (*global*)   
+  078:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    7 (GLIBC_2.28) 
+  07c:   5 (GLIBC_2.33)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    1 (*global*)   
+  080:   1 (*global*)   
+
+Version needs section '.gnu.version_r' contains 2 entries:
+ Addr: 0x0000000000401768  Offset: 0x001768  Link: 7 (.dynstr)
+  000000: Version: 1  File: ld-linux-aarch64.so.1  Cnt: 1
+  0x0010:   Name: GLIBC_2.17  Flags: none  Version: 6
+  0x0020: Version: 1  File: libc.so.6  Cnt: 5
+  0x0030:   Name: GLIBC_2.28  Flags: none  Version: 7
+  0x0040:   Name: GLIBC_2.33  Flags: none  Version: 5
+  0x0050:   Name: GLIBC_2.32  Flags: none  Version: 4
+  0x0060:   Name: GLIBC_2.34  Flags: none  Version: 3
+  0x0070:   Name: GLIBC_2.17  Flags: none  Version: 2
+34e28c71e7a2c1dee8c511f4ef5abb54a9fa9919556569ff34756b845e6c7b2c  dist/linux-arm64/serverdeckctl
+dist/linux-arm64/serverdeckctl: go1.27.2
+	path	serverdeck.local/agent/cmd/serverdeckctl
+	mod	serverdeck.local/agent	(devel)	
+	dep	github.com/coder/websocket	v1.8.15	h1:6B2JPeOGlpff2Uz6vOEH1Vzpi0iUz20A+lPVhPHtNUA=
+	dep	github.com/mattn/go-sqlite3	v1.14.52	h1:wVbm2Qnf4OXkqhBTSPuCRZDRnxfbVrrmiCEroVdog8U=
+	dep	github.com/santhosh-tekuri/jsonschema/v5	v5.3.1	h1:lZUw3E0/J3roVtGQ+SCrUrg3ON6NgVqpn3+iol9aGu4=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-trimpath=true
+	build	CGO_ENABLED=1
+	build	GOARCH=arm64
+	build	GOOS=linux
+	build	GOARM64=v8.0
+ELF Header:
+  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF64
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           AArch64
+  Version:                           0x1
+  Entry point address:               0x402a80
+  Start of program headers:          64 (bytes into file)
+  Start of section headers:          17383032 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               64 (bytes)
+  Size of program headers:           56 (bytes)
+  Number of program headers:         10
+  Size of section headers:           64 (bytes)
+  Number of section headers:         51
+  Section header string table index: 50
+
+Program Headers:
+  Type           Offset             VirtAddr           PhysAddr
+                 FileSiz            MemSiz              Flags  Align
+  PHDR           0x0000000000000040 0x0000000000400040 0x0000000000400040
+                 0x0000000000000230 0x0000000000000230  R      0x8
+  INTERP         0x0000000000000270 0x0000000000400270 0x0000000000400270
+                 0x000000000000001b 0x000000000000001b  R      0x1
+      [Requesting program interpreter: /lib/ld-linux-aarch64.so.1]
+  LOAD           0x0000000000000000 0x0000000000400000 0x0000000000400000
+                 0x0000000000a7a954 0x0000000000a7a954  R E    0x10000
+  LOAD           0x0000000000a7b618 0x0000000000e8b618 0x0000000000e8b618
+                 0x0000000000065529 0x00000000020af948  RW     0x10000
+  DYNAMIC        0x0000000000a7dd50 0x0000000000e8dd50 0x0000000000e8dd50
+                 0x00000000000001e0 0x00000000000001e0  RW     0x8
+  NOTE           0x000000000000028c 0x000000000040028c 0x000000000040028c
+                 0x00000000000000a8 0x00000000000000a8  R      0x4
+  TLS            0x0000000000a7b618 0x0000000000e8b618 0x0000000000e8b618
+                 0x0000000000000000 0x0000000000000010  R      0x8
+  GNU_EH_FRAME   0x0000000000a59eb8 0x0000000000e59eb8 0x0000000000e59eb8
+                 0x0000000000003cac 0x0000000000003cac  R      0x4
+  GNU_STACK      0x0000000000000000 0x0000000000000000 0x0000000000000000
+                 0x0000000000000000 0x0000000000000000  RW     0x10
+  GNU_RELRO      0x0000000000a7b618 0x0000000000e8b618 0x0000000000e8b618
+                 0x00000000000029e8 0x00000000000029e8  R      0x1
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     
+   01     .interp 
+   02     .interp .note.gnu.build-id .note.ABI-tag .note.go.buildid .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt .init .plt .text .fini .rodata .gopclntab .go.type .go.func .eh_frame_hdr .eh_frame 
+   03     .init_array .fini_array .data.rel.ro .dynamic .got .got.plt .data .go.buildinfo .go.fipsinfo .go.module .noptrdata .bss .noptrbss 
+   04     .dynamic 
+   05     .note.gnu.build-id .note.ABI-tag .note.go.buildid 
+   06     .tbss 
+   07     .eh_frame_hdr 
+   08     
+   09     .init_array .fini_array .data.rel.ro .dynamic .got 
+
+Dynamic section at offset 0xa7dd50 contains 25 entries:
+  Tag        Type                         Name/Value
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [ld-linux-aarch64.so.1]
+ 0x000000000000000c (INIT)               0x4022f8
+ 0x000000000000000d (FINI)               0x8c9010
+ 0x0000000000000019 (INIT_ARRAY)         0xe8b618
+ 0x000000000000001b (INIT_ARRAYSZ)       8 (bytes)
+ 0x000000000000001a (FINI_ARRAY)         0xe8b620
+ 0x000000000000001c (FINI_ARRAYSZ)       8 (bytes)
+ 0x000000006ffffef5 (GNU_HASH)           0x400338
+ 0x0000000000000005 (STRTAB)             0x401050
+ 0x0000000000000006 (SYMTAB)             0x400438
+ 0x000000000000000a (STRSZ)              1553 (bytes)
+ 0x000000000000000b (SYMENT)             24 (bytes)
+ 0x0000000000000015 (DEBUG)              0x0
+ 0x0000000000000003 (PLTGOT)             0xe8dfe8
+ 0x0000000000000002 (PLTRELSZ)           2736 (bytes)
+ 0x0000000000000014 (PLTREL)             RELA
+ 0x0000000000000017 (JMPREL)             0x401848
+ 0x0000000000000007 (RELA)               0x4017e8
+ 0x0000000000000008 (RELASZ)             96 (bytes)
+ 0x0000000000000009 (RELAENT)            24 (bytes)
+ 0x000000006ffffffe (VERNEED)            0x401768
+ 0x000000006fffffff (VERNEEDNUM)         2
+ 0x000000006ffffff0 (VERSYM)             0x401662
+ 0x0000000000000000 (NULL)               0x0
+
+Version symbols section '.gnu.version' contains 129 entries:
+ Addr: 0x0000000000401662  Offset: 0x001662  Link: 6 (.dynsym)
+  000:   0 (*local*)       2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  004:   2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17)    3 (GLIBC_2.34) 
+  008:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  00c:   4 (GLIBC_2.32)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  010:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  014:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  018:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  01c:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  020:   2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  024:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  028:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  02c:   3 (GLIBC_2.34)    1 (*global*)      6 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  030:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  034:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  038:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  03c:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    4 (GLIBC_2.32) 
+  040:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  044:   2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  048:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  04c:   2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  050:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34) 
+  054:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  058:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    3 (GLIBC_2.34)    2 (GLIBC_2.17) 
+  05c:   3 (GLIBC_2.34)    3 (GLIBC_2.34)    3 (GLIBC_2.34)    1 (*global*)   
+  060:   1 (*global*)      1 (*global*)      5 (GLIBC_2.33)    2 (GLIBC_2.17) 
+  064:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  068:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17) 
+  06c:   5 (GLIBC_2.33)    1 (*global*)      1 (*global*)      2 (GLIBC_2.17) 
+  070:   1 (*global*)      2 (GLIBC_2.17)    2 (GLIBC_2.17)    1 (*global*)   
+  074:   2 (GLIBC_2.17)    1 (*global*)      1 (*global*)      1 (*global*)   
+  078:   2 (GLIBC_2.17)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    7 (GLIBC_2.28) 
+  07c:   5 (GLIBC_2.33)    2 (GLIBC_2.17)    2 (GLIBC_2.17)    1 (*global*)   
+  080:   1 (*global*)   
+
+Version needs section '.gnu.version_r' contains 2 entries:
+ Addr: 0x0000000000401768  Offset: 0x001768  Link: 7 (.dynstr)
+  000000: Version: 1  File: ld-linux-aarch64.so.1  Cnt: 1
+  0x0010:   Name: GLIBC_2.17  Flags: none  Version: 6
+  0x0020: Version: 1  File: libc.so.6  Cnt: 5
+  0x0030:   Name: GLIBC_2.28  Flags: none  Version: 7
+  0x0040:   Name: GLIBC_2.33  Flags: none  Version: 5
+  0x0050:   Name: GLIBC_2.32  Flags: none  Version: 4
+  0x0060:   Name: GLIBC_2.34  Flags: none  Version: 3
+  0x0070:   Name: GLIBC_2.17  Flags: none  Version: 2

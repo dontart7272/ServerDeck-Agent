@@ -129,3 +129,6 @@ func ApplyRuntimeChanges(current RuntimeConfig, changes io.Reader) (RuntimeConfi
 	}
 	return Decode[RuntimeConfig](bytes.NewReader(merged), Target{"api", "Runtime"}, MaxJSONBytes)
 }
+
+// ValidICMPTarget accepts the same restricted syntax as runtime configuration.
+func ValidICMPTarget(s string) bool { return validTarget(s) }

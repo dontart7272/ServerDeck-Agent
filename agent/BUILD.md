@@ -182,3 +182,98 @@ Root-процедура использует уже собранный app.test,
 Go modules, toolchains и cgo baseline E03 не изменены. Direct cgo sysconf(_SC_CLK_TCK) использует glibc; Go не предполагает частоту100Hz. Воспроизводимые recipes amd64/arm64 остаются tools/build-linux.sh. Перед экспортом source hashes сравниваются с главным проектом, чужие изменения не перезаписываются. Обновление схем выполняется только tools/build-contracts.py → копии api/ipc в internal/contracts/schemas → tools/generate-types.py → gofmt → contract/docs validation; это авторинг, не runtime генерация.
 
 Пример локального запроса в защищённый *тестовый* runtime: JSON `{"schema_version":"1.0","request_id":"11111111-1111-4111-8111-111111111111","query":"snapshot.get","params":{"view":"summary","blocks":["cpu","memory"]}}`; `serverdeckctl local --config CONFIG query QUERY_FILE`. Команда не собирает данные отдельно, читает общий snapshot. Служба/пользователь/права не устанавливаются ради теста.
+
+## E05: первая часть — агрегация
+
+14 октября 2026. [Границы реализации](HISTORY.md), [команды и фактические результаты](evidence/E05-aggregation-2026-10-14/README.md). Из корня: `wsl -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e05-aggregation.sh`. Script сам создаёт отдельную ext4-копию, caches/tmp; не собирает на Windows mount. В текущем прогоне копия `~/serverdeck-e05-aggregation-2026-10-14/source.ig0ZrT`,142 исходных файлов, версия Go1.27.2/GCC11.4.0/cgo1 и прежний package/toolchain lock E01 без изменений. Экспорт результатов: `wsl -d Ubuntu-22.04 -- bash -lc 'rsync -a "$HOME/serverdeck-e05-aggregation-2026-10-14/evidence/" /mnt/d/Projects/ServerDeck/agent/evidence/E05-aggregation-2026-10-14/'`.
+
+PASS gofmt, mod verify, vet, test, race всех пакетов; 10s fuzz `FuzzWeightedRollup` с двумя workers —866139 executions; amd64 cgo build/version/sqlite-info/ldd обеих commands, ELF/glibc, compiled CLI/TLS smoke и E02 state smoke на временных данных. PASS arm64 cgo cross-build/ELF; native ARM не выполнялся. Фактическая SQLite3.53.4. Бинарники находятся только в Linux-копии; `binaries.sha256` относится к ней, старые `agent/dist/` в Windows не перезаписаны.
+
+Новый `internal/history` ещё не вызывается runtime; compiled version остаётся development E04, API/capabilities не расширены. Тесты непосредственно вызывают новый код. E05 целиком открыт: history.db, WAL/quotas/retention, ingestion/registry/revision writer, API/cursors, rules/events и WSS resume требуют следующих частей. Старые root/private-mount ENOSPC opt-in procedures не повторялись; их SKIP не считается PASS. Docs validator запускается отдельно, результат — `docs-checks.txt`.
+
+
+## E05: полный блок истории и событий
+
+Актуальное [HISTORY](HISTORY.md) заменяет ограничения исторического E05-A выше. Точные команды/версии/контрольные суммы и фактический результат — [E05 evidence](evidence/E05-wsl-2026-10-14/README.md). Из корня выполняются wsl-e05.sh → отдельная e05-full-filesystem.sh в private unshare namespace → wsl-e05-export.sh → штатный check-docs.ps1. Полные команды приведены в evidence. Все build/test/caches/DB остаются в Ubuntu ext4. Новых зависимостей нет; Go/cgo/native pins прежние. Version development E05/runtime0.5.0-e05, critical schema3, telemetry schema1.
+
+Первый script запускает gofmt/modverify/vet/test -v/race/fuzz10s, cgo amd64/arm64 recipes с ELF/glibc inspection, version/sqlite-info/ldd обеих amd64 commands и compiled CLI/TLS/state smoke. storage.test собирается для отдельного isolated physical ENOSPC. Export сверяет весь build input inventory с основным проектом и не перезаписывает чужие sources/binaries. Пример source-copy.json — снимок до последующего Markdown отчёта, build-inputs.json — проверенные исполняемые inputs. Native ARM не выдаётся за cross build.
+
+
+Уточнение завершения15 октября2026 (прогоны именованы по UTC14 октября): config.set при незавершённом уменьшении budget/retention возвращает новую version и cleanup_operation_id, равный ID текущей операции, со статусом unknown/partial/CLEANUP_PENDING. Это та же наблюдаемая операция применения политики и очистки, а не потерянное фоновое действие. До подтверждения результата сохранённый intent/lock не удаляется; повтор не запускает очистку заново. По правилам E02 требуется сверка и штатное административное resolve после проверки остатка/health; неизвестный исход автоматически не объявляется успехом. При пустом журнале уменьшение срока завершается succeeded и cleanup_operation_id=null. Calendar cleanup не обходит консервативные clock guards. Это ограничение доступности при неопределённости, не ложный failed/none и не откат принятой политики.
+
+## E06: воспроизводимые доступные проверки
+
+Из корня Windows: `wsl.exe -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e06.sh`. Скрипт создаёт новую ext4-копию в `~/serverdeck-e06-final-2026-10-15/source.XXXXXX`, сверяет SHA256 с основным проектом, использует E01 pinned environment, Linux cache/tmp и GCC11. Выполняет fmt/mod verify/vet/test/race/fuzz, cgo amd64/arm64 build, ELF/ldd и compiled CLI smoke. После успешного окончания: `wsl.exe -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e06-export.sh`. Export проверяет неизменность build inputs и переносит только evidence. [Ограничения адаптеров](INTEGRATIONS.md), [фактические результаты](evidence/E06-wsl-2026-10-15/README.md). Настоящие NVIDIA/Docker/Fail2ban тесты этим скриптом не подменяются. E06 открыт.
+
+Дополнительные read-only команды E06 для provenance, реальной доступности источников и ELF записаны в `agent/evidence/E06-wsl-2026-10-15/extra-commands.sh`; после основного прогона: `wsl.exe -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/evidence/E06-wsl-2026-10-15/extra-commands.sh`, затем повторный export. Они читают binaries именно из последней Linux-копии, не запускают ARM на amd64. Таблицы nft сами по себе дают только partial security coverage; complete host coverage не заявляется.
+
+## E07: процессы и ICMP
+
+Свежая ext4-копия и весь доступный Linux-прогон:
+
+```powershell
+wsl.exe -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e07.sh
+wsl.exe -d Ubuntu-22.04 -u root -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e07-root.sh
+wsl.exe -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e07-export.sh
+pwsh -NoProfile -File "Документация ServerDeck/Документация ServerDeck Agent/tools/check-docs.ps1"
+```
+
+Первый script использует прежние pinned Go1.27.2/GCC11.4.0/CGO_ENABLED=1/glibc2.35, отдельные source/cache/tmp на ext4, полный suite/race, FuzzPingSummary, amd64/arm64 cgo build/ELF, compiled CLI/TLS/state smoke. Дополнительно компилирует test binaries: user/PID namespace forced reuse меняет ns_last_pid исключительно внутри проверенного нового namespace; Root script дополнительно проверяет отказ ICMP с capability-drop в дочернем namespace и создаёт отдельный PID/mount namespace и временные процессы UID0/65534, не меняет пользователей, sysctl, capabilities, firewall или службы хоста. Требуется уже доступный unshare/setpriv; автоматического изменения sysctl для разрешения namespaces нет.
+
+Export сверяет inputs/inventory, переносит только evidence. Предыдущие evidence E01–E06 не перезаписываются. Новых Go dependencies/native link libraries нет. Штатный Ubuntu iputils-ping3:20211215-1ubuntu0.1 проверяется как внешняя программа; provenance, file capabilities и license записаны в evidence. Прогон не выполняет setcap, установку пакетов или изменение sysctl хоста; ns_last_pid меняется исключительно внутри проверенного нового PID namespace. Version development E07/API0.7.0-e07, critical schema3 без новой миграции. [Результаты и ограничения](evidence/E07-wsl-2026-10-15/README.md).
+
+## Исторический E08: частичный read-only профиль15 октября
+
+```powershell
+wsl.exe -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08.sh
+wsl.exe -d Ubuntu-22.04 -u root -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08-root.sh
+wsl.exe -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08-export.sh
+pwsh -NoProfile -File "Документация ServerDeck/Документация ServerDeck Agent/tools/check-docs.ps1"
+```
+
+Fresh ext4 copy/cache/tmp, pinned E01 Go1.27.2/GCC11.4/CGO1/glibc2.35 и прежние dependencies. Script fmt/modverify/vet/test/race/fuzz/fileaccess, cgo amd64/arm64/ELF и compiled CLI/TLS/state smoke. Root script только в private mount/PID namespace делает propagation private, монтирует16МБ tmpfs, проверяет actual protection/bind/TLS download и удаляет свои временные данные. Системные настройки/mounts Windows/VPS и исходники не меняются. Export проверяет input inventory и переносит только evidence. Новых Go/native link dependencies нет; Linux UAPI openat2 из того же sysroot. Stage E08/read версия0.8.0-e08-read, critical schema4/floor3; E08 не закрыт. [Границы](FILES.md), [фактические результаты](evidence/E08-wsl-2026-10-15/README.md).
+
+E08 inventory: `serverdeckctl state-inventory /absolute/state` — offline status, при открытии выполняются применимые миграции/recovery. Schema4/floor3 несовместимы с предыдущим binary: не открывать state старой версией. Legacy baseline остаётся unknown. Backup/restore ограничены32 persistent unknown receipts и32000 bytes inventory; при исчерпании требуется отдельная безопасная сверка, автоматического удаления/complete нет. [Подробности](E08-INVENTORY-DESIGN.md).
+
+Итог E08 доступной части15 октября2026: полный wsl-e08.sh exit0, отдельный private root script exit0, export подтвердил213 исполняемых inputs. PASS vet/test/race/fuzz/cgo amd64+arm64 cross/ELF, amd64 CLI/TLS/state/inventory smoke. Проверки/контрольные суммы — [E08 evidence](evidence/E08-wsl-2026-10-15/README.md). E08 открыт; production reads и mutations не включены. Native ARM/full V-FILE/host matrix не проверены.
+
+
+## Исторический E08: промежуточный снимок15 октября2026
+
+Согласованные внешние гонки и модель обслуживания — [FILES.md](FILES.md). Текущее хранилище critical schema5 / floor4, migration005. Старые пункты выше schema4/floor3 и production always-off описывают предыдущий evidence, не текущую реализацию. Новых Go/native link dependencies нет. Перед использованием старой версии на state5 остановитесь: writer несовместим.
+
+Offline подтверждение полного учёта собственных копий: `serverdeckctl state-inventory-confirm /absolute/state /absolute/confirmation.json OPERATION_ID --confirm`. Вход `{"known_regions":[],"absent_operation_ids":[]}`; известные внешние собственные области включают в known_regions. Существующие backup/restore receipts проверяются автоматически; absence assertions запрещены. Operator completeness — явная доверительная граница, а не автоматическое сканирование. Выполнять при остановленной службе; после изменения inventory/boot/identity требуется повторная сверка.
+
+Новый воспроизводимый набор:
+
+```powershell
+wsl -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08-completion.sh
+wsl -d Ubuntu-22.04 -u root -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08-completion-root.sh
+wsl -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08-completion-export.sh
+pwsh -NoProfile -File "Документация ServerDeck/Документация ServerDeck Agent/tools/check-docs.ps1"
+```
+
+Новая Linux ext4 копия и cache/tmp: `~/serverdeck-e08-completion-2026-10-15`. Root test создаёт только два16000000 bytes tmpfs в отдельном mount/PID namespace. Обычный полный go test пропускает требующие этого namespace случаи; root script запускается отдельно. [Новый evidence](evidence/E08-completion-wsl-2026-10-15/README.md) хранится отдельно; прежние артефакты не изменены. Полный E08 остаётся открытым до перечисленных в FILES.md реализации и V-FILE; ARM native gate остаётся E12.
+
+
+Фактический новый прогон: completion script/root/export exit0,233 executable inputs подтверждены; все Go test/race/vet, fuzz, amd64 smoke и cgo arm64 cross-build PASS. Compiled state-inventory-confirm/replay/backup invalidation и отдельный native root race PASS. Точные результаты и SHA256 — новый completion evidence. Полный E08 по-прежнему открыт по перечисленным критериям FILES.md; это не отсутствие согласования пользователя.
+
+## E08: финальные проверки16 октября2026
+
+Текущий код: critical schema5/floor5, migration005; старые schema4/floor3 и schema5/floor4 записи выше относятся к сохранённым историческим evidence. Новых Go/link dependencies нет. Linux syscalls/cgo используют закреплённый sysroot; faccessat2 требует kernel≥5.8. [FILES](FILES.md) содержит actual behavior, CLI recovery, ограничения и maintenance/inventory процедуру.
+
+Из корня проекта в PowerShell:
+
+```powershell
+wsl -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08-final.sh
+wsl -d Ubuntu-22.04 -u root -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08-final-root.sh
+wsl -d Ubuntu-22.04 -- bash /mnt/d/Projects/ServerDeck/agent/tools/wsl-e08-final-export.sh
+pwsh -NoProfile -File "Документация ServerDeck/Документация ServerDeck Agent/tools/check-docs.ps1"
+python agent/evidence/E08-final-wsl-2026-10-16/seal.py --verify
+```
+
+Final script создаёт новую byte-identical Linux ext4 копию в ~/serverdeck-e08-final-2026-10-16, отдельные cache/tmp/test DB/dist. Выполняет gofmt/mod verify/vet, все tests/race, два fuzz targets, amd64 cgo build/ELF/ldd/sqlite-info, compiled CLI/TLS/local transfer smoke, offline state smoke, arm64 cgo cross-build/ELF. Root script работает только в отдельном mount/PID namespace с двумя tmpfs по16000000 bytes и проверяет cross-FS/restore/full/read-only/own-key/aliases/private guards. Export сверяет executable/test/tool inputs с основным проектом, переносит только evidence. Native ARM не выполняется (E12), Windows build не заменяет Linux evidence. Фактические результаты и SHA — [итоговый evidence](evidence/E08-final-wsl-2026-10-16/README.md).
+
+16 октября первоначальный прогон остановился с I/O error при почти заполненном C: (~45МБ). Перед повтором удалены только воспроизводимые cache/tmp наших предыдущих ServerDeck сборок внутри Ubuntu; исходники/toolchain/evidence сохранены. Свободные ext4 blocks повторно используются без переноса/resize WSL и изменений Windows. Неуспешный прогон не считается PASS. WSL warning пользовательской systemd session не доказывает lifecycle readiness; foreground checks учитываются отдельно.
+
+Фактический итог16 октября: final/root/export и supplemental root-race/compiled codec/inventory/reconcile/foreign-peer checks exit0.270 первоначальных файлов,249 executable inputs,4 binaries SHA-256;4372 toolchain files matched. Linux fmt/vet/test/race/fuzz/build/amd64 smoke PASS, документация и seal проверены отдельно. E08 закрыт в согласованных границах; native ARM/full host matrix не заявлены. Бинарные файлы находятся в Linux копии, export сохраняет только evidence.

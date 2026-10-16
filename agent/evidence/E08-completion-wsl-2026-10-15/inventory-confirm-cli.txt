@@ -1,0 +1,14 @@
++ dist/linux-amd64/serverdeckctl state-init /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/state /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/config.json
+OK: critical schema v5; existing settings preserved
++ dist/linux-amd64/serverdeckctl state-inventory-confirm /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/state /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/confirm.json aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa --confirm
+{"operation_id":"aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa","initiator":"local:1000","action":"storage.inventory.confirm","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1792089905768769,"updated_us":1792089905791482,"dedup_until_us":1792694705791482}
++ dist/linux-amd64/serverdeckctl state-inventory-confirm /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/state /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/confirm.json aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa --confirm
+{"operation_id":"aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa","initiator":"local:1000","action":"storage.inventory.confirm","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1792089905768769,"updated_us":1792089905791482,"dedup_until_us":1792694705791482}
++ dist/linux-amd64/serverdeckctl state-inventory /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/state
++ python3 - /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/inventory.json
+PASS: compiled CLI confirmation persisted current attestation and replay did not repeat it
++ dist/linux-amd64/serverdeckctl state-backup /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/state /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/backup bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb --confirm
+{"operation_id":"bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb","initiator":"local:1000","action":"storage.backup","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1792089906052429,"updated_us":1792089906098197,"dedup_until_us":1792694706098197}
++ dist/linux-amd64/serverdeckctl state-inventory /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/state
++ python3 - /home/dontart7272/serverdeck-e08-completion-2026-10-15/tmp/inventory-confirm.VGSPS8/inventory.json
+PASS: a new owned backup invalidates the previous attestation

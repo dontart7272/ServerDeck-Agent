@@ -1,0 +1,16 @@
+{
+	"Path": "github.com/NVIDIA/go-nvml",
+	"Version": "v0.13.4-1",
+	"Info": "/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath/pkg/mod/cache/download/github.com/!n!v!i!d!i!a/go-nvml/@v/v0.13.4-1.info",
+	"GoMod": "/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath/pkg/mod/cache/download/github.com/!n!v!i!d!i!a/go-nvml/@v/v0.13.4-1.mod",
+	"Zip": "/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath/pkg/mod/cache/download/github.com/!n!v!i!d!i!a/go-nvml/@v/v0.13.4-1.zip",
+	"Dir": "/home/dontart7272/serverdeck-e01-2026-10-13/cache/gopath/pkg/mod/github.com/!n!v!i!d!i!a/go-nvml@v0.13.4-1",
+	"Sum": "h1:2E7RdOLBxHGSXq8sUw+c5Y0aWmFT7Cj+ZdjYulgUH18=",
+	"GoModSum": "h1:id63qwpoDWpFXwnwM6psDCSqW4BmNu6mWpr4YeQtPGo=",
+	"Origin": {
+		"VCS": "git",
+		"URL": "https://github.com/NVIDIA/go-nvml",
+		"Hash": "1a1e86da474d340d7cf58274588f4a4afc8772e7",
+		"Ref": "refs/tags/v0.13.4-1"
+	}
+}

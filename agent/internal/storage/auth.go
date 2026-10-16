@@ -58,7 +58,7 @@ func migrateAuthDB(ctx context.Context, db *sql.DB) error {
 	if db.QueryRowContext(ctx, "PRAGMA user_version").Scan(&v) != nil {
 		return ErrSchema
 	}
-	if v == 2 {
+	if v == 2 || v == 3 || v == 4 || v == 5 {
 		return nil
 	}
 	if v != 1 {

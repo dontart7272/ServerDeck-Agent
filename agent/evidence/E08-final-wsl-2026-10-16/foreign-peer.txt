@@ -1,0 +1,3 @@
+=== RUN   TestForeignUIDAdminPeerIsRejected
+--- PASS: TestForeignUIDAdminPeerIsRejected (1.50s)
+PASS

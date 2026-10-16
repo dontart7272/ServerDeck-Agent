@@ -42,6 +42,10 @@ type baseline struct {
 	cpus         int
 }
 type Linux struct {
+	adapters                               AdapterOptions
+	gpu                                    *gpuAdapter
+	docker                                 *dockerAdapter
+	security                               *securityAdapter
 	root, boot                             string
 	hz                                     uint64
 	cpu, network, process                  map[string]baseline
@@ -122,6 +126,12 @@ func (l *Linux) Collect(name string, s Stamp, ms int64, segment string) (Sample,
 	var err error
 	var ps []contracts.APIProcess
 	switch name {
+	case "gpu":
+		err = l.collectGPU(&b, s)
+	case "docker":
+		err = l.collectDocker(&b, s)
+	case "security":
+		err = l.collectSecurity(&b, s)
 	case "cpu":
 		err = l.collectCPU(&b, s, segment)
 	case "memory":

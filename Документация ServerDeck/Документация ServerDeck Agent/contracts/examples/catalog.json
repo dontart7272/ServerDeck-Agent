@@ -12,6 +12,7 @@
     "files.stat",
     "files.text",
     "history.get",
+    "history.series",
     "modules.describe",
     "modules.list",
     "modules.read",

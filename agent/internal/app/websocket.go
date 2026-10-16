@@ -115,7 +115,11 @@ func (g *Gateway) websocket(w http.ResponseWriter, r *http.Request, session *aut
 		if errorCode(err) == "CURSOR_GAP" {
 			kind = "gap"
 		}
-		_ = g.sendWSS(conn, session, map[string]any{"schema_version": "1.0", "subscription_id": id, "server_time": timestamp(time.Now()), "type": kind, "error": map[string]any{"code": errorCode(err), "message": errorCode(err), "retryable": false}})
+		value := map[string]any{"code": errorCode(err), "message": errorCode(err), "retryable": false}
+		if details := gapDetails(err); details != nil {
+			value["details"] = details
+		}
+		_ = g.sendWSS(conn, session, map[string]any{"schema_version": "1.0", "subscription_id": id, "server_time": timestamp(time.Now()), "type": kind, "error": value})
 	}
 	emit := func(s *subscription) error {
 		if s.Topic == "snapshot" {
@@ -138,7 +142,7 @@ func (g *Gateway) websocket(w http.ResponseWriter, r *http.Request, session *aut
 			if !s.Sent.IsZero() && time.Since(s.Sent) < period {
 				return nil
 			}
-			value := g.Metrics.Snapshot(p.View, p.Blocks, p.Resources)
+			value := g.processSnapshot(ctx, g.Metrics.Snapshot(p.View, p.Blocks, p.Resources))
 			if e := g.sendWSS(conn, session, map[string]any{"schema_version": "1.0", "subscription_id": s.ID, "server_time": timestamp(time.Now()), "type": "snapshot", "data": value}); e != nil {
 				return e
 			}
@@ -153,7 +157,7 @@ func (g *Gateway) websocket(w http.ResponseWriter, r *http.Request, session *aut
 		var e error
 		if s.Topic == "storage" {
 			s.Counter++
-			data = []any{g.storageInfo()}
+			data = g.storageInfos()
 			cursor, e = g.cursor("storage", g.RunID, scope(s.Params), s.Counter)
 		} else {
 			var p map[string]any
@@ -163,7 +167,18 @@ func (g *Gateway) websocket(w http.ResponseWriter, r *http.Request, session *aut
 				p["cursor"] = s.After
 			}
 			raw, _ := json.Marshal(p)
-			value, err := g.Query(ctx, "operations.list", raw)
+			queryName := "operations.list"
+			if s.Topic == "events" {
+				queryName = "events.list"
+			}
+			var value any
+			var err error
+			trusted := withMetricOwner(ctx, "device:"+session.Credential.ID())
+			if s.Topic == "problems" {
+				value, err = g.problemChanges(trusted, raw)
+			} else {
+				value, err = g.Query(trusted, queryName, raw)
+			}
 			if err != nil {
 				return err
 			}
@@ -274,7 +289,7 @@ func (g *Gateway) websocket(w http.ResponseWriter, r *http.Request, session *aut
 				s.Pending = ""
 				pendingBytes -= s.PendingBytes
 				s.PendingBytes = 0
-				if s.Topic == "operations" {
+				if s.Topic == "operations" || s.Topic == "events" || s.Topic == "problems" {
 					if e = emit(s); e != nil {
 						sendError(s.ID, e)
 					}
@@ -296,17 +311,27 @@ func (g *Gateway) websocket(w http.ResponseWriter, r *http.Request, session *aut
 				batchIDs[v.ID] = true
 			}
 			for _, v := range message.Subscriptions {
-				if v.Topic != "operations" && v.Topic != "storage" && (v.Topic != "snapshot" || g.Metrics == nil) {
+				if v.Topic != "operations" && v.Topic != "storage" && (v.Topic != "snapshot" || g.Metrics == nil) && ((v.Topic != "events" && v.Topic != "problems") || g.eventsDB == nil) {
 					sendError(v.ID, errors.New("SOURCE_UNAVAILABLE"))
 					continue
 				}
 				s := &subscription{ID: v.ID, Topic: v.Topic, Params: v.Params, After: v.After}
 				if v.After != "" {
 					kind := "operations.list"
+					if v.Topic == "events" {
+						kind = "events.list"
+					}
+					if v.Topic == "problems" {
+						kind = "problems.changes"
+					}
 					if v.Topic == "storage" {
 						kind = "storage"
 					}
-					c, err := g.position(v.After, kind, scope(v.Params))
+					digest := scope(v.Params)
+					if v.Topic == "events" || v.Topic == "problems" {
+						digest += ":device:" + session.Credential.ID()
+					}
+					c, err := g.position(v.After, kind, digest)
 					if err != nil || v.Topic == "storage" && c.Epoch != g.RunID {
 						if err == nil {
 							err = storage.ErrCursor

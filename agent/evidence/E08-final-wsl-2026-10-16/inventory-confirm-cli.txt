@@ -1,0 +1,14 @@
++ dist/linux-amd64/serverdeckctl state-init /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/state /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/config.json
+OK: critical schema v5; existing settings preserved
++ dist/linux-amd64/serverdeckctl state-inventory-confirm /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/state /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/confirm.json aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa --confirm
+{"operation_id":"aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa","initiator":"local:1000","action":"storage.inventory.confirm","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1792132764954308,"updated_us":1792132764976910,"dedup_until_us":1792737564976910}
++ dist/linux-amd64/serverdeckctl state-inventory-confirm /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/state /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/confirm.json aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa --confirm
+{"operation_id":"aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa","initiator":"local:1000","action":"storage.inventory.confirm","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1792132764954308,"updated_us":1792132764976910,"dedup_until_us":1792737564976910}
++ dist/linux-amd64/serverdeckctl state-inventory /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/state
++ python3 - /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/inventory.json
+PASS: compiled CLI confirmation persisted current attestation and replay did not repeat it
++ dist/linux-amd64/serverdeckctl state-backup /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/state /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/backup bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb --confirm
+{"operation_id":"bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb","initiator":"local:1000","action":"storage.backup","state":"succeeded","phase":"complete","effect_status":"applied","audit_status":"durable","code":"","revision":3,"created_us":1792132765244884,"updated_us":1792132765302113,"dedup_until_us":1792737565302113}
++ dist/linux-amd64/serverdeckctl state-inventory /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/state
++ python3 - /home/dontart7272/serverdeck-e08-final-2026-10-16/tmp/inventory-confirm.THJLiV/inventory.json
+PASS: a new owned backup invalidates the previous attestation

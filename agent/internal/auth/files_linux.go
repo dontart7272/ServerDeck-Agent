@@ -18,13 +18,22 @@ func ReadTrusted(path string, max int64, private bool) ([]byte, error) {
 	return ReadTrustedForOwner(path, max, private, uint32(os.Geteuid()))
 }
 func ReadTrustedForOwner(path string, max int64, private bool, uid uint32) ([]byte, error) {
+	b, f, e := ReadTrustedPinned(path, max, private, uid)
+	if f != nil {
+		f.Close()
+	}
+	return b, e
+}
+
+// ReadTrustedPinned retains the actual descriptor used for the trusted read.
+func ReadTrustedPinned(path string, max int64, private bool, uid uint32) ([]byte, *os.File, error) {
 	if !filepath.IsAbs(path) || filepath.Clean(path) != path || len(path) > 4096 {
-		return nil, storage.ErrSafety
+		return nil, nil, storage.ErrSafety
 	}
 	parts := strings.Split(strings.TrimPrefix(path, "/"), "/")
 	fd, e := syscall.Open("/", syscall.O_RDONLY|syscall.O_DIRECTORY|syscall.O_CLOEXEC, 0)
 	if e != nil {
-		return nil, storage.ErrSafety
+		return nil, nil, storage.ErrSafety
 	}
 	for i, p := range parts {
 		last := i == len(parts)-1
@@ -35,26 +44,32 @@ func ReadTrustedForOwner(path string, max int64, private bool, uid uint32) ([]by
 		next, err := syscall.Openat(fd, p, flags, 0)
 		syscall.Close(fd)
 		if err != nil {
-			return nil, storage.ErrSafety
+			return nil, nil, storage.ErrSafety
 		}
 		fd = next
 		var st syscall.Stat_t
 		if syscall.Fstat(fd, &st) != nil || (st.Uid != 0 && st.Uid != uid) || st.Mode&0022 != 0 && !(st.Uid == 0 && st.Mode&syscall.S_ISVTX != 0 && !last) {
 			syscall.Close(fd)
-			return nil, storage.ErrSafety
+			return nil, nil, storage.ErrSafety
 		}
 		if last && (st.Mode&syscall.S_IFMT != syscall.S_IFREG || st.Nlink != 1 || private && st.Mode&0077 != 0 || st.Size > max) {
 			syscall.Close(fd)
-			return nil, storage.ErrSafety
+			return nil, nil, storage.ErrSafety
 		}
 	}
 	f := os.NewFile(uintptr(fd), path)
-	defer f.Close()
+	keep := false
+	defer func() {
+		if !keep {
+			f.Close()
+		}
+	}()
 	b, e := io.ReadAll(io.LimitReader(f, max+1))
 	if e != nil || int64(len(b)) > max {
-		return nil, storage.ErrSafety
+		return nil, nil, storage.ErrSafety
 	}
-	return b, nil
+	keep = true
+	return b, f, nil
 }
 func PeerUID(c *net.UnixConn) (uint32, error) {
 	raw, e := c.SyscallConn()
